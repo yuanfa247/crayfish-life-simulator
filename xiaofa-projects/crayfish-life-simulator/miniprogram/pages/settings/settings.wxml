@@ -1,0 +1,37 @@
+<!--pages/settings/settings.wxml-->
+<view class="container">
+  <view class="settings-list">
+    <view class="setting-item">
+      <view class="setting-info">
+        <view class="setting-name">音效</view>
+        <view class="setting-desc">游戏背景音乐和点击音效</view>
+      </view>
+      <switch data-field="soundEnabled" checked="{{soundEnabled}}" bindchange="onSwitchChange" />
+    </view>
+
+    <view class="setting-item">
+      <view class="setting-info">
+        <view class="setting-name">震动反馈</view>
+        <view class="setting-desc">操作时震动提示</view>
+      </view>
+      <switch data-field="vibrationEnabled" checked="{{vibrationEnabled}}" bindchange="onSwitchChange" />
+    </view>
+
+    <view class="setting-item">
+      <view class="setting-info">
+        <view class="setting-name">自动保存</view>
+        <view class="setting-desc">退出游戏时自动保存进度</view>
+      </view>
+      <switch data-field="autoSave" checked="{{autoSave}}" bindchange="onSwitchChange" />
+    </view>
+  </view>
+
+  <view class="danger-zone">
+    <button class="clear-btn" bindtap="clearData">清空所有游戏数据</button>
+  </view>
+
+  <view class="about">
+    <view class="about-title">小龙虾人生模拟器</view>
+    <view class="about-version">v1.0.0</view>
+  </view>
+</view>

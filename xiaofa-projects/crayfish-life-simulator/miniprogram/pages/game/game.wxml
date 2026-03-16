@@ -1,0 +1,54 @@
+<!--pages/game/game.wxml-->
+<view class="container">
+  <view class="game-header">
+    <view class="title">小龙虾成长日记</view>
+    <view class="level">Lv.{{attributes.level}}</view>
+  </view>
+
+  <view class="attributes-panel">
+    <view class="attr-item">
+      <view class="attr-name">生命</view>
+      <view class="attr-bar">
+        <view class="attr-fill" style="width: {{attributes.health}}%; background-color: #ff4d4f;"></view>
+      </view>
+      <view class="attr-value">{{attributes.health}}</view>
+    </view>
+    <view class="attr-item">
+      <view class="attr-name">饥饿</view>
+      <view class="attr-bar">
+        <view class="attr-fill" style="width: {{attributes.hunger}}%; background-color: #faad14;"></view>
+      </view>
+      <view class="attr-value">{{attributes.hunger}}</view>
+    </view>
+    <view class="attr-item">
+      <view class="attr-name">清洁</view>
+      <view class="attr-bar">
+        <view class="attr-fill" style="width: {{attributes.clean}}%; background-color: #1890ff;"></view>
+      </view>
+      <view class="attr-value">{{attributes.clean}}</view>
+    </view>
+    <view class="attr-item">
+      <view class="attr-name">心情</view>
+      <view class="attr-bar">
+        <view class="attr-fill" style="width: {{attributes.happiness}}%; background-color: #52c41a;"></view>
+      </view>
+      <view class="attr-value">{{attributes.happiness}}</view>
+    </view>
+  </view>
+
+  <view class="pet-image">
+    <!-- 小龙虾占位 -->
+    <view class="pet-placeholder">🦞</view>
+  </view>
+
+  <view class="actions-panel">
+    <view class="action-row">
+      <button class="action-btn" bindtap="feed">🍖 喂食</button>
+      <button class="action-btn" bindtap="clean">🚿 清洁</button>
+    </view>
+    <view class="action-row">
+      <button class="action-btn" bindtap="play">🎮 玩耍</button>
+      <button class="action-btn" bindtap="rest">😴 休息</button>
+    </view>
+  </view>
+</view>

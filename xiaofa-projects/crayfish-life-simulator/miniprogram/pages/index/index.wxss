@@ -1,0 +1,49 @@
+/* index.wxss */
+.title-card {
+  margin-top: 100rpx;
+  text-align: center;
+  margin-bottom: 60rpx;
+}
+
+.title {
+  display: block;
+  font-size: 64rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.content-card {
+  text-align: center;
+  margin-bottom: 80rpx;
+}
+
+.desc {
+  display: block;
+  font-size: 32rpx;
+  color: #555;
+  margin: 10rpx 0;
+}
+
+.start-btn {
+  background-color: #4A90E2;
+  color: white;
+  border-radius: 50rpx;
+  padding: 25rpx;
+  font-size: 36rpx;
+  margin-bottom: 20rpx;
+}
+
+.setting-btn {
+  background-color: #f0f0f0;
+  color: #666;
+  border-radius: 50rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+}

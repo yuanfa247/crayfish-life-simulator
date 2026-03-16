@@ -1,0 +1,34 @@
+<view class="container">
+  <view class="title-card">
+    <text class="title">养一只小龙虾</text>
+    <text class="subtitle">文字人生模拟器</text>
+  </view>
+  
+  <view class="attrs-card">
+    <view class="card-title">你的小龙虾开局属性</view>
+    <view class="attr-item">
+      <text class="attr-label">活力</text>
+      <text class="attr-value">{{attrs.vitality}}</text>
+    </view>
+    <view class="attr-item">
+      <text class="attr-label">智力</text>
+      <text class="attr-value">{{attrs.wisdom}}</text>
+    </view>
+    <view class="attr-item">
+      <text class="attr-label">财富</text>
+      <text class="attr-value">{{attrs.fortune}}</text>
+    </view>
+    <view class="attr-item">
+      <text class="attr-label">运气</text>
+      <text class="attr-value">{{attrs.luck}}</text>
+    </view>
+    <view class="attr-item">
+      <text class="attr-label">颜值</text>
+      <text class="attr-value">{{attrs.charm}}</text>
+    </view>
+    <button class="reroll-btn" bindtap="reRandom">重新随机</button>
+  </view>
+
+  <button class="start-btn" bindtap="startGame">开始新人生</button>
+  <button class="setting-btn" bindtap="openSettings">设置</button>
+</view>

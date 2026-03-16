@@ -1,0 +1,31 @@
+<!--pages/result/result.wxml-->
+<view class="container">
+  <view class="result-card">
+    <view class="title">游戏结束</view>
+    <view class="emoji">💀</view>
+    
+    <view class="stats">
+      <view class="stat-item">
+        <view class="stat-label">存活天数</view>
+        <view class="stat-value">{{survivalDays}} 天</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-label">最终等级</view>
+        <view class="stat-value">Lv.{{finalLevel}}</view>
+      </view>
+    </view>
+
+    <view class="achievements">
+      <view class="section-title">成就解锁</view>
+      <view class="achievement-item" wx:for="{{achievements}}" wx:key="name">
+        <view class="achievement-name {{item.unlocked ? '' : 'locked'}}">{{item.name}}</view>
+        <view class="achievement-status">{{item.unlocked ? '✅' : '🔒'}}</view>
+      </view>
+    </view>
+
+    <view class="actions">
+      <button class="btn btn-primary" bindtap="restart">再玩一次</button>
+      <button class="btn btn-default" bindtap="backHome">返回首页</button>
+    </view>
+  </view>
+</view>
