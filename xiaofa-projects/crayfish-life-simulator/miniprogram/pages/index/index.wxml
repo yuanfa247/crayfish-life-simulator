@@ -12,11 +12,11 @@
     </view>
     <view class="attr-item">
       <text class="attr-label">智力</text>
-      <text class="attr-value">{{attrs.wisdom}}</text>
+      <text class="attr-value">{{attrs.intelligence}}</text>
     </view>
     <view class="attr-item">
       <text class="attr-label">财富</text>
-      <text class="attr-value">{{attrs.fortune}}</text>
+      <text class="attr-value">{{attrs.wealth}}</text>
     </view>
     <view class="attr-item">
       <text class="attr-label">运气</text>
