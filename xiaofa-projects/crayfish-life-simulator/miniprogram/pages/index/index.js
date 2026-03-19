@@ -6,8 +6,8 @@ Page({
     // 随机生成的开局属性
     attrs: {
       vitality: 0,
-      wisdom: 0,
-      fortune: 0,
+      intelligence: 0,
+      wealth: 0,
       luck: 0,
       charm: 0
     }
@@ -23,8 +23,8 @@ Page({
     let total = 50;
     let attrs = {
       vitality: 0,
-      wisdom: 0,
-      fortune: 0,
+      intelligence: 0,
+      wealth: 0,
       luck: 0,
       charm: 0
     };
@@ -56,7 +56,7 @@ Page({
   startGame() {
     const attrsStr = encodeURIComponent(JSON.stringify(this.data.attrs));
     wx.navigateTo({
-      url: `/pages/game/game?attrs=${attrsStr}`
+      url: `/pages/game/game?attributes=${attrsStr}`
     });
   },
 

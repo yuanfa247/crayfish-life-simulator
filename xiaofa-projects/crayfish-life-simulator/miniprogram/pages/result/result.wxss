@@ -1,14 +1,13 @@
 /* pages/result/result.wxss */
 .container {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 30rpx;
   background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
 }
 
-.result-card {
+.ending-card {
   width: 100%;
   background-color: #fff;
   border-radius: 24rpx;
@@ -16,32 +15,44 @@
   text-align: center;
 }
 
-.title {
+.ending-emoji {
+  font-size: 120rpx;
+  margin-bottom: 20rpx;
+}
+
+.ending-title {
   font-size: 40rpx;
   font-weight: bold;
   color: #333;
-  margin-bottom: 30rpx;
+  margin-bottom: 25rpx;
 }
 
-.emoji {
-  font-size: 120rpx;
+.ending-desc {
+  font-size: 30rpx;
+  color: #666;
+  line-height: 1.6;
   margin-bottom: 40rpx;
 }
 
-.stats {
+.final-stats {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 50rpx;
+  justify-content: center;
+  margin-bottom: 30rpx;
 }
 
 .stat-item {
-  text-align: center;
+  padding: 0 40rpx;
+  border-right: 1rpx solid #eee;
+}
+
+.stat-item:last-child {
+  border-right: none;
 }
 
 .stat-label {
   font-size: 26rpx;
   color: #999;
-  margin-bottom: 10rpx;
+  margin-bottom: 8rpx;
 }
 
 .stat-value {
@@ -50,40 +61,30 @@
   color: #4A90E2;
 }
 
-.achievements {
-  margin-bottom: 50rpx;
-  text-align: left;
-}
-
-.section-title {
-  font-size: 30rpx;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20rpx;
-}
-
-.achievement-item {
+.attributes-summary {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20rpx;
-  background-color: #f9f9f9;
-  border-radius: 12rpx;
-  margin-bottom: 15rpx;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10rpx;
+  margin-bottom: 30rpx;
 }
 
-.achievement-item:last-child {
-  margin-bottom: 0;
+.attr-tag {
+  background-color: #f0f7ff;
+  color: #4A90E2;
+  font-size: 24rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
 }
 
-.achievement-name {
+.ending-conclusion {
   font-size: 28rpx;
-  color: #333;
-}
-
-.achievement-name.locked {
-  color: #999;
-  text-decoration: line-through;
+  color: #52c41a;
+  line-height: 1.8;
+  padding: 20rpx;
+  background-color: #f6ffed;
+  border-radius: 12rpx;
+  margin-bottom: 40rpx;
 }
 
 .actions {
@@ -94,7 +95,7 @@
 .btn {
   font-size: 32rpx;
   padding: 25rpx 0;
-  border-radius: 12rpx;
+  border-radius: 50rpx;
   margin-bottom: 20rpx;
   border: none;
 }
