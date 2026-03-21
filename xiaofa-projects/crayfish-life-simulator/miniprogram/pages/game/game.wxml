@@ -38,12 +38,10 @@
     </view>
   </view>
 
-  <!-- 等待事件状态 -->
+  <!-- 等待事件状态（自动触发，无需用户操作） -->
   <view wx:if="{{status === 'playing'}}" class="waiting-panel">
     <view class="crayfish-icon">🦞</view>
     <view class="tip-text">你的小龙虾正在成长...</view>
-    <button class="trigger-btn" bindtap="startNewEvent">触发随机事件</button>
-    <button class="back-btn" bindtap="backToHome">返回首页</button>
   </view>
 
   <!-- 事件展示状态 -->

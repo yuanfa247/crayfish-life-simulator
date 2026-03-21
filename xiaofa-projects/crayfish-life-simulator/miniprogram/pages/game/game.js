@@ -44,6 +44,10 @@ Page({
         'attributes.charm': 10        // 魅力
       })
     }
+    // 自动触发第一个事件
+    setTimeout(() => {
+      this.triggerRandomEvent()
+    }, 800)
   },
 
   // 根据年龄获取年龄阶段
@@ -149,13 +153,17 @@ Page({
     }
   },
 
-  // 继续下一个事件
+  // 继续下一个事件（自动触发）
   nextEvent: function () {
     this.setData({
       status: 'playing',
       currentEvent: null,
       showResult: false
     })
+    // 自动触发下一个事件
+    setTimeout(() => {
+      this.triggerRandomEvent()
+    }, 800)
   },
 
   // 结束游戏，跳转结果页
