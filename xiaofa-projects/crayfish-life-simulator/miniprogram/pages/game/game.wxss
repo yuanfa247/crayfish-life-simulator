@@ -29,7 +29,7 @@ page {
 .status-bar .age,
 .status-bar .event-count,
 .status-bar .age-stage {
-	font-size: 28rpx;
+	font-size: 32rpx;
 }
 
 .status-bar .age-stage {
@@ -70,13 +70,13 @@ page {
 }
 
 .attr-label {
-	font-size: 24rpx;
+	font-size: 28rpx;
 	color: #666;
 	margin-bottom: 5rpx;
 }
 
 .attr-value {
-	font-size: 32rpx;
+	font-size: 36rpx;
 	font-weight: bold;
 	color: #333;
 }
@@ -135,7 +135,7 @@ page {
 }
 
 .event-title {
-	font-size: 36rpx;
+	font-size: 40rpx;
 	font-weight: bold;
 	color: #333;
 	margin-bottom: 20rpx;
@@ -143,7 +143,7 @@ page {
 }
 
 .event-desc {
-	font-size: 30rpx;
+	font-size: 34rpx;
 	color: #555;
 	line-height: 1.6;
 	margin-bottom: 30rpx;
@@ -160,7 +160,7 @@ page {
 	border-radius: 12rpx;
 	padding: 25rpx 20rpx;
 	margin-bottom: 20rpx;
-	font-size: 30rpx;
+	font-size: 34rpx;
 	color: #333;
 	line-height: 1.5;
 }
@@ -190,7 +190,7 @@ page {
 }
 
 .result-text {
-	font-size: 30rpx;
+	font-size: 34rpx;
 	color: #333;
 	line-height: 1.6;
 	margin-bottom: 25rpx;
