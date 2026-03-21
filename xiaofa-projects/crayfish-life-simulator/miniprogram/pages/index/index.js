@@ -22,7 +22,7 @@ Page({
       { key: 'charm', label: '魅力' }
     ],
     // 总属性点
-    totalPoints: 50,
+    totalPoints: 25,
     // 剩余可分配点数
     remainingPoints: 0,
     // 完整天赋库（所有可选天赋），等级：0-白板 1-绿色 2-蓝色 3-紫色 4-橙色 5-红色
