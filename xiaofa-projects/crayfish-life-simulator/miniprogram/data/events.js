@@ -1304,21 +1304,21 @@ module.exports = [
 	},
 	{
 		id: 'nb2',
-		title: '第一次吃龙虾',
+		title: '辅食品尝',
 		description:
-			'妈妈端来一盘红烧小龙虾，你盯着盘子里的同类，陷入复杂情绪。',
+			'妈妈给你添加辅食，碗里有虾泥，你闻到熟悉的味道，内心五味杂陈。',
 		minAge: 1,
 		maxAge: 4,
 		options: [
 			{
-				text: '放声大哭，拒绝进食',
+				text: '紧闭嘴巴，拒吃',
 				effects: { charm: 1, vitality: -1 },
-				result: '妈妈从此不做龙虾了。你感到轻松，又有点饿。',
+				result: '妈妈以为你不爱吃，从此不给你做虾泥了。你松了一口气。',
 			},
 			{
-				text: '含泪吃完，感谢前世同伴',
-				effects: { vitality: 3, luck: 1 },
-				result: '味道很好。你在心里说：对不起，也谢谢你。',
+				text: '闭上眼睛，张嘴吃完',
+				effects: { vitality: 2, luck: 1 },
+				result: '味道很鲜。你默默接受了命运的安排。',
 			},
 		],
 	},
