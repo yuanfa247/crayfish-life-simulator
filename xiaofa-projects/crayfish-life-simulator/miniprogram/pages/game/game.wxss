@@ -190,6 +190,31 @@ page {
   text-align: center;
 }
 
+.attr-changes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15rpx;
+  margin-bottom: 20rpx;
+}
+
+.attr-change-item {
+  font-size: 28rpx;
+  font-weight: bold;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.attr-change-item.add {
+  background: #e8f5e9;
+  color: #4caf50;
+}
+
+.attr-change-item.sub {
+  background: #ffebee;
+  color: #f44336;
+}
+
 .next-btn {
   display: block;
   width: 70%;

@@ -30,7 +30,9 @@ Page({
     currentEvent: null,
     // 事件选择后的结果展示
     showResult: false,
-    eventResult: ''
+    eventResult: '',
+    // 本次选项的属性变化
+    attrChanges: []
   },
 
   onLoad: function (options) {
@@ -157,12 +159,22 @@ Page({
     
     // 应用属性变化
     const attributes = { ...this.data.attributes }
+    const attrChanges = []
+    const attrNames = { vitality: '活力', intelligence: '智力', wealth: '财富', luck: '运气', charm: '魅力' }
     for (const [key, delta] of Object.entries(option.effects)) {
       // 只处理已定义的五个属性，忽略happiness/health等遗留字段
       if (attributes.hasOwnProperty(key)) {
+        const oldVal = attributes[key]
         attributes[key] += delta
         // 属性不能小于0
         if (attributes[key] < 0) attributes[key] = 0
+        const newVal = attributes[key]
+        if (newVal !== oldVal) {
+          attrChanges.push({
+            name: attrNames[key],
+            delta: newVal - oldVal
+          })
+        }
       }
     }
 
@@ -171,6 +183,7 @@ Page({
       attributes,
       eventCount: this.data.eventCount + 1,
       eventResult: option.result,
+      attrChanges,
       showResult: true
     })
 

@@ -53,6 +53,11 @@
     <!-- 选择结果展示（支持点击跳过） -->
     <view wx:if="{{showResult}}" class="result-panel" bindtap="skipResult">
       <view class="result-text">{{eventResult}}</view>
+      <view class="attr-changes" wx:if="{{attrChanges.length > 0}}">
+        <view class="attr-change-item {{item.delta > 0 ? 'add' : 'sub'}}" wx:for="{{attrChanges}}" wx:key="name">
+          {{item.name}} {{item.delta > 0 ? '+' : ''}}{{item.delta}}
+        </view>
+      </view>
     </view>
 
     <!-- 选项列表 -->

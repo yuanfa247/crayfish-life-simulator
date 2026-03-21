@@ -73,16 +73,14 @@ Page({
   },
 
   onLoad() {
-    // 页面加载就随机生成开局和天赋
+    // 页面加载只随机属性，天赋点下一步再随机
     this.randomAttrs();
-    this.randomTalents();
   },
 
   onShow() {
-    // 每次回到首页，重置到属性分配步骤，重新随机
+    // 每次回到首页，重置到属性分配步骤，重新随机属性
     this.setData({ step: 1 });
     this.randomAttrs();
-    this.randomTalents();
   },
 
   // 按概率随机抽取10个不重复天赋
@@ -171,9 +169,9 @@ Page({
       wx.showToast({ title: '请分配完所有属性点', icon: 'none' });
       return;
     }
-    // 重置天赋选择
-    const talentList = this.data.talentList.map(t => ({ ...t, selected: false }));
-    this.setData({ step: 2, talentList, selectedTalents: [] });
+    // 进入天赋页面时才随机生成天赋列表
+    this.randomTalents();
+    this.setData({ step: 2 });
   },
 
   // 返回属性调整步骤
