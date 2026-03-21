@@ -119,24 +119,6 @@ module.exports = [
       }
     ]
   },
-      {
-        text: "勇敢地往远处游",
-        effects: {
-          vitality: +5,
-          luck: +2
-        },
-        result: "你锻炼了肌肉，感觉充满力量"
-      },
-      {
-        text: "躲在水草后面观察",
-        effects: {
-          intelligence: +5,
-          luck: +1
-        },
-        result: "你变得更加谨慎，懂得观察环境"
-      }
-    ]
-  },
   {
     id: 2,
     title: "寻找食物",
