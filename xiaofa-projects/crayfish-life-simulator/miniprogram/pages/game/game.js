@@ -46,7 +46,7 @@ Page({
         'attributes.intelligence': 10,// 智力
         'attributes.wealth': 10,      // 财富/食物储备
         'attributes.luck': 10,        // 运气
-        'attributes.charm': 10        // 魅力,
+        'attributes.charm': 10,       // 魅力
         talentTags: []
       })
     }
