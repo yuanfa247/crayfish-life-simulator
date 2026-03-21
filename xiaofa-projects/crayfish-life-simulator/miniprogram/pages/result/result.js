@@ -75,21 +75,13 @@ Page({
     })
   },
 
-  // 重新开始游戏
+  // 重新开始游戏 - 直接回到首页，首页会自动重置
   restart: function () {
-    wx.redirectTo({
-      url: '/pages/index/index'
-    })
+    wx.navigateBack()
   },
 
   // 返回首页
   backHome: function () {
-    wx.navigateBack()
-  },
-
-  // 重新开始游戏
-  restart: function () {
-    // 回到首页，首页会自动重置属性和天赋
     wx.navigateBack()
   },
 
