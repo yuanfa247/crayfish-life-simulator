@@ -46,10 +46,12 @@ Page({
         'attributes.charm': 10        // 魅力
       })
     }
-    // 自动触发第一个事件
+    // 提前预加载事件列表，优化读取速度
+    this.getAvailableEvents()
+    // 自动触发第一个事件，缩短等待时间
     setTimeout(() => {
       this.triggerRandomEvent()
-    }, 800)
+    }, 300)
   },
 
   // 根据年龄获取年龄阶段
@@ -246,10 +248,10 @@ Page({
       currentEvent: null,
       showResult: false
     })
-    // 自动触发下一个事件
+    // 自动触发下一个事件，缩短等待时间
     setTimeout(() => {
       this.triggerRandomEvent()
-    }, 800)
+    }, 300)
   },
 
   // 结束游戏，跳转结果页
@@ -263,6 +265,13 @@ Page({
     wx.redirectTo({
       url: '/pages/result/result?data=' + encodeURIComponent(JSON.stringify(finalData))
     })
+  },
+
+  // 跳过等待直接触发事件
+  skipWaiting: function () {
+    if (this.data.status === 'playing') {
+      this.triggerRandomEvent()
+    }
   },
 
   // 返回首页

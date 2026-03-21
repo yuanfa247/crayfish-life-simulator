@@ -116,21 +116,8 @@ page {
   font-size: 30rpx;
   border: none;
   box-shadow: 0 5rpx 15rpx rgba(0,0,0,0.1);
-  margin-bottom: 20rpx;
 }
 
-/* 广告位预留样式 */
-.ad-slot {
-  height: 120rpx;
-  background: rgba(255,255,255,0.8);
-  border-radius: 20rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2rpx dashed #aaa;
-}
-
-.ad-placeholder {
-  font-size: 26rpx;
-  color: #999;
+page {
+  overflow: hidden;
 }

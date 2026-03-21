@@ -38,10 +38,11 @@
     </view>
   </view>
 
-  <!-- 等待事件状态（自动触发，无需用户操作） -->
-  <view wx:if="{{status === 'playing'}}" class="waiting-panel">
+  <!-- 等待事件状态（自动触发，支持点击跳过） -->
+  <view wx:if="{{status === 'playing'}}" class="waiting-panel" bindtap="skipWaiting">
     <view class="crayfish-icon">🦞</view>
     <view class="tip-text">你的小龙虾正在成长...</view>
+    <view class="skip-tip">点击任意位置跳过</view>
   </view>
 
   <!-- 事件展示状态 -->
@@ -67,5 +68,10 @@
   <view wx:if="{{status === 'ended'}}" class="end-panel">
     <view class="end-text">故事即将结束...</view>
     <button class="end-btn" bindtap="endGame">查看结局</button>
+  </view>
+
+  <!-- 内页全屏广告位（底部固定） -->
+  <view class="game-ad-slot">
+    <text class="ad-placeholder">游戏内广告位</text>
   </view>
 </view>

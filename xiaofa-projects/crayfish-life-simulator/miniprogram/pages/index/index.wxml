@@ -31,9 +31,4 @@
 
   <button class="start-btn" bindtap="startGame">开始新人生</button>
   <button class="setting-btn" bindtap="openSettings">设置</button>
-
-  <!-- 广告位预留 -->
-  <view class="ad-slot">
-    <text class="ad-placeholder">广告位招租</text>
-  </view>
 </view>
