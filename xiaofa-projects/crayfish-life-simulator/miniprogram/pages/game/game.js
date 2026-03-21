@@ -9,9 +9,11 @@ Page({
     // 当前年龄
     age: 1,
     // 年龄阶段
-    ageStage: '幼虾', // 幼虾/青年/壮年/老年
+    ageStage: '幼虾', // 幼虾/青年/壮年/老年/筑基期(300+)/金丹期(500+)/元婴期(800+)/渡劫期(980)
     // 总经历事件数
     eventCount: 0,
+    // 是否进入修仙模式
+    isCultivator: false,
     // 初始属性（从首页传入）
     attributes: {
       vitality: 0,    // 活力
@@ -52,10 +54,18 @@ Page({
 
   // 根据年龄获取年龄阶段
   getAgeStage: function (age) {
+    if (this.data.isCultivator) {
+      if (age >= 980) return '渡劫期'
+      if (age >= 800) return '元婴期'
+      if (age >= 500) return '金丹期'
+      if (age >= 300) return '筑基期'
+      return '修仙者'
+    }
     if (age <= 5) return '幼虾'
     if (age <= 15) return '青年'
     if (age <= 30) return '壮年'
-    return '老年'
+    if (age <= 105) return '老年'
+    return '长寿者'
   },
 
   // 获取符合当前条件的可触发事件列表
@@ -141,15 +151,91 @@ Page({
 
     // 检查是否游戏结束（年龄达到最大或某个属性归零）
     this.checkGameEnd()
+    
+    // 2秒后自动进入下一个事件，无需用户点击
+    if (this.data.status !== 'ended') {
+      setTimeout(() => {
+        this.nextEvent()
+      }, 2000)
+    }
   },
 
   // 检查游戏是否结束
   checkGameEnd: function () {
-    const { age, attributes } = this.data
+    const { age, attributes, isCultivator } = this.data
     const attrs = Object.values(attributes)
-    // 任意属性归0 或 年龄达到60，游戏结束
-    if (attrs.some(a => a <= 0) || age >= 60) {
-      this.endGame()
+    
+    // 普通模式（未修仙）
+    if (!isCultivator) {
+      // 60岁以下，任意属性归0 → 意外死亡
+      if (age < 60 && attrs.some(a => a <= 0)) {
+        this.endGame()
+        return
+      }
+      // 60-105岁，任意属性归0 → 寿终正寝；到105岁自动结束
+      if ((age >= 60 && age <= 105) && (attrs.some(a => a <= 0) || age === 105)) {
+        this.endGame()
+        return
+      }
+      // 105岁以上，小概率触发修仙机缘（智力≥70，运气≥60）
+      if (age > 105 && attributes.intelligence >= 70 && attributes.luck >= 60) {
+        this.setData({ isCultivator: true })
+        // 触发修仙事件
+        this.setData({
+          eventResult: "🎉 你意外获得上古传承，踏上修仙之路，寿命大幅延长！",
+          showResult: true
+        })
+        setTimeout(() => {
+          this.nextEvent()
+        }, 3000)
+        return
+      }
+    }
+
+    // 修仙模式
+    if (isCultivator) {
+      // 300岁渡劫坎：智力≥80，运气≥70
+      if (age === 300) {
+        if (attributes.intelligence < 80 || attributes.luck < 70) {
+          this.setData({
+            eventResult: "💥 筑基期渡劫失败，修为散尽，寿元耗尽...",
+            showResult: true
+          })
+          setTimeout(() => this.endGame(), 2000)
+          return
+        }
+      }
+      // 500岁渡劫坎：智力≥90，运气≥80
+      if (age === 500) {
+        if (attributes.intelligence < 90 || attributes.luck < 80) {
+          this.setData({
+            eventResult: "💥 金丹期渡劫失败，神魂俱灭...",
+            showResult: true
+          })
+          setTimeout(() => this.endGame(), 2000)
+          return
+        }
+      }
+      // 800岁渡劫坎：智力≥95，运气≥90
+      if (age === 800) {
+        if (attributes.intelligence < 95 || attributes.luck < 90) {
+          this.setData({
+            eventResult: "💥 元婴期渡劫失败，被九天神雷劈成飞灰...",
+            showResult: true
+          })
+          setTimeout(() => this.endGame(), 2000)
+          return
+        }
+      }
+      // 980岁终极渡劫，成功达成最高结局
+      if (age >= 980) {
+        this.setData({
+          eventResult: "✨ 你历经九九天劫，成功飞升，成为虾中至尊，与天地同寿！",
+          showResult: true
+        })
+        setTimeout(() => this.endGame(), 3000)
+        return
+      }
     }
   },
 

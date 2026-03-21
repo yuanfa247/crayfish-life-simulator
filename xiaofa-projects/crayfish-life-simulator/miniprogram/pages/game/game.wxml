@@ -52,7 +52,6 @@
     <!-- 选择结果展示 -->
     <view wx:if="{{showResult}}" class="result-panel">
       <view class="result-text">{{eventResult}}</view>
-      <button class="next-btn" bindtap="nextEvent">下一个事件</button>
     </view>
 
     <!-- 选项列表 -->
