@@ -158,9 +158,18 @@ page {
   border: 2rpx solid transparent;
 }
 
+/* 天赋等级样式 */
+.talent-item.level-0 { border-left: 6rpx solid #9e9e9e; } /* 白板 */
+.talent-item.level-1 { border-left: 6rpx solid #4caf50; } /* 绿色 */
+.talent-item.level-2 { border-left: 6rpx solid #2196f3; } /* 蓝色 */
+.talent-item.level-3 { border-left: 6rpx solid #9c27b0; } /* 紫色 */
+.talent-item.level-4 { border-left: 6rpx solid #ff9800; } /* 橙色 */
+.talent-item.level-5 { border-left: 6rpx solid #f44336; } /* 红色 */
+
 .talent-item.selected {
   background: #e8f5e9;
   border-color: #4caf50;
+  box-shadow: 0 0 0 2rpx rgba(76,175,80,0.3);
 }
 
 .talent-name {

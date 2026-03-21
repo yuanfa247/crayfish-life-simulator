@@ -23,7 +23,7 @@
   <!-- 步骤2：天赋选择 -->
   <view wx:if="{{step === 2}}" class="talent-card">
     <view class="card-title">选择天赋 (已选: {{selectedTalents.length}}/3)</view>
-    <view class="talent-item {{item.selected ? 'selected' : ''}}" wx:for="{{talentList}}" wx:key="id" bindtap="selectTalent" data-id="{{item.id}}">
+    <view class="talent-item level-{{item.level}} {{item.selected ? 'selected' : ''}}" wx:for="{{talentList}}" wx:key="id" bindtap="selectTalent" data-id="{{item.id}}">
       <view class="talent-name">{{item.name}}</view>
       <view class="talent-desc">{{item.desc}}</view>
       <view class="talent-effect">{{item.effectDesc}}</view>

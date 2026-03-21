@@ -14,6 +14,8 @@ Page({
     eventCount: 0,
     // 是否进入修仙模式
     isCultivator: false,
+    // 天赋标签，影响事件触发
+    talentTags: [],
     // 初始属性（从首页传入）
     attributes: {
       vitality: 0,    // 活力
@@ -30,11 +32,12 @@ Page({
   },
 
   onLoad: function (options) {
-    // 从首页获取初始属性
-    if (options.attributes) {
-      const attrs = JSON.parse(decodeURIComponent(options.attributes))
+    // 从首页获取初始属性和天赋
+    if (options.params) {
+      const params = JSON.parse(decodeURIComponent(options.params))
       this.setData({
-        attributes: attrs
+        attributes: params.attributes,
+        talentTags: params.talentTags || []
       })
     } else {
       // 默认属性
@@ -43,8 +46,13 @@ Page({
         'attributes.intelligence': 10,// 智力
         'attributes.wealth': 10,      // 财富/食物储备
         'attributes.luck': 10,        // 运气
-        'attributes.charm': 10        // 魅力
+        'attributes.charm': 10        // 魅力,
+        talentTags: []
       })
+    }
+    // 修仙天赋直接开启修仙模式
+    if (this.data.talentTags.includes('cultivate') || this.data.talentTags.includes('god')) {
+      this.setData({ isCultivator: true })
     }
     // 提前预加载事件列表，优化读取速度
     this.getAvailableEvents()
@@ -95,7 +103,7 @@ Page({
     })
   },
 
-  // 随机抽取一个事件
+  // 随机抽取一个事件（天赋标签加权）
   triggerRandomEvent: function () {
     const availableEvents = this.getAvailableEvents()
     if (availableEvents.length === 0) {
@@ -103,9 +111,31 @@ Page({
       this.setData({ status: 'playing' })
       return
     }
-    // 随机抽取
-    const randomIndex = Math.floor(Math.random() * availableEvents.length)
-    const event = availableEvents[randomIndex]
+    // 天赋加权：对应标签的事件概率提升3倍
+    const weightedEvents = []
+    const talentTags = this.data.talentTags
+    availableEvents.forEach(event => {
+      let weight = 1
+      // 如果事件有tag，且天赋包含该tag，权重乘以3
+      if (event.tags) {
+        event.tags.forEach(tag => {
+          if (talentTags.includes(tag) || talentTags.includes('god')) {
+            weight *= 3
+          }
+        })
+      }
+      // 锦鲤天赋，所有事件权重乘以2
+      if (talentTags.includes('luck')) {
+        weight *= 2
+      }
+      // 按权重添加到数组
+      for (let i = 0; i < weight; i++) {
+        weightedEvents.push(event)
+      }
+    })
+    // 随机抽取加权后的事件
+    const randomIndex = Math.floor(Math.random() * weightedEvents.length)
+    const event = weightedEvents[randomIndex]
     this.setData({
       currentEvent: event,
       status: 'event',
@@ -179,8 +209,8 @@ Page({
         this.endGame()
         return
       }
-      // 105岁以上，小概率触发修仙机缘（智力≥70，运气≥60）
-      if (age > 105 && attributes.intelligence >= 70 && attributes.luck >= 60) {
+      // 105岁以上，小概率触发修仙机缘（有修仙天赋直接触发，否则智力≥70，运气≥60）
+      if ((age > 105 && attributes.intelligence >= 70 && attributes.luck >= 60) || talentTags.includes('cultivate')) {
         this.setData({ isCultivator: true })
         // 触发修仙事件
         this.setData({

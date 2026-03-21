@@ -25,18 +25,18 @@ Page({
     totalPoints: 50,
     // 剩余可分配点数
     remainingPoints: 0,
-    // 天赋列表 10选3
+    // 天赋列表 10选3，等级：0-白板 1-绿色 2-蓝色 3-紫色 4-橙色 5-红色
     talentList: [
-      { id: 1, name: '天生神力', desc: '从小力气就比别人大', effectDesc: '活力+5', effects: { vitality: 5 } },
-      { id: 2, name: '学霸附体', desc: '学习能力超强', effectDesc: '智力+5', effects: { intelligence: 5 } },
-      { id: 3, name: '家财万贯', desc: '出生在富裕家庭', effectDesc: '财富+5', effects: { wealth: 5 } },
-      { id: 4, name: '锦鲤转世', desc: '运气好到爆棚', effectDesc: '运气+5', effects: { luck: 5 } },
-      { id: 5, name: '颜值爆表', desc: '长得特别好看', effectDesc: '魅力+5', effects: { charm: 5 } },
-      { id: 6, name: '修仙体质', desc: '天生适合修行', effectDesc: '智力+3，运气+2', effects: { intelligence: 3, luck: 2 } },
-      { id: 7, name: '社交达人', desc: '特别会说话', effectDesc: '魅力+3，财富+2', effects: { charm: 3, wealth: 2 } },
-      { id: 8, name: '钢铁身躯', desc: '不容易生病受伤', effectDesc: '活力+3，魅力+2', effects: { vitality: 3, charm: 2 } },
-      { id: 9, name: '商业头脑', desc: '特别会赚钱', effectDesc: '智力+3，财富+2', effects: { intelligence: 3, wealth: 2 } },
-      { id: 10, name: '天选之子', desc: '各方面都很均衡', effectDesc: '全属性+2', effects: { vitality: 2, intelligence: 2, wealth: 2, luck: 2, charm: 2 } }
+      { id: 1, name: '天生神力', desc: '从小力气就比别人大', effectDesc: '活力+5 | 解锁力量类特殊事件', level: 2, effects: { vitality: 5, tag: 'strength' } },
+      { id: 2, name: '学霸附体', desc: '学习能力超强', effectDesc: '智力+5 | 解锁学习类特殊事件', level: 2, effects: { intelligence: 5, tag: 'intelligence' } },
+      { id: 3, name: '家财万贯', desc: '出生在富裕家庭', effectDesc: '财富+5 | 解锁财富类特殊事件', level: 3, effects: { wealth: 5, tag: 'wealth' } },
+      { id: 4, name: '锦鲤转世', desc: '运气好到爆棚', effectDesc: '运气+5 | 大幅提升幸运事件概率', level: 4, effects: { luck: 5, tag: 'luck' } },
+      { id: 5, name: '颜值爆表', desc: '长得特别好看', effectDesc: '魅力+5 | 解锁社交类特殊事件', level: 3, effects: { charm: 5, tag: 'charm' } },
+      { id: 6, name: '修仙体质', desc: '天生适合修行', effectDesc: '智力+3，运气+2 | 大幅提高修仙概率', level: 5, effects: { intelligence: 3, luck: 2, tag: 'cultivate' } },
+      { id: 7, name: '社交达人', desc: '特别会说话', effectDesc: '魅力+3，财富+2 | 解锁商业合作事件', level: 2, effects: { charm: 3, wealth: 2, tag: 'social' } },
+      { id: 8, name: '钢铁身躯', desc: '不容易生病受伤', effectDesc: '活力+3，魅力+2 | 大幅降低意外死亡概率', level: 3, effects: { vitality: 3, charm: 2, tag: 'tough' } },
+      { id: 9, name: '商业头脑', desc: '特别会赚钱', effectDesc: '智力+3，财富+2 | 解锁投资类特殊事件', level: 2, effects: { intelligence: 3, wealth: 2, tag: 'business' } },
+      { id: 10, name: '天选之子', desc: '各方面都很均衡', effectDesc: '全属性+2 | 解锁所有特殊事件', level: 5, effects: { vitality: 2, intelligence: 2, wealth: 2, luck: 2, charm: 2, tag: 'god' } }
     ],
     // 已选择的天赋
     selectedTalents: []
@@ -151,16 +151,23 @@ Page({
   startGame() {
     // 应用天赋加成
     const finalAttrs = { ...this.data.attrs };
+    const talentTags = [];
     this.data.selectedTalents.forEach(talent => {
       for (const [key, val] of Object.entries(talent.effects)) {
-        if (finalAttrs.hasOwnProperty(key)) {
+        if (key === 'tag') {
+          talentTags.push(val);
+        } else if (finalAttrs.hasOwnProperty(key)) {
           finalAttrs[key] += val;
         }
       }
     });
-    const attrsStr = encodeURIComponent(JSON.stringify(finalAttrs));
+    const params = {
+      attributes: finalAttrs,
+      talentTags: talentTags
+    };
+    const paramsStr = encodeURIComponent(JSON.stringify(params));
     wx.navigateTo({
-      url: `/pages/game/game?attributes=${attrsStr}`
+      url: `/pages/game/game?params=${paramsStr}`
     });
   },
 
