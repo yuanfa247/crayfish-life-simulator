@@ -1,18 +1,124 @@
-// 事件库 - 小龙虾人生模拟器
+// 事件库 - 龙虾转生人生模拟器
+// 背景：你原本是一只小龙虾，死在菜市场后重生成为了人类
 // 事件类型：normal(普通事件), key(关键事件), special(特殊事件)
 // 属性影响格式：{ attribute: delta }, 属性：vitality(活力)/intelligence(智力)/wealth(财富)/luck(运气)/charm(魅力)
-// 年龄范围：minAge ~ maxAge，幼虾阶段 1-5，青年 6-15，壮年 16-30，老年 31+
+// 年龄范围：minAge ~ maxAge
+// tags：对应天赋标签，只有拥有对应天赋才能触发
 
 module.exports = [
-  // ---------- 幼年期事件 (1-5岁) - 共 35 个事件 ----------
+  // ---------- 幼年事件 (0-6岁) - 共 35 个事件 ----------
   {
     id: 1,
-    title: "初次下水",
-    description: "你第一次从卵里钻出来，好奇地打量着这个陌生的水域...",
+    title: "诞生",
+    description: "你缓缓睁开眼，发现自己重生成为了人类婴儿...前世记忆还在，你记得你曾经是一只逍遥自在的小龙虾",
+    type: "key",
+    minAge: 1,
+    maxAge: 1,
+    tags: [],
+    options: [
+      {
+        text: "接受新生，继续人生",
+        effects: {
+          vitality: +3,
+          intelligence: +2
+        },
+        result: "带着前世小龙虾的记忆，开始你不一样的人生"
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "第一次学爬",
+    description: "到了学爬的年纪，你继承了小龙虾爬行天赋",
     type: "normal",
     minAge: 1,
     maxAge: 3,
+    tags: [],
     options: [
+      {
+        text: "慢慢适应人类身体",
+        effects: {
+          vitality: +2,
+          intelligence: +1
+        },
+        result: "虽然不如以前爬行自在，但你学的比同龄人都快"
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "幼儿园里抓螃蟹",
+    description: "幼儿园秋游，小朋友们在水沟里抓螃蟹，你一眼就看出螃蟹躲在哪里",
+    type: "normal",
+    minAge: 2,
+    maxAge: 5,
+    tags: ['lobster-perception'],
+    options: [
+      {
+        text: "出手就是最大的一只",
+        effects: {
+          luck: +3,
+          charm: +2
+        },
+        result: "小朋友们都夸你厉害，老师还给你发了小红花"
+      }
+    ]
+  },
+  // ---------- 原始小龙虾事件保留（适配新设定）----------
+  {
+    id: 101,
+    title: "初次下水",
+    description: "你想起作为小龙虾第一次下水的感觉，现在你去游泳馆游泳，那种感觉又回来了...",
+    type: "normal",
+    minAge: 1,
+    maxAge: 10,
+    tags: [],
+    options: [
+      {
+        text: "勇敢地往远处游",
+        effects: {
+          vitality: +5,
+          luck: +2
+        },
+        result: "你锻炼了肌肉，感觉充满力量"
+      },
+      {
+        text: "躲在水草旁边观察",
+        effects: {
+          intelligence: +5,
+          luck: +1
+        },
+        result: "你变得更加谨慎，懂得观察环境"
+      }
+    ]
+  },
+  {
+    id: 102,
+    title: "寻找食物",
+    description: "跟着本能，你知道哪里能找到好吃的...",
+    type: "normal",
+    minAge: 1,
+    maxAge: 15,
+    tags: [],
+    options: [
+      {
+        text: "吃水底的水藻和微生物",
+        effects: {
+          vitality: +3,
+          wealth: +1
+        },
+        result: "味道一般，勉强填饱肚子"
+      },
+      {
+        text: "冒险去吃水面上的浮游生物",
+        effects: {
+          vitality: +8,
+          luck: -2
+        },
+        result: "营养丰富，但差点被飞鸟发现"
+      }
+    ]
+  },
       {
         text: "勇敢地往远处游",
         effects: {

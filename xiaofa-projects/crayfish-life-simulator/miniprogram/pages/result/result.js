@@ -87,6 +87,12 @@ Page({
     wx.navigateBack()
   },
 
+  // 重新开始游戏
+  restart: function () {
+    // 回到首页，首页会自动重置属性和天赋
+    wx.navigateBack()
+  },
+
   // 分享游戏
   shareGame: function () {
     // 微信小程序分享会自动处理

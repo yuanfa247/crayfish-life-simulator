@@ -64,7 +64,15 @@ Page({
       
       // 红色天赋（等级5，神话，概率极低）
       { id: 6, name: '修仙体质', desc: '天生适合修行', effectDesc: '智力+3，运气+2 | 大幅提高修仙概率', level: 5, effects: { intelligence: 3, luck: 2, tag: 'cultivate' } },
-      { id: 10, name: '天选之子', desc: '各方面都很均衡', effectDesc: '全属性+2 | 解锁所有特殊事件', level: 5, effects: { vitality: 2, intelligence: 2, wealth: 2, luck: 2, charm: 2, tag: 'god' } }
+      { id: 10, name: '天选之子', desc: '各方面都很均衡', effectDesc: '全属性+2 | 解锁所有特殊事件', level: 5, effects: { vitality: 2, intelligence: 2, wealth: 2, luck: 2, charm: 2, tag: 'god' } },
+      // 龙虾转生专属天赋（前世技能）
+      { id: 501, name: '断肢再生', desc: '小龙虾天生能力，断了钳子能再长出来', effectDesc: '活力+3 | 大幅降低受伤死亡概率', level: 3, effects: { vitality: 3, tag: 'lobster-regen' } },
+      { id: 502, name: '无限生长', desc: '小龙虾终身生长，你也继承了这个能力', effectDesc: '全属性每年稳步增长', level: 4, effects: { intelligence: 2, vitality: 2, tag: 'lobster-infinite' } },
+      { id: 503, name: '三百六十度感知', desc: '小龙虾特殊感知系统，能感知四面八方', effectDesc: '智力+4，运气+2 | 大幅提高避开危险概率', level: 3, effects: { intelligence: 4, luck: 2, tag: 'lobster-perception' } },
+      { id: 504, name: '铁甲防御', desc: '坚硬虾壳就是最好的防御', effectDesc: '活力+6 | 大幅降低物理伤害', level: 3, effects: { vitality: 6, tag: 'lobster-armor' } },
+      { id: 505, name: '夜行猎手', desc: '习惯在黑夜行动，视力比普通人好', effectDesc: '幸运+5 | 更容易发现夜间机会', level: 2, effects: { luck: 5, tag: 'lobster-night' } },
+      { id: 506, name: '洞穴大师', desc: '天生会打洞，知道怎么找到最安全的藏身之处', effectDesc: '智力+3，活力+3 | 大幅降低天灾死亡概率', level: 3, effects: { intelligence: 3, vitality: 3, tag: 'lobster-cave' } },
+      { id: 507, name: '端粒酶永生', desc: '小龙虾端粒酶不会失活，理论上可以永生', effectDesc: '活力+3，运气+3 | 极大提高修仙成功概率', level: 5, effects: { vitality: 3, luck: 3, tag: 'lobster-immortal, cultivate' } }
     ],
     // 当前展示的天赋列表（随机抽取10个）
     talentList: [],

@@ -16,6 +16,8 @@ Page({
     isCultivator: false,
     // 天赋标签，影响事件触发
     talentTags: [],
+    // 已经触发过的事件ID，避免重复
+    triggeredEvents: [],
     // 自动跳转定时器
     autoNextTimer: null,
     // 初始属性（从首页传入）
@@ -84,12 +86,15 @@ Page({
 
   // 获取符合当前条件的可触发事件列表
   getAvailableEvents: function () {
-    const { age, attributes } = this.data
+    const { age, attributes, talentTags, triggeredEvents } = this.data
     // 更新年龄阶段
     const ageStage = this.getAgeStage(age)
     this.setData({ ageStage })
     
     return eventList.filter(e => {
+      // 已经触发过的事件不再重复触发
+      if (triggeredEvents.includes(e.id)) return false
+      
       // 年龄范围筛选
       const minAge = e.minAge || 1
       const maxAge = e.maxAge || 100
@@ -103,16 +108,23 @@ Page({
         }
       }
       
+      // 天赋标签筛选：如果事件有tags，至少匹配一个天赋标签才能触发
+      if (e.tags && e.tags.length > 0) {
+        if (!talentTags.some(t => e.tags.includes(t) || talentTags.includes('god'))) {
+          return false
+        }
+      }
+      
       return true
     })
   },
 
-  // 随机抽取一个事件（天赋标签加权）
+  // 随机抽取一个事件（天赋标签加权，避免重复）
   triggerRandomEvent: function () {
     const availableEvents = this.getAvailableEvents()
     if (availableEvents.length === 0) {
-      // 没有符合条件的事件，继续等待
-      this.setData({ status: 'playing' })
+      // 所有事件都触发完了，直接结束游戏
+      this.endGame()
       return
     }
     // 天赋加权：对应标签的事件概率提升3倍
@@ -140,6 +152,8 @@ Page({
     // 随机抽取加权后的事件
     const randomIndex = Math.floor(Math.random() * weightedEvents.length)
     const event = weightedEvents[randomIndex]
+    // 记录已触发事件，避免重复
+    this.data.triggeredEvents.push(event.id)
     this.setData({
       currentEvent: event,
       status: 'event',
@@ -209,41 +223,51 @@ Page({
 
   // 检查游戏是否结束
   checkGameEnd: function () {
-    const { age, attributes, isCultivator } = this.data
+    const { age, attributes, isCultivator, talentTags } = this.data
     const attrs = Object.values(attributes)
+    const random = Math.random()
     
     // 普通模式（未修仙）
     if (!isCultivator) {
-      // 60岁以下，任意属性归0 → 意外死亡
-      if (age < 60 && attrs.some(a => a <= 0)) {
+      // 任意属性归0 → 直接结束
+      if (attrs.some(a => a <= 0)) {
         this.endGame()
         return
       }
-      // 60-105岁，任意属性归0 → 寿终正寝；到105岁自动结束
-      if ((age >= 60 && age <= 105) && (attrs.some(a => a <= 0) || age === 105)) {
+      // 60岁以下：30%概率结束（各种意外）
+      if (age < 60 && random < 0.3) {
         this.endGame()
         return
       }
-      // 105岁以上，小概率触发修仙机缘（有修仙天赋直接触发，否则智力≥70，运气≥60）
-      if ((age > 105 && attributes.intelligence >= 70 && attributes.luck >= 60) || talentTags.includes('cultivate')) {
-        this.setData({ isCultivator: true })
-        // 触发修仙事件
-        this.setData({
-          eventResult: "🎉 你意外获得上古传承，踏上修仙之路，寿命大幅延长！",
-          showResult: true
-        })
-        setTimeout(() => {
-          this.nextEvent()
-        }, 3000)
+      // 60-105岁：50%概率结束
+      if (age >= 60 && age <= 105 && random < 0.5) {
+        this.endGame()
+        return
+      }
+      // 105岁：强制结束（寿终正寝），除非触发修仙
+      if (age === 105) {
+        // 有修仙天赋或满足属性条件直接触发修仙
+        if (talentTags.includes('cultivate') || (attributes.intelligence >= 70 && attributes.luck >= 60)) {
+          this.setData({ isCultivator: true })
+          this.setData({
+            eventResult: "🎉 你意外获得上古传承，踏上修仙之路，寿命大幅延长！",
+            showResult: true
+          })
+          setTimeout(() => {
+            this.nextEvent()
+          }, 3000)
+          return
+        }
+        this.endGame()
         return
       }
     }
-
+    
     // 修仙模式
     if (isCultivator) {
-      // 300岁渡劫坎：智力≥80，运气≥70
+      // 300岁渡劫坎：智力≥80，运气≥70，20%概率失败（高等级失败概率降低）
       if (age === 300) {
-        if (attributes.intelligence < 80 || attributes.luck < 70) {
+        if (attributes.intelligence < 80 || attributes.luck < 70 || random < 0.2) {
           this.setData({
             eventResult: "💥 筑基期渡劫失败，修为散尽，寿元耗尽...",
             showResult: true
@@ -252,9 +276,9 @@ Page({
           return
         }
       }
-      // 500岁渡劫坎：智力≥90，运气≥80
+      // 500岁渡劫坎：智力≥90，运气≥80，25%概率失败
       if (age === 500) {
-        if (attributes.intelligence < 90 || attributes.luck < 80) {
+        if (attributes.intelligence < 90 || attributes.luck < 80 || random < 0.25) {
           this.setData({
             eventResult: "💥 金丹期渡劫失败，神魂俱灭...",
             showResult: true
@@ -263,9 +287,9 @@ Page({
           return
         }
       }
-      // 800岁渡劫坎：智力≥95，运气≥90
+      // 800岁渡劫坎：智力≥95，运气≥90，30%概率失败
       if (age === 800) {
-        if (attributes.intelligence < 95 || attributes.luck < 90) {
+        if (attributes.intelligence < 95 || attributes.luck < 90 || random < 0.3) {
           this.setData({
             eventResult: "💥 元婴期渡劫失败，被九天神雷劈成飞灰...",
             showResult: true

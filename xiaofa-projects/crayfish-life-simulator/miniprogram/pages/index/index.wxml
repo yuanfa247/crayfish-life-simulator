@@ -8,6 +8,9 @@
   <!-- 步骤1：属性分配 -->
   <view wx:if="{{step === 1}}" class="attrs-card">
     <view class="card-title">分配初始属性 (剩余点数: {{remainingPoints}})</view>
+    <view class="back-btn hidden">
+      <!-- 第一页不需要返回 -->
+    </view>
     <view class="attr-item" wx:for="{{attrList}}" wx:key="key">
       <text class="attr-label">{{item.label}}</text>
       <view class="attr-control">
@@ -22,7 +25,12 @@
 
   <!-- 步骤2：天赋选择 -->
   <view wx:if="{{step === 2}}" class="talent-card">
-    <view class="card-title">选择天赋 (已选: {{selectedTalents.length}}/3)</view>
+    <view class="card-header">
+      <view class="back-btn" bindtap="goToAttr">
+        <text class="back-icon">◀</text>
+      </view>
+      <view class="card-title">选择天赋 (已选: {{selectedTalents.length}}/3)</view>
+    </view>
     <view class="talent-item level-{{item.level}} {{item.selected ? 'selected' : ''}}" wx:for="{{talentList}}" wx:key="id" bindtap="selectTalent" data-id="{{item.id}}">
       <view class="talent-header">
         <view class="talent-level level-text-{{item.level}}">{{['白','绿','蓝','紫','橙','红'][item.level]}}</view>
