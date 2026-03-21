@@ -14,12 +14,12 @@ page {
 }
 
 .title-card {
-  margin-top: 40rpx;
+  margin-top: 20rpx;
   text-align: center;
-  margin-bottom: 30rpx;
-  padding: 30rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
   background: rgba(255,255,255,0.95);
-  border-radius: 30rpx;
+  border-radius: 25rpx;
   box-shadow: 0 10rpx 30rpx rgba(0,0,0,0.15);
 }
 
@@ -186,12 +186,12 @@ page {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   color: white;
   border-radius: 50rpx;
-  padding: 30rpx;
-  font-size: 38rpx;
+  padding: 40rpx;
+  font-size: 42rpx;
   font-weight: bold;
   margin-bottom: 20rpx;
   border: none;
-  box-shadow: 0 8rpx 20rpx rgba(79,172,254,0.4);
+  box-shadow: 0 10rpx 25rpx rgba(79,172,254,0.4);
 }
 
 .setting-btn {
