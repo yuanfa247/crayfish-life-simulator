@@ -1,7 +1,7 @@
 <view class="container">
   <view class="title-card">
     <text class="title">养一只小龙虾</text>
-    <text class="subtitle">文字人生模拟器</text>
+    <text class="subtitle">你是一只小龙虾，在菜市场死亡后转生人类</text>
     <view class="step-indicator">当前步骤: {{step === 1 ? '属性分配' : step === 2 ? '天赋选择' : '开始游戏'}}</view>
   </view>
   

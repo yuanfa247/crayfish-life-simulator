@@ -1,361 +1,385 @@
-// pages/game/game.js
-const app = getApp()
-const eventList = require('../../data/events.js')
+﻿// pages/game/game.js
+const app = getApp();
+const eventList = require('../../data/events.js');
 
 Page({
-  data: {
-    // 游戏状态
-    status: 'playing', // playing: 游戏中, event: 事件选择, ended: 结束
-    // 当前年龄
-    age: 1,
-    // 年龄阶段
-    ageStage: '幼虾', // 幼虾/青年/壮年/老年/筑基期(300+)/金丹期(500+)/元婴期(800+)/渡劫期(980)
-    // 总经历事件数
-    eventCount: 0,
-    // 是否进入修仙模式
-    isCultivator: false,
-    // 天赋标签，影响事件触发
-    talentTags: [],
-    // 已经触发过的事件ID，避免重复
-    triggeredEvents: [],
-    // 自动跳转定时器
-    autoNextTimer: null,
-    // 初始属性（从首页传入）
-    attributes: {
-      vitality: 0,    // 活力
-      intelligence: 0,// 智力
-      wealth: 0,      // 财富
-      luck: 0,        // 运气
-      charm: 0        // 魅力
-    },
-    // 当前事件
-    currentEvent: null,
-    // 事件选择后的结果展示
-    showResult: false,
-    eventResult: '',
-    // 本次选项的属性变化
-    attrChanges: []
-  },
+	data: {
+		status: 'event',
+		age: 1,
+		ageStage: '幼儿',
+		eventCount: 0,
+		isCultivator: false,
+		isEndingPending: false,
+		talentTags: [],
+		triggeredEvents: [],
+		autoNextTimer: null,
+		attributes: {
+			vitality: 10,
+			intelligence: 10,
+			wealth: 10,
+			luck: 10,
+			charm: 10,
+		},
+		currentEvent: null,
+		showResult: false,
+		eventResult: '',
+		attrChanges: [],
+		pendingEndingId: null,
+	},
 
-  onLoad: function (options) {
-    // 从首页获取初始属性和天赋
-    if (options.params) {
-      const params = JSON.parse(decodeURIComponent(options.params))
-      this.setData({
-        attributes: params.attributes,
-        talentTags: params.talentTags || []
-      })
-    } else {
-      // 默认属性
-      this.setData({
-        'attributes.vitality': 10,    // 活力
-        'attributes.intelligence': 10,// 智力
-        'attributes.wealth': 10,      // 财富/食物储备
-        'attributes.luck': 10,        // 运气
-        'attributes.charm': 10,       // 魅力
-        talentTags: []
-      })
-    }
-    // 修仙天赋直接开启修仙模式
-    if (this.data.talentTags.includes('cultivate') || this.data.talentTags.includes('god')) {
-      this.setData({ isCultivator: true })
-    }
-    // 提前预加载事件列表，优化读取速度
-    this.getAvailableEvents()
-    // 自动触发第一个事件，缩短等待时间
-    setTimeout(() => {
-      this.triggerRandomEvent()
-    }, 300)
-  },
+	onLoad: function (options) {
+		let attrs = {
+			vitality: 10,
+			intelligence: 10,
+			wealth: 10,
+			luck: 10,
+			charm: 10,
+		};
+		let tags = [];
+		if (options.params) {
+			const p = JSON.parse(decodeURIComponent(options.params));
+			attrs = p.attributes;
+			tags = p.talentTags || [];
+		}
+		this.data.attributes = attrs;
+		this.data.talentTags = tags;
+		if (tags.includes('cultivate') || tags.includes('god'))
+			this.data.isCultivator = true;
+		this.setData({
+			attributes: attrs,
+			talentTags: tags,
+			isCultivator: this.data.isCultivator,
+			status: 'event',
+		});
+		// 直接加载第一个事件，无需等待
+		this.triggerRandomEvent();
+	},
 
-  // 根据年龄获取年龄阶段
-  getAgeStage: function (age) {
-    if (this.data.isCultivator) {
-      if (age >= 980) return '渡劫期'
-      if (age >= 800) return '元婴期'
-      if (age >= 500) return '金丹期'
-      if (age >= 300) return '筑基期'
-      return '修仙者'
-    }
-    if (age <= 5) return '幼虾'
-    if (age <= 15) return '青年'
-    if (age <= 30) return '壮年'
-    if (age <= 105) return '老年'
-    return '长寿者'
-  },
+	getAgeStage: function (age) {
+		if (this.data.isCultivator) {
+			if (age >= 980) return '渡劫期';
+			if (age >= 800) return '元婴期';
+			if (age >= 500) return '金丹期';
+			if (age >= 300) return '筑基期';
+			return '修仙者';
+		}
+		if (age <= 5) return '幼儿';
+		if (age <= 12) return '少年';
+		if (age <= 17) return '青少年';
+		if (age <= 25) return '青年';
+		if (age <= 40) return '壮年';
+		if (age <= 60) return '中年';
+		if (age <= 80) return '老年';
+		if (age <= 105) return '耄耋';
+		return '长寿者';
+	},
 
-  // 获取符合当前条件的可触发事件列表
-  getAvailableEvents: function () {
-    const { age, attributes, talentTags, triggeredEvents } = this.data
-    // 更新年龄阶段
-    const ageStage = this.getAgeStage(age)
-    this.setData({ ageStage })
-    
-    return eventList.filter(e => {
-      // 已经触发过的事件不再重复触发
-      if (triggeredEvents.includes(e.id)) return false
-      
-      // 年龄范围筛选
-      const minAge = e.minAge || 1
-      const maxAge = e.maxAge || 100
-      if (age < minAge || age > maxAge) return false
-      
-      // 属性条件筛选（如果有配置）
-      if (e.requires) {
-        for (const [key, minValue] of Object.entries(e.requires)) {
-          if (!attributes.hasOwnProperty(key)) continue
-          if (attributes[key] < minValue) return false
-        }
-      }
-      
-      // 天赋标签筛选：如果事件有tags，至少匹配一个天赋标签才能触发
-      if (e.tags && e.tags.length > 0) {
-        if (!talentTags.some(t => e.tags.includes(t) || talentTags.includes('god'))) {
-          return false
-        }
-      }
-      
-      return true
-    })
-  },
+	getAvailableEvents: function () {
+		const { age, attributes, talentTags, triggeredEvents, isCultivator } =
+			this.data;
+		this.setData({ ageStage: this.getAgeStage(age) });
+		return eventList.filter((e) => {
+			if (e.isEnding || e.isCultivateTrigger) {
+				if (isCultivator && e.isCultivateTrigger) return false;
+				if (e.isCultivateTrigger && age < 105) return false;
+			}
+			if (triggeredEvents.includes(e.id)) return false;
+			const minAge = e.minAge || 1;
+			const maxAge = e.maxAge || 999;
+			if (age < minAge || age > maxAge) return false;
+			if (e.requires) {
+				for (const [key, minVal] of Object.entries(e.requires)) {
+					if (
+						attributes.hasOwnProperty(key) &&
+						attributes[key] < minVal
+					)
+						return false;
+				}
+			}
+			if (e.tags && e.tags.length > 0) {
+				if (
+					!talentTags.includes('god') &&
+					!e.tags.some((t) => talentTags.includes(t))
+				)
+					return false;
+			}
+			return true;
+		});
+	},
 
-  // 随机抽取一个事件（天赋标签加权，避免重复）
-  triggerRandomEvent: function () {
-    const availableEvents = this.getAvailableEvents()
-    if (availableEvents.length === 0) {
-      // 所有事件都触发完了，直接结束游戏
-      this.endGame()
-      return
-    }
-    // 天赋加权：对应标签的事件概率提升3倍
-    const weightedEvents = []
-    const talentTags = this.data.talentTags
-    availableEvents.forEach(event => {
-      let weight = 1
-      // 如果事件有tag，且天赋包含该tag，权重乘以3
-      if (event.tags) {
-        event.tags.forEach(tag => {
-          if (talentTags.includes(tag) || talentTags.includes('god')) {
-            weight *= 3
-          }
-        })
-      }
-      // 锦鲤天赋，所有事件权重乘以2
-      if (talentTags.includes('luck')) {
-        weight *= 2
-      }
-      // 按权重添加到数组
-      for (let i = 0; i < weight; i++) {
-        weightedEvents.push(event)
-      }
-    })
-    // 随机抽取加权后的事件
-    const randomIndex = Math.floor(Math.random() * weightedEvents.length)
-    const event = weightedEvents[randomIndex]
-    // 记录已触发事件，避免重复
-    this.data.triggeredEvents.push(event.id)
-    this.setData({
-      currentEvent: event,
-      status: 'event',
-      showResult: false
-    })
-  },
+	// 结局概率：幼年极低，成年后逐步上升，符合人类生命规律
+	getEndingRatio: function (age) {
+		if (age < 18) return 0.005; // 18岁以下极低
+		if (age < 30) return 0.01; // 18-29岁 1%
+		if (age < 40) return 0.02; // 30-39岁 2%
+		if (age < 50) return 0.04 + (age - 40) * 0.003; // 40-49岁 4%-7%
+		if (age < 60) return 0.07 + (age - 50) * 0.008; // 50-59岁 7%-15%
+		if (age < 70) return 0.15 + (age - 60) * 0.015; // 60-69岁 15%-30%
+		if (age < 80) return 0.3 + (age - 70) * 0.02; // 70-79岁 30%-50%
+		return Math.min(0.85, 0.5 + (age - 80) * 0.012); // 80+岁
+	},
 
-  // 开始新事件（点击按钮触发）
-  startNewEvent: function () {
-    this.triggerRandomEvent()
-  },
+	triggerRandomEvent: function () {
+		const { talentTags, eventCount } = this.data;
+		let { age } = this.data;
 
-  // 选择事件选项
-  selectOption: function (e) {
-    const optionIndex = e.currentTarget.dataset.index
-    const option = this.data.currentEvent.options[optionIndex]
-    
-    // 应用属性变化
-    const attributes = { ...this.data.attributes }
-    const attrChanges = []
-    const attrNames = { vitality: '活力', intelligence: '智力', wealth: '财富', luck: '运气', charm: '魅力' }
-    for (const [key, delta] of Object.entries(option.effects)) {
-      // 只处理已定义的五个属性，忽略happiness/health等遗留字段
-      if (attributes.hasOwnProperty(key)) {
-        const oldVal = attributes[key]
-        attributes[key] += delta
-        // 属性不能小于0
-        if (attributes[key] < 0) attributes[key] = 0
-        const newVal = attributes[key]
-        if (newVal !== oldVal) {
-          attrChanges.push({
-            name: attrNames[key],
-            delta: newVal - oldVal
-          })
-        }
-      }
-    }
+		// 当前年龄的普通事件用完时，强制涨岁直到有事件可用
+		let events = this.getAvailableEvents();
+		let normalCheck = events.filter(
+			(e) => !e.isEnding && !e.isCultivateTrigger
+		);
+		let safetyCount = 0;
+		while (normalCheck.length === 0 && age < 999 && safetyCount < 200) {
+			age++;
+			this.data.age = age;
+			this.setData({ age, ageStage: this.getAgeStage(age) });
+			events = this.getAvailableEvents();
+			normalCheck = events.filter(
+				(e) => !e.isEnding && !e.isCultivateTrigger
+			);
+			safetyCount++;
+		}
 
-    // 更新数据
-    this.setData({
-      attributes,
-      eventCount: this.data.eventCount + 1,
-      eventResult: option.result,
-      attrChanges,
-      showResult: true
-    })
+		if (normalCheck.length === 0) {
+			this.endGame();
+			return;
+		}
 
-    // 每经历5个事件，年龄增长1岁
-    if (this.data.eventCount % 5 === 0) {
-      const newAge = this.data.age + 1
-      this.setData({
-        age: newAge,
-        ageStage: this.getAgeStage(newAge)
-      })
-    }
+		// 每8件事触发一次结局检查机会
+		const isAgeCheckEvent = eventCount % 8 === 7;
+		const normalEvents = events.filter(
+			(e) => !e.isEnding && !e.isCultivateTrigger
+		);
+		const endingEvents = events.filter(
+			(e) => e.isEnding || e.isCultivateTrigger
+		);
 
-    // 检查是否游戏结束（年龄达到最大或某个属性归零）
-    this.checkGameEnd()
-    
-    // 1.2秒后自动进入下一个事件，也支持点击跳过
-    if (this.data.status !== 'ended') {
-      this.setData({ autoNextTimer: setTimeout(() => {
-        this.nextEvent()
-      }, 1200) })
-    }
-  },
+		const weightedNormal = [];
+		normalEvents.forEach((ev) => {
+			let w = 1;
+			if (ev.tags) {
+				ev.tags.forEach((tag) => {
+					if (talentTags.includes(tag) || talentTags.includes('god'))
+						w *= 3;
+				});
+			}
+			for (let i = 0; i < w; i++) weightedNormal.push(ev);
+		});
 
-  // 检查游戏是否结束
-  checkGameEnd: function () {
-    const { age, attributes, isCultivator, talentTags } = this.data
-    const attrs = Object.values(attributes)
-    const random = Math.random()
-    
-    // 普通模式（未修仙）
-    if (!isCultivator) {
-      // 任意属性归0 → 直接结束
-      if (attrs.some(a => a <= 0)) {
-        this.endGame()
-        return
-      }
-      // 60岁以下：30%概率结束（各种意外）
-      if (age < 60 && random < 0.3) {
-        this.endGame()
-        return
-      }
-      // 60-105岁：50%概率结束
-      if (age >= 60 && age <= 105 && random < 0.5) {
-        this.endGame()
-        return
-      }
-      // 105岁：强制结束（寿终正寝），除非触发修仙
-      if (age === 105) {
-        // 有修仙天赋或满足属性条件直接触发修仙
-        if (talentTags.includes('cultivate') || (attributes.intelligence >= 70 && attributes.luck >= 60)) {
-          this.setData({ isCultivator: true })
-          this.setData({
-            eventResult: "🎉 你意外获得上古传承，踏上修仙之路，寿命大幅延长！",
-            showResult: true
-          })
-          setTimeout(() => {
-            this.nextEvent()
-          }, 3000)
-          return
-        }
-        this.endGame()
-        return
-      }
-    }
-    
-    // 修仙模式
-    if (isCultivator) {
-      // 300岁渡劫坎：智力≥80，运气≥70，20%概率失败（高等级失败概率降低）
-      if (age === 300) {
-        if (attributes.intelligence < 80 || attributes.luck < 70 || random < 0.2) {
-          this.setData({
-            eventResult: "💥 筑基期渡劫失败，修为散尽，寿元耗尽...",
-            showResult: true
-          })
-          setTimeout(() => this.endGame(), 2000)
-          return
-        }
-      }
-      // 500岁渡劫坎：智力≥90，运气≥80，25%概率失败
-      if (age === 500) {
-        if (attributes.intelligence < 90 || attributes.luck < 80 || random < 0.25) {
-          this.setData({
-            eventResult: "💥 金丹期渡劫失败，神魂俱灭...",
-            showResult: true
-          })
-          setTimeout(() => this.endGame(), 2000)
-          return
-        }
-      }
-      // 800岁渡劫坎：智力≥95，运气≥90，30%概率失败
-      if (age === 800) {
-        if (attributes.intelligence < 95 || attributes.luck < 90 || random < 0.3) {
-          this.setData({
-            eventResult: "💥 元婴期渡劫失败，被九天神雷劈成飞灰...",
-            showResult: true
-          })
-          setTimeout(() => this.endGame(), 2000)
-          return
-        }
-      }
-      // 980岁终极渡劫，成功达成最高结局
-      if (age >= 980) {
-        this.setData({
-          eventResult: "✨ 你历经九九天劫，成功飞升，成为虾中至尊，与天地同寿！",
-          showResult: true
-        })
-        setTimeout(() => this.endGame(), 3000)
-        return
-      }
-    }
-  },
+		if (weightedNormal.length === 0 && endingEvents.length > 0) {
+			const ev =
+				endingEvents[Math.floor(Math.random() * endingEvents.length)];
+			this.setData({
+				currentEvent: ev,
+				status: 'event',
+				showResult: false,
+				isEndingPending: false,
+				pendingEndingId: null,
+			});
+			return;
+		}
+		if (weightedNormal.length === 0) {
+			this.endGame();
+			return;
+		}
 
-  // 继续下一个事件（自动触发）
-  nextEvent: function () {
-    this.setData({
-      status: 'playing',
-      currentEvent: null,
-      showResult: false
-    })
-    // 自动触发下一个事件，缩短等待时间
-    setTimeout(() => {
-      this.triggerRandomEvent()
-    }, 300)
-  },
+		const normalTotal = weightedNormal.length;
+		const weightedEnding = [];
+		if (isAgeCheckEvent && endingEvents.length > 0) {
+			const hasCultivate = endingEvents.some((e) => e.isCultivateTrigger);
+			const ratio = hasCultivate
+				? Math.min(0.9, Math.max(0.05, (age - 104) * 0.05))
+				: this.getEndingRatio(age);
+			const endingTotal = Math.max(
+				1,
+				Math.round((normalTotal * ratio) / (1 - ratio))
+			);
+			const perEvent = Math.max(
+				1,
+				Math.round(endingTotal / endingEvents.length)
+			);
+			endingEvents.forEach((ev) => {
+				const w = perEvent * (ev.endingWeight || 1);
+				for (let i = 0; i < w; i++) weightedEnding.push(ev);
+			});
+		}
 
-  // 结束游戏，跳转结果页
-  endGame: function () {
-    this.setData({ status: 'ended' })
-    // 将最终属性和年龄传给结果页
-    const finalData = {
-      age: this.data.age,
-      attributes: this.data.attributes
-    }
-    wx.redirectTo({
-      url: '/pages/result/result?data=' + encodeURIComponent(JSON.stringify(finalData))
-    })
-  },
+		const all = [...weightedNormal, ...weightedEnding];
+		if (all.length === 0) {
+			this.endGame();
+			return;
+		}
+		const ev = all[Math.floor(Math.random() * all.length)];
+		if (!ev) {
+			this.endGame();
+			return;
+		}
+		if (!ev.isEnding && !ev.isCultivateTrigger)
+			this.data.triggeredEvents.push(ev.id);
+		this.setData({
+			currentEvent: ev,
+			status: 'event',
+			showResult: false,
+			isEndingPending: false,
+			pendingEndingId: null,
+		});
+	},
 
-  // 跳过等待直接触发事件
-  skipWaiting: function () {
-    if (this.data.status === 'playing') {
-      this.triggerRandomEvent()
-    }
-  },
+	startNewEvent: function () {
+		this.triggerRandomEvent();
+	},
 
-  // 跳过结果展示直接进入下一个事件
-  skipResult: function () {
-    if (this.data.showResult && this.data.status !== 'ended') {
-      // 清除自动跳转定时器
-      if (this.data.autoNextTimer) {
-        clearTimeout(this.data.autoNextTimer)
-      }
-      this.nextEvent()
-    }
-  },
+	selectOption: function (e) {
+		const idx = e.currentTarget.dataset.index;
+		const option = this.data.currentEvent.options[idx];
+		const attributes = { ...this.data.attributes };
+		const attrChanges = [];
+		const attrNames = {
+			vitality: '活力',
+			intelligence: '智力',
+			wealth: '财富',
+			luck: '运气',
+			charm: '魅力',
+		};
+		for (const [key, delta] of Object.entries(option.effects)) {
+			if (attributes.hasOwnProperty(key)) {
+				const old = attributes[key];
+				attributes[key] = Math.max(0, old + delta);
+				if (attributes[key] !== old)
+					attrChanges.push({
+						name: attrNames[key],
+						delta: attributes[key] - old,
+					});
+			}
+		}
+		const newEventCount = this.data.eventCount + 1;
+		let newAge = this.data.age;
+		// 每8件事涨1岁，让玩家有充足的事件体验
+		if (newEventCount % 8 === 0) newAge++;
+		this.setData({
+			attributes,
+			eventCount: newEventCount,
+			age: newAge,
+			ageStage: this.getAgeStage(newAge),
+			eventResult: option.result,
+			attrChanges,
+			showResult: true,
+		});
+		if (Object.values(attributes).some((a) => a <= 0)) {
+			this.setData({ isEndingPending: true, pendingEndingId: null });
+			return;
+		}
+		if (option.isCultivateOption) {
+			this.setData({ isCultivator: true });
+			setTimeout(() => this.nextEvent(), 2500);
+			return;
+		}
+		if (option.isEndingOption) {
+			this.setData({
+				isEndingPending: true,
+				pendingEndingId: option.endingId || null,
+			});
+			return;
+		}
+		if (this.data.isCultivator) {
+			const result = this.checkCultivatorBreakthrough(newAge, attributes);
+			if (result) {
+				this.setData({ eventResult: result.msg, showResult: true });
+				if (result.end)
+					this.setData({
+						isEndingPending: true,
+						pendingEndingId: null,
+					});
+				else setTimeout(() => this.nextEvent(), 2500);
+				return;
+			}
+		}
+		if (this.data.status !== 'ended') {
+			this.setData({
+				autoNextTimer: setTimeout(() => this.nextEvent(), 800),
+			});
+		}
+	},
 
-  // 返回首页
-  backToHome: function () {
-    wx.navigateBack()
-  }
-})
+	goToResult: function () {
+		if (this.data.isEndingPending) this.endGame(this.data.pendingEndingId);
+	},
+
+	checkCultivatorBreakthrough: function (age, attrs) {
+		const r = Math.random();
+		if (age === 300) {
+			if (attrs.intelligence < 80 || attrs.luck < 70 || r < 0.2)
+				return {
+					msg: '💥 筑基期渡劫失败，修为散尽，寿元耗尽...',
+					end: true,
+				};
+			return { msg: '✨ 筑基期渡劫成功！寿命延长到500岁！', end: false };
+		}
+		if (age === 500) {
+			if (attrs.intelligence < 90 || attrs.luck < 80 || r < 0.25)
+				return { msg: '💥 金丹期渡劫失败，神魂俱灭...', end: true };
+			return { msg: '✨ 金丹期渡劫成功！寿命延长到800岁！', end: false };
+		}
+		if (age === 800) {
+			if (attrs.intelligence < 95 || attrs.luck < 90 || r < 0.3)
+				return {
+					msg: '💥 元婴期渡劫失败，被九天神雷劈成飞灰...',
+					end: true,
+				};
+			return { msg: '✨ 元婴期渡劫成功！寿命延长到980岁！', end: false };
+		}
+		if (age >= 980) {
+			if (attrs.intelligence < 100 || attrs.luck < 95 || r < 0.35)
+				return {
+					msg: '💥 九九天劫失败！你在雷火中化为灰烬，修为尽毁...',
+					end: true,
+				};
+			return {
+				msg: '✨✨✨ 你历经九九天劫，成功飞升！成为虾中至尊，与天地同寿！✨✨✨',
+				end: true,
+			};
+		}
+		return null;
+	},
+
+	nextEvent: function () {
+		// 直接触发下一个事件，减少中间 setData 次数
+		this.data.showResult = false;
+		this.data.isEndingPending = false;
+		this.triggerRandomEvent();
+	},
+
+	endGame: function (forcedEndingId) {
+		this.setData({ status: 'ended' });
+		const finalData = {
+			age: this.data.age,
+			attributes: this.data.attributes,
+			isCultivator: this.data.isCultivator,
+			forcedEndingId: forcedEndingId || null,
+		};
+		wx.redirectTo({
+			url:
+				'/pages/result/result?data=' +
+				encodeURIComponent(JSON.stringify(finalData)),
+		});
+	},
+
+	skipWaiting: function () {
+		// 已移除等待画面，此函数保留兼容性
+	},
+
+	skipResult: function () {
+		if (this.data.isEndingPending) {
+			this.endGame(this.data.pendingEndingId);
+			return;
+		}
+		if (this.data.showResult && this.data.status !== 'ended') {
+			if (this.data.autoNextTimer) clearTimeout(this.data.autoNextTimer);
+			this.nextEvent();
+		}
+	},
+
+	backToHome: function () {
+		wx.navigateBack();
+	},
+});

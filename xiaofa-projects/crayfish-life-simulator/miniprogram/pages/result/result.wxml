@@ -17,13 +17,13 @@
     </view>
 
     <view class="attributes-summary">
-      <view class="attr-tag" wx:for="{{attributes}}" wx:key="key">
-        {{index}}: {{item}}
+      <view class="attr-tag" wx:for="{{attrList}}" wx:key="key">
+        {{item.label}}: {{item.value}}
       </view>
     </view>
 
     <view class="ending-conclusion">
-      {{ending.endingText.replace('{{age}}', age)}}
+      {{endingText}}
     </view>
 
     <view class="actions">
