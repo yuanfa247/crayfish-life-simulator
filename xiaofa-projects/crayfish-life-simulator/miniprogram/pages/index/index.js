@@ -105,9 +105,9 @@ Page({
     this.setData({ talentList: selected, selectedTalents: [] });
   },
 
-  // 随机生成开局属性（总和50点）
+  // 随机生成开局属性（总和25点）
   randomAttrs() {
-    let total = 50;
+    let total = 25;
     let attrs = {
       vitality: 0,
       intelligence: 0,

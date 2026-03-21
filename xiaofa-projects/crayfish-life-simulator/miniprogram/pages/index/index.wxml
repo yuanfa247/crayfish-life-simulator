@@ -32,7 +32,8 @@
       <view class="talent-effect">{{item.effectDesc}}</view>
     </view>
     <button class="prev-step-btn" bindtap="goToAttr">上一步：调整属性</button>
-    <button class="start-btn" bindtap="startGame" disabled="{{selectedTalents.length < 3}}">开始新人生</button>
+    <button class="start-btn talent-start-btn" bindtap="startGame" disabled="{{selectedTalents.length < 3}}">开始新人生</button>
+    <view class="talent-tip" wx:if="{{selectedTalents.length < 3}}">请选择3个天赋</view>
   </view>
 
   <button wx:if="{{step === 1}}" class="setting-btn" bindtap="openSettings">设置</button>
