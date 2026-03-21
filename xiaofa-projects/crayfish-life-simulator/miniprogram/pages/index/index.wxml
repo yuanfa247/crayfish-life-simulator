@@ -2,33 +2,35 @@
   <view class="title-card">
     <text class="title">养一只小龙虾</text>
     <text class="subtitle">文字人生模拟器</text>
+    <view class="step-indicator">当前步骤: {{step === 1 ? '属性分配' : step === 2 ? '天赋选择' : '开始游戏'}}</view>
   </view>
   
-  <view class="attrs-card">
-    <view class="card-title">你的小龙虾开局属性</view>
-    <view class="attr-item">
-      <text class="attr-label">活力</text>
-      <text class="attr-value">{{attrs.vitality}}</text>
-    </view>
-    <view class="attr-item">
-      <text class="attr-label">智力</text>
-      <text class="attr-value">{{attrs.intelligence}}</text>
-    </view>
-    <view class="attr-item">
-      <text class="attr-label">财富</text>
-      <text class="attr-value">{{attrs.wealth}}</text>
-    </view>
-    <view class="attr-item">
-      <text class="attr-label">运气</text>
-      <text class="attr-value">{{attrs.luck}}</text>
-    </view>
-    <view class="attr-item">
-      <text class="attr-label">颜值</text>
-      <text class="attr-value">{{attrs.charm}}</text>
+  <!-- 步骤1：属性分配 -->
+  <view wx:if="{{step === 1}}" class="attrs-card">
+    <view class="card-title">分配初始属性 (剩余点数: {{remainingPoints}})</view>
+    <view class="attr-item" wx:for="{{attrList}}" wx:key="key">
+      <text class="attr-label">{{item.label}}</text>
+      <view class="attr-control">
+        <button class="ctrl-btn" bindtap="changeAttr" data-key="{{item.key}}" data-op="-" disabled="{{attrs[item.key] <= 1}}">-</button>
+        <text class="attr-value">{{attrs[item.key]}}</text>
+        <button class="ctrl-btn" bindtap="changeAttr" data-key="{{item.key}}" data-op="+" disabled="{{remainingPoints <= 0}}">+</button>
+      </view>
     </view>
     <button class="reroll-btn" bindtap="reRandom">重新随机</button>
+    <button class="next-step-btn" bindtap="goToTalent">下一步：选择天赋</button>
   </view>
 
-  <button class="start-btn" bindtap="startGame">开始新人生</button>
-  <button class="setting-btn" bindtap="openSettings">设置</button>
+  <!-- 步骤2：天赋选择 -->
+  <view wx:if="{{step === 2}}" class="talent-card">
+    <view class="card-title">选择天赋 (已选: {{selectedTalents.length}}/3)</view>
+    <view class="talent-item {{item.selected ? 'selected' : ''}}" wx:for="{{talentList}}" wx:key="id" bindtap="selectTalent" data-id="{{item.id}}">
+      <view class="talent-name">{{item.name}}</view>
+      <view class="talent-desc">{{item.desc}}</view>
+      <view class="talent-effect">{{item.effectDesc}}</view>
+    </view>
+    <button class="prev-step-btn" bindtap="goToAttr">上一步：调整属性</button>
+    <button class="start-btn" bindtap="startGame" disabled="{{selectedTalents.length < 3}}">开始新人生</button>
+  </view>
+
+  <button wx:if="{{step === 1}}" class="setting-btn" bindtap="openSettings">设置</button>
 </view>

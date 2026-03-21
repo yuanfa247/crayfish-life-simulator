@@ -154,11 +154,11 @@ Page({
     // 检查是否游戏结束（年龄达到最大或某个属性归零）
     this.checkGameEnd()
     
-    // 2秒后自动进入下一个事件，无需用户点击
+    // 1.2秒后自动进入下一个事件，也支持点击跳过
     if (this.data.status !== 'ended') {
-      setTimeout(() => {
+      this.setData({ autoNextTimer: setTimeout(() => {
         this.nextEvent()
-      }, 2000)
+      }, 1200) })
     }
   },
 
@@ -271,6 +271,17 @@ Page({
   skipWaiting: function () {
     if (this.data.status === 'playing') {
       this.triggerRandomEvent()
+    }
+  },
+
+  // 跳过结果展示直接进入下一个事件
+  skipResult: function () {
+    if (this.data.showResult && this.data.status !== 'ended') {
+      // 清除自动跳转定时器
+      if (this.data.autoNextTimer) {
+        clearTimeout(this.data.autoNextTimer)
+      }
+      this.nextEvent()
     }
   },
 
