@@ -16,6 +16,8 @@ Page({
     isCultivator: false,
     // 天赋标签，影响事件触发
     talentTags: [],
+    // 自动跳转定时器
+    autoNextTimer: null,
     // 初始属性（从首页传入）
     attributes: {
       vitality: 0,    // 活力

@@ -78,6 +78,13 @@ Page({
     this.randomTalents();
   },
 
+  onShow() {
+    // 每次回到首页，重置到属性分配步骤，重新随机
+    this.setData({ step: 1 });
+    this.randomAttrs();
+    this.randomTalents();
+  },
+
   // 按概率随机抽取10个不重复天赋
   randomTalents() {
     const talentPool = [...this.data.talentPool];
