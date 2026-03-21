@@ -1422,7 +1422,7 @@ module.exports = [
 	{
 		id: 'nb8',
 		title: '天才预感',
-		description: '幼儀园老师发现你记忆力超群，推荐你参加早教比赛。',
+		description: '幼儿园老师发现你记忆力超群，推荐你参加早教比赛。',
 		minAge: 3,
 		maxAge: 5,
 		options: [
@@ -1435,6 +1435,44 @@ module.exports = [
 				text: '故意表现普通，低调行事',
 				effects: { intelligence: 2, luck: 2 },
 				result: '你决定隐藏实力，等待合适时机。',
+			},
+		],
+	},
+	{
+		id: 'nb9',
+		title: '池塘边抓小鱼',
+		description: '邻居带你去公园池塘边玩，你不自觉地就想往水里爬。',
+		minAge: 3,
+		maxAge: 5,
+		options: [
+			{
+				text: '忍不住下水游起来',
+				effects: { vitality: 3, luck: 1 },
+				result: '邻居吓得赶紧拉你上来，但你真的很舒服。',
+			},
+			{
+				text: '忍住，在岸边玩',
+				effects: { intelligence: 2, charm: 1 },
+				result: '你告诉自己，要忍住，现在是人类小孩。',
+			},
+		],
+	},
+	{
+		id: 'nb10',
+		title: '超市里的海鲜区',
+		description: '妈妈带你逛超市，经过海鲜区你停住了脚步，看着水缸里的同类。',
+		minAge: 2,
+		maxAge: 5,
+		options: [
+			{
+				text: '拉着妈妈离开',
+				effects: { charm: 1, intelligence: 1 },
+				result: '妈妈以为你害怕，赶紧带你走了。',
+			},
+			{
+				text: '静静地看一会儿',
+				effects: { intelligence: 2, luck: 1 },
+				result: '你在心里默默地和它们打招呼。',
 			},
 		],
 	},
@@ -1598,6 +1636,45 @@ module.exports = [
 				text: '劳逸结合，适当放松',
 				effects: { intelligence: 2, vitality: 1 },
 				result: '你考得不错，身体状态也很好。',
+			},
+		],
+	},
+	{
+		id: 'ne9',
+		title: '夏令营抓螃蟹',
+		description: '夏令营去河边活动，大家比赛抓螃蟹。你一看就懂。',
+		minAge: 10,
+		maxAge: 12,
+		tags: ['lobster-perception'],
+		options: [
+			{
+				text: '运用前世本能，轻松抓一大堆',
+				effects: { vitality: 2, luck: 3, charm: 2 },
+				result: '同学们惊呆了，问你怎么这么厉害。你笑而不答。',
+			},
+			{
+				text: '故意少抓，保持低调',
+				effects: { charm: 2, intelligence: 1 },
+				result: '你拿了第三名，大家说你运气好。',
+			},
+		],
+	},
+	{
+		id: 'ne10',
+		title: '学校食堂的小龙虾',
+		description: '今天食堂做了十三香小龙虾，你看着餐盘犹豫了。',
+		minAge: 9,
+		maxAge: 12,
+		options: [
+			{
+				text: '不吃，换成别的菜',
+				effects: { charm: 1, vitality: -1 },
+				result: '你说你对虾过敏，师傅给你换了宫保鸡丁。',
+			},
+			{
+				text: '坦然吃下，接受现实',
+				effects: { vitality: 3, intelligence: 1 },
+				result: '味道很好。你接受了这一世的生活。',
 			},
 		],
 	},
@@ -1767,9 +1844,48 @@ module.exports = [
 				result: '你完赛了。运动员们问你练了多久，你说：前世就开始练了。',
 			},
 			{
-				text: '当啗威队员，加油打气',
+				text: '当啦啦队员，加油打气',
 				effects: { charm: 3, vitality: 1 },
-				result: '你的加油声洪亮而有力，运动员们都说你崔气十足。',
+				result: '你的加油声洪亮而有力，运动员们都说你底气十足。',
+			},
+		],
+	},
+	{
+		id: 'nt9',
+		title: '生物竞赛',
+		description: '全国生物竞赛，有一道关于甲壳类动物的难题，没人做出来。',
+		minAge: 16,
+		maxAge: 18,
+		tags: ['lobster-perception'],
+		options: [
+			{
+				text: '轻松写出答案',
+				effects: { intelligence: 5, charm: 2 },
+				result: '阅卷老师惊叹，你拿到了金牌，保送名牌大学。',
+			},
+			{
+				text: '写一半留一半',
+				effects: { intelligence: 3, luck: 2 },
+				result: '你拿到二等奖，依然获得了自主招生加分。',
+			},
+		],
+	},
+	{
+		id: 'nt10',
+		title: '同学聚会',
+		description: '同学聚会上有人打赌，谁能一口气吃最多小龙虾。',
+		minAge: 16,
+		maxAge: 18,
+		options: [
+			{
+				text: '参加打赌，轻松赢了',
+				effects: { vitality: 3, charm: 2, wealth: 2 },
+				result: '你赢了请客，同学们都说你是小龙虾转世。',
+			},
+			{
+				text: '借口不吃，低调离场',
+				effects: { intelligence: 2, luck: 1 },
+				result: '你说你过敏，保住了秘密。',
 			},
 		],
 	},
@@ -1859,14 +1975,52 @@ module.exports = [
 		maxAge: 32,
 		options: [
 			{
-				text: '合伙创业，倒贴前世专业知识',
+				text: '合伙创业，贡献前世专业知识',
 				effects: { wealth: 3, vitality: -1, luck: 2 },
 				result: '开业第一天就火爆，龙虾盘被点到断货。你对天说了声对不起。',
 			},
 			{
 				text: '谢绝，选择稳定工作',
 				effects: { wealth: 1, charm: 1 },
-				result: '你选择了稳定。但偶尔在饭店门口经过时你还是会住脚看一会。',
+				result: '你选择了稳定。但偶尔在饭店门口经过时你还是会停脚看一会。',
+			},
+		],
+	},
+	{
+		id: 'na6',
+		title: '同学会海鲜大餐',
+		description: '十年同学会定在海鲜酒楼，端上了一大盆麻辣小龙虾。',
+		minAge: 28,
+		maxAge: 35,
+		options: [
+			{
+				text: '主动带头剥虾，手法娴熟',
+				effects: { charm: 3, vitality: 1 },
+				result: '同学们都说你一看就是经常吃，太会享受生活了。',
+			},
+			{
+				text: '推说过敏，少吃一点',
+				effects: { intelligence: 2, charm: 1 },
+				result: '你保持了低调，大家也没多想。',
+			},
+		],
+	},
+	{
+		id: 'na7',
+		title: '去海边出差',
+		description: '公司派你去沿海城市出差，你站在海边闻到了熟悉的海水味道。',
+		minAge: 25,
+		maxAge: 40,
+		options: [
+			{
+				text: '脱鞋下海，感受海水',
+				effects: { vitality: 3, luck: 1 },
+				result: '像回到了前世故乡，你感到了前所未有的放松。',
+			},
+			{
+				text: '在岸边看看，完成工作',
+				effects: { wealth: 2, intelligence: 1 },
+				result: '工作顺利完成，你把思念藏在心里。',
 			},
 		],
 	},
@@ -1968,6 +2122,45 @@ module.exports = [
 			},
 		],
 	},
+	{
+		id: 'nm6',
+		title: '家庭聚餐',
+		description: '家庭聚餐，孙子/女看到小龙虾问你：爷爷/奶奶，你吃过小龙虾吗？',
+		minAge: 45,
+		maxAge: 60,
+		options: [
+			{
+				text: '我就是小龙虾转世',
+				effects: { charm: 4, luck: 1 },
+				result: '全家都笑了，说你真幽默。只有你自己知道这是真话。',
+			},
+			{
+				text: '当然吃过，给你讲怎么做',
+				effects: { charm: 2, intelligence: 1 },
+				result: '你给家人讲了很多小龙虾知识，大家都说你懂得多。',
+			},
+		],
+	},
+	{
+		id: 'nm7',
+		title: '单位体检',
+		description: '单位体检，医生说你的骨密度比同龄人高很多，太健康了。',
+		minAge: 40,
+		maxAge: 60,
+		tags: ['lobster-armor'],
+		options: [
+			{
+				text: '笑说经常锻炼',
+				effects: { charm: 2, intelligence: 1 },
+				result: '医生夸你自律，你心里知道这是龙虾铠甲天赋。',
+			},
+			{
+				text: '也觉得很神奇',
+				effects: { luck: 2, vitality: 1 },
+				result: '你感谢前世龙虾身体带给你的礼物。',
+			},
+		],
+	},
 
 	// ===== 新增：60-105岁 老年期 =====
 	{
@@ -2059,12 +2252,50 @@ module.exports = [
 			{
 				text: '说：我就是龙虾转生的',
 				effects: { charm: 5, luck: 3 },
-				result: '记者以为你在开玩笑，却深深被你的潇默打动了。',
+				result: '记者以为你在开玩笑，却深深被你的幽默打动了。',
 			},
 			{
 				text: '说：常常吃龙虾补脑',
 				effects: { vitality: 3, charm: 3 },
-				result: '这个回答上了热搜。龙虾饪店销量全面飙升。',
+				result: '这个回答上了热搜。龙虾饭店销量全面飙升。',
+			},
+		],
+	},
+	{
+		id: 'no6',
+		title: '家乡的河',
+		description: '你回到家乡，那条小河还在。你站在河边，想起了前世。',
+		minAge: 65,
+		maxAge: 100,
+		options: [
+			{
+				text: '下水游一圈',
+				effects: { vitality: 3, luck: 2 },
+				result: '河水还是那么清澈，你感到灵魂都安宁了。',
+			},
+			{
+				text: '岸边坐一会儿',
+				effects: { charm: 2, intelligence: 1 },
+				result: '你静静地坐了一下午，把前世今生都想明白了。',
+			},
+		],
+	},
+	{
+		id: 'no7',
+		title: '菜市场闲逛',
+		description: '你去菜市场买菜，路过水产摊，看到水缸里活蹦乱跳的龙虾。',
+		minAge: 60,
+		maxAge: 100,
+		options: [
+			{
+				text: '买一只放回河里',
+				effects: { luck: 3, charm: 2 },
+				result: '你放生了一只龙虾，心里感到一丝慰藉。',
+			},
+			{
+				text: '买一只回家做了',
+				effects: { vitality: 2, intelligence: 1 },
+				result: '味道还是那么好，这就是生活。',
 			},
 		],
 	},
