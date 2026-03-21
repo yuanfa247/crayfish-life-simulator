@@ -119,26 +119,35 @@ module.exports = [
       }
     ]
   },
+  {
+    id: 3,
+    title: "遇到同类",
+    description: "你遇到一群和你差不多大的孩子...，你小龙虾的本能让你很懂怎么和同类相处",
+    type: "normal",
+    minAge: 2,
+    maxAge: 5,
+    tags: ['lobster-social'],
+    options: [
       {
-        text: "勇敢地往远处游",
+        text: "和它们一起玩耍",
         effects: {
-          vitality: +5,
+          charm: +3,
           luck: +2
         },
-        result: "你锻炼了肌肉，感觉充满力量"
+        result: "你交到了朋友，心情愉快"
       },
       {
-        text: "躲在水草后面观察",
+        text: "躲开它们，自己玩",
         effects: {
-          intelligence: +5,
-          luck: +1
+          intelligence: +2,
+          charm: -1
         },
-        result: "你变得更加谨慎，懂得观察环境"
+        result: "你习惯了独处，更加独立"
       }
     ]
   },
   {
-    id: 2,
+    id: 4,
     title: "寻找食物",
     description: "肚子饿了，需要找点东西吃...",
     type: "normal",
