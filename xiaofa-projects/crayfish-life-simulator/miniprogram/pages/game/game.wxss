@@ -96,7 +96,7 @@ page {
 }
 
 .tip-text {
-	font-size: 30rpx;
+	font-size: 34rpx;
 	color: #666;
 	margin-bottom: 40rpx;
 }
@@ -105,7 +105,7 @@ page {
 	width: 80%;
 	background-color: #4a90e2;
 	color: #fff;
-	font-size: 32rpx;
+	font-size: 36rpx;
 	padding: 25rpx 0;
 	border-radius: 50rpx;
 	margin-bottom: 20rpx;
@@ -206,7 +206,7 @@ page {
 }
 
 .attr-change-item {
-	font-size: 28rpx;
+	font-size: 32rpx;
 	font-weight: bold;
 	padding: 8rpx 16rpx;
 	border-radius: 20rpx;
@@ -228,7 +228,7 @@ page {
 	margin: 0 auto;
 	background-color: #52c41a;
 	color: #fff;
-	font-size: 30rpx;
+	font-size: 34rpx;
 	padding: 20rpx 0;
 	border-radius: 50rpx;
 }
@@ -247,7 +247,7 @@ page {
 	width: 80%;
 	background: linear-gradient(135deg, #722ed1, #eb2f96);
 	color: #fff;
-	font-size: 32rpx;
+	font-size: 36rpx;
 	font-weight: bold;
 	padding: 28rpx 0;
 	border-radius: 50rpx;
@@ -262,7 +262,7 @@ page {
 /* 普通事件点击继续提示 */
 .skip-hint {
 	text-align: center;
-	font-size: 24rpx;
+	font-size: 28rpx;
 	color: #aaa;
 	margin-top: 16rpx;
 	padding: 10rpx;
@@ -276,7 +276,7 @@ page {
 }
 
 .end-text {
-	font-size: 32rpx;
+	font-size: 36rpx;
 	color: #666;
 	margin-bottom: 40rpx;
 }
@@ -285,7 +285,7 @@ page {
 	width: 70%;
 	background-color: #722ed1;
 	color: #fff;
-	font-size: 32rpx;
+	font-size: 36rpx;
 	padding: 25rpx 0;
 	border-radius: 50rpx;
 }
