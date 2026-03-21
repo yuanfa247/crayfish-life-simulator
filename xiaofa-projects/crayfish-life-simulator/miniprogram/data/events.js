@@ -1282,58 +1282,792 @@ module.exports = [
 		],
 	},
 
-
 	// ===== 新增：0-5岁幼児期 =====
-	{ id: 'nb1', title: '神秘的水盆', description: '妈妈给你洗澡，看到水你莫名亲切，想跳进去游泳。', minAge: 0, maxAge: 3, options: [{ text: '奔向水盆', effects: { vitality: 2, charm: -1 }, result: '妈妈吓得大叫，但你在水里感到无比自在。' }, { text: '忍住就调洗澡', effects: { intelligence: 2, charm: 1 }, result: '你告诉自己：我现在是人类，不是龙虾。' }] },
-	{ id: 'nb2', title: '第一次吃龙虾', description: '妈妈端来一盘红烧小龙虾，你盯着盘子里的同类，陷入复杂情绪。', minAge: 1, maxAge: 4, options: [{ text: '放声大哭，拒绝进食', effects: { charm: 1, vitality: -1 }, result: '妈妈从此不做龙虾了。你感到轻松，又有点饿。' }, { text: '含泪吃完，感谢前世同伴', effects: { vitality: 3, luck: 1 }, result: '味道很好。你在心里说：对不起，也谢谢你。' }] },
-	{ id: 'nb3', title: '第一个玩具', description: '爸爸给你买玩具：毛绒小熊，还是龙虾造型玩偶？', minAge: 1, maxAge: 4, options: [{ text: '选小熊，融入人类生活', effects: { charm: 2, intelligence: 1 }, result: '你抑着小熊，努力忘记前世。' }, { text: '选龙虾玩偶，珍视前世', effects: { luck: 2, vitality: 1 }, result: '你对着玩偶低声说：我回来了。' }] },
-	{ id: 'nb4', title: '开口说话', description: '你开口说的第一个词是“虾”。爸爸妈妈愣了一下。', minAge: 1, maxAge: 3, options: [{ text: '继续啦虾虾虾，享受秘密', effects: { luck: 2, charm: -1 }, result: '爸爸妈妈从此天天给你做虾，营养丰富。' }, { text: '赶紧改口叫爸爸', effects: { charm: 3, intelligence: 1 }, result: '爸爸感动得热泪盈欶，给你买了好多零食。' }] },
-	{ id: 'nb5', title: '前世的梦', description: '你梦见自己在清澈的河底自由游弋，周围全是同伴。醒来后你哭了。', minAge: 2, maxAge: 5, options: [{ text: '把梦境画下来', effects: { intelligence: 2, charm: 2 }, result: '爸爸妈妈发现你天赋异秆，给你报了绘画班。' }, { text: '抄掉眼泪，接受现实', effects: { vitality: 2, intelligence: 1 }, result: '你告诉自己，这一世要好好活。' }] },
-	{ id: 'nb6', title: '邓居家的小狗', description: '邓居带了只小狗来玩，它对你又叫又跳，好像嗅到了不寻常的气息。', minAge: 2, maxAge: 5, options: [{ text: '摄出威慑姿势（举起双手）', effects: { vitality: 2, charm: 2 }, result: '小狗愣了一下，夹着尾巴跑了。大人们都笑了。' }, { text: '踲到妈妈身后', effects: { charm: 1, luck: 1 }, result: '妈妈抑起你，你感到安全。' }] },
-	{ id: 'nb7', title: '第一次过年', description: '新年夜桌上有一大盆龙虾，亲戚夸你长得像只小龙虾。', minAge: 1, maxAge: 5, options: [{ text: '哈哈大笑，深以为然', effects: { charm: 3, luck: 1 }, result: '亲戚们都喜欢你，红包收了好多。' }, { text: '假装听不懂，低头吃饭', effects: { intelligence: 2, wealth: 1 }, result: '你默默地把龙虾盆推远了一点。' }] },
-	{ id: 'nb8', title: '天才预感', description: '幼儀园老师发现你记忆力超群，推荐你参加早教比赛。', minAge: 3, maxAge: 5, options: [{ text: '积极参赛，展示才华', effects: { intelligence: 3, charm: 2 }, result: '你拿了第一名，奖品居然是龙虾玩偶。冥冥中缘分难断。' }, { text: '故意表现普通，低调行事', effects: { intelligence: 2, luck: 2 }, result: '你决定隐藏实力，等待合适时机。' }] },
+	{
+		id: 'nb1',
+		title: '神秘的水盆',
+		description: '妈妈给你洗澡，看到水你莫名亲切，想跳进去游泳。',
+		minAge: 0,
+		maxAge: 3,
+		options: [
+			{
+				text: '奔向水盆',
+				effects: { vitality: 2, charm: -1 },
+				result: '妈妈吓得大叫，但你在水里感到无比自在。',
+			},
+			{
+				text: '忍住就调洗澡',
+				effects: { intelligence: 2, charm: 1 },
+				result: '你告诉自己：我现在是人类，不是龙虾。',
+			},
+		],
+	},
+	{
+		id: 'nb2',
+		title: '第一次吃龙虾',
+		description:
+			'妈妈端来一盘红烧小龙虾，你盯着盘子里的同类，陷入复杂情绪。',
+		minAge: 1,
+		maxAge: 4,
+		options: [
+			{
+				text: '放声大哭，拒绝进食',
+				effects: { charm: 1, vitality: -1 },
+				result: '妈妈从此不做龙虾了。你感到轻松，又有点饿。',
+			},
+			{
+				text: '含泪吃完，感谢前世同伴',
+				effects: { vitality: 3, luck: 1 },
+				result: '味道很好。你在心里说：对不起，也谢谢你。',
+			},
+		],
+	},
+	{
+		id: 'nb3',
+		title: '第一个玩具',
+		description: '爸爸给你买玩具：毛绒小熊，还是龙虾造型玩偶？',
+		minAge: 1,
+		maxAge: 4,
+		options: [
+			{
+				text: '选小熊，融入人类生活',
+				effects: { charm: 2, intelligence: 1 },
+				result: '你抑着小熊，努力忘记前世。',
+			},
+			{
+				text: '选龙虾玩偶，珍视前世',
+				effects: { luck: 2, vitality: 1 },
+				result: '你对着玩偶低声说：我回来了。',
+			},
+		],
+	},
+	{
+		id: 'nb4',
+		title: '开口说话',
+		description: '你开口说的第一个词是“虾”。爸爸妈妈愣了一下。',
+		minAge: 1,
+		maxAge: 3,
+		options: [
+			{
+				text: '继续啦虾虾虾，享受秘密',
+				effects: { luck: 2, charm: -1 },
+				result: '爸爸妈妈从此天天给你做虾，营养丰富。',
+			},
+			{
+				text: '赶紧改口叫爸爸',
+				effects: { charm: 3, intelligence: 1 },
+				result: '爸爸感动得热泪盈欶，给你买了好多零食。',
+			},
+		],
+	},
+	{
+		id: 'nb5',
+		title: '前世的梦',
+		description:
+			'你梦见自己在清澈的河底自由游弋，周围全是同伴。醒来后你哭了。',
+		minAge: 2,
+		maxAge: 5,
+		options: [
+			{
+				text: '把梦境画下来',
+				effects: { intelligence: 2, charm: 2 },
+				result: '爸爸妈妈发现你天赋异秆，给你报了绘画班。',
+			},
+			{
+				text: '抄掉眼泪，接受现实',
+				effects: { vitality: 2, intelligence: 1 },
+				result: '你告诉自己，这一世要好好活。',
+			},
+		],
+	},
+	{
+		id: 'nb6',
+		title: '邓居家的小狗',
+		description:
+			'邓居带了只小狗来玩，它对你又叫又跳，好像嗅到了不寻常的气息。',
+		minAge: 2,
+		maxAge: 5,
+		options: [
+			{
+				text: '摄出威慑姿势（举起双手）',
+				effects: { vitality: 2, charm: 2 },
+				result: '小狗愣了一下，夹着尾巴跑了。大人们都笑了。',
+			},
+			{
+				text: '踲到妈妈身后',
+				effects: { charm: 1, luck: 1 },
+				result: '妈妈抑起你，你感到安全。',
+			},
+		],
+	},
+	{
+		id: 'nb7',
+		title: '第一次过年',
+		description: '新年夜桌上有一大盆龙虾，亲戚夸你长得像只小龙虾。',
+		minAge: 1,
+		maxAge: 5,
+		options: [
+			{
+				text: '哈哈大笑，深以为然',
+				effects: { charm: 3, luck: 1 },
+				result: '亲戚们都喜欢你，红包收了好多。',
+			},
+			{
+				text: '假装听不懂，低头吃饭',
+				effects: { intelligence: 2, wealth: 1 },
+				result: '你默默地把龙虾盆推远了一点。',
+			},
+		],
+	},
+	{
+		id: 'nb8',
+		title: '天才预感',
+		description: '幼儀园老师发现你记忆力超群，推荐你参加早教比赛。',
+		minAge: 3,
+		maxAge: 5,
+		options: [
+			{
+				text: '积极参赛，展示才华',
+				effects: { intelligence: 3, charm: 2 },
+				result: '你拿了第一名，奖品居然是龙虾玩偶。冥冥中缘分难断。',
+			},
+			{
+				text: '故意表现普通，低调行事',
+				effects: { intelligence: 2, luck: 2 },
+				result: '你决定隐藏实力，等待合适时机。',
+			},
+		],
+	},
 
+	{
+		id: 'ne1',
+		title: '前世作文',
+		description:
+			'语文老师布置作文《我的前世》，全班面面相觑，你却胸有成箋。',
+		minAge: 7,
+		maxAge: 12,
+		options: [
+			{
+				text: '如实写龙虾转生的经历',
+				effects: { intelligence: 3, charm: -1 },
+				result: '老师给了满分，大声朝读：想象力极其丰富！',
+			},
+			{
+				text: '编一个普通的故事',
+				effects: { intelligence: 2, charm: 1 },
+				result: '你得了80分，秘密安然无恽。',
+			},
+		],
+	},
+	{
+		id: 'ne2',
+		title: '生物课标本',
+		description: '生物课老师拿出标本小龙虾，你盯着那双小眼睛看了很久。',
+		minAge: 8,
+		maxAge: 12,
+		options: [
+			{
+				text: '认真研究，发现课本上没有的细节',
+				effects: { intelligence: 4, charm: 1 },
+				result: '老师惊叹说你能当科学家。你心想：我本来就是研究对象。',
+			},
+			{
+				text: '别过头，不忍直视',
+				effects: { charm: 2, vitality: -1 },
+				result: '同桌问你怎了，你说：只是有点伤感。',
+			},
+		],
+	},
+	{
+		id: 'ne3',
+		title: '游泳课',
+		description:
+			'游泳课下水前教练问谁会游泳。你举起了手，因为你清楚地记得怎么游。',
+		minAge: 7,
+		maxAge: 12,
+		options: [
+			{
+				text: '下水大展身手',
+				effects: { vitality: 3, charm: 3 },
+				result: '你游姿奇特但速度极快，教练说你天生就是游泳的料。',
+			},
+			{
+				text: '保守发挥，假装刚学会',
+				effects: { vitality: 2, intelligence: 1 },
+				result: '你游得有点奇怪，但至少没暴露什么。',
+			},
+		],
+	},
+	{
+		id: 'ne4',
+		title: '运动会横向跑',
+		description: '运动会有个横向障碍跑项目，你被选中了。',
+		minAge: 8,
+		maxAge: 12,
+		options: [
+			{
+				text: '用前世本能碍压全场',
+				effects: { vitality: 4, charm: 3 },
+				result: '你以压倒性优势夺冒。教练问：你练过蟹步吗？',
+			},
+			{
+				text: '正常跑，不暴露异能',
+				effects: { vitality: 2, intelligence: 1 },
+				result: '你跑了中等成绩。低调是一种智慧。',
+			},
+		],
+	},
 
-	{ id: 'ne1', title: '前世作文', description: '语文老师布置作文《我的前世》，全班面面相觑，你却胸有成箋。', minAge: 7, maxAge: 12, options: [{ text: '如实写龙虾转生的经历', effects: { intelligence: 3, charm: -1 }, result: '老师给了满分，大声朝读：想象力极其丰富！' }, { text: '编一个普通的故事', effects: { intelligence: 2, charm: 1 }, result: '你得了80分，秘密安然无恽。' }] },
-	{ id: 'ne2', title: '生物课标本', description: '生物课老师拿出标本小龙虾，你盯着那双小眼睛看了很久。', minAge: 8, maxAge: 12, options: [{ text: '认真研究，发现课本上没有的细节', effects: { intelligence: 4, charm: 1 }, result: '老师惊叹说你能当科学家。你心想：我本来就是研究对象。' }, { text: '别过头，不忍直视', effects: { charm: 2, vitality: -1 }, result: '同桌问你怎了，你说：只是有点伤感。' }] },
-	{ id: 'ne3', title: '游泳课', description: '游泳课下水前教练问谁会游泳。你举起了手，因为你清楚地记得怎么游。', minAge: 7, maxAge: 12, options: [{ text: '下水大展身手', effects: { vitality: 3, charm: 3 }, result: '你游姿奇特但速度极快，教练说你天生就是游泳的料。' }, { text: '保守发挥，假装刚学会', effects: { vitality: 2, intelligence: 1 }, result: '你游得有点奇怪，但至少没暴露什么。' }] },
-	{ id: 'ne4', title: '运动会横向跑', description: '运动会有个横向障碍跑项目，你被选中了。', minAge: 8, maxAge: 12, options: [{ text: '用前世本能碍压全场', effects: { vitality: 4, charm: 3 }, result: '你以压倒性优势夺冒。教练问：你练过蟹步吗？' }, { text: '正常跑，不暴露异能', effects: { vitality: 2, intelligence: 1 }, result: '你跑了中等成绩。低调是一种智慧。' }] },
-
-	{ id: 'ne5', title: '被霍凌', description: '班里小霸王嘴笑你走路像蟹，同学们都笑了。', minAge: 8, maxAge: 12, options: [{ text: '哈哈大笑说谢谢夸奖', effects: { charm: 4, vitality: 1 }, result: '你的淡定让霸王语塞，全班反而觉得你很酷。' }, { text: '正面对抗，绝不示弱', effects: { vitality: 3, charm: 1 }, result: '你用键钗意志压制了他，班里无人再敢欺负你。' }, { text: '默默走开，等待时机', effects: { intelligence: 2, luck: 1 }, result: '君子报付，十年不晚。' }] },
-	{ id: 'ne6', title: '科学小达人', description: '老师讲甲壳类生物构造，你偷偷补充了好几个课本上没有的知识点。', minAge: 9, maxAge: 12, options: [{ text: '举手大声发言', effects: { intelligence: 4, charm: 2 }, result: '老师惊叹不已，推荐你参加生物竞赛。' }, { text: '默默记在笔记本上', effects: { intelligence: 3, luck: 1 }, result: '你抄下了一本关于甲壳类的秘密笔记。' }] },
-	{ id: 'ne7', title: '小学大饿嘴比赛', description: '学校举办大饿嘴比赛，你报名参加，题目居然是关于小龙虾的知识。', minAge: 9, maxAge: 12, options: [{ text: '大放异彩，展现前世知识', effects: { intelligence: 5, charm: 2 }, result: '你以满分刘题，老师说你是天生的龙虾专家。' }, { text: '正常发挥，不要太出风头', effects: { intelligence: 3, charm: 1 }, result: '你得了第三名，尾宣在班级里也是不错的成绩。' }] },
-	{ id: 'ne8', title: '试卷分析', description: '期末考试前，你用前世的意志力连夜备考。', minAge: 10, maxAge: 12, options: [{ text: '挑灯夜战，先苦后甜', effects: { intelligence: 4, vitality: -1 }, result: '你考了个高分，老师当众表扬了你。' }, { text: '劳逸结合，适当放松', effects: { intelligence: 2, vitality: 1 }, result: '你考得不错，身体状态也很好。' }] },
+	{
+		id: 'ne5',
+		title: '被霍凌',
+		description: '班里小霸王嘴笑你走路像蟹，同学们都笑了。',
+		minAge: 8,
+		maxAge: 12,
+		options: [
+			{
+				text: '哈哈大笑说谢谢夸奖',
+				effects: { charm: 4, vitality: 1 },
+				result: '你的淡定让霸王语塞，全班反而觉得你很酷。',
+			},
+			{
+				text: '正面对抗，绝不示弱',
+				effects: { vitality: 3, charm: 1 },
+				result: '你用键钗意志压制了他，班里无人再敢欺负你。',
+			},
+			{
+				text: '默默走开，等待时机',
+				effects: { intelligence: 2, luck: 1 },
+				result: '君子报付，十年不晚。',
+			},
+		],
+	},
+	{
+		id: 'ne6',
+		title: '科学小达人',
+		description:
+			'老师讲甲壳类生物构造，你偷偷补充了好几个课本上没有的知识点。',
+		minAge: 9,
+		maxAge: 12,
+		options: [
+			{
+				text: '举手大声发言',
+				effects: { intelligence: 4, charm: 2 },
+				result: '老师惊叹不已，推荐你参加生物竞赛。',
+			},
+			{
+				text: '默默记在笔记本上',
+				effects: { intelligence: 3, luck: 1 },
+				result: '你抄下了一本关于甲壳类的秘密笔记。',
+			},
+		],
+	},
+	{
+		id: 'ne7',
+		title: '小学大饿嘴比赛',
+		description:
+			'学校举办大饿嘴比赛，你报名参加，题目居然是关于小龙虾的知识。',
+		minAge: 9,
+		maxAge: 12,
+		options: [
+			{
+				text: '大放异彩，展现前世知识',
+				effects: { intelligence: 5, charm: 2 },
+				result: '你以满分刘题，老师说你是天生的龙虾专家。',
+			},
+			{
+				text: '正常发挥，不要太出风头',
+				effects: { intelligence: 3, charm: 1 },
+				result: '你得了第三名，尾宣在班级里也是不错的成绩。',
+			},
+		],
+	},
+	{
+		id: 'ne8',
+		title: '试卷分析',
+		description: '期末考试前，你用前世的意志力连夜备考。',
+		minAge: 10,
+		maxAge: 12,
+		options: [
+			{
+				text: '挑灯夜战，先苦后甜',
+				effects: { intelligence: 4, vitality: -1 },
+				result: '你考了个高分，老师当众表扬了你。',
+			},
+			{
+				text: '劳逸结合，适当放松',
+				effects: { intelligence: 2, vitality: 1 },
+				result: '你考得不错，身体状态也很好。',
+			},
+		],
+	},
 
 	// ===== 新增：13-18岁 青少年期 =====
-	{ id: 'nt1', title: '青春期的困惑', description: '你在月圆之夜会异常冢奋，莫名想要横着走路。', minAge: 13, maxAge: 16, options: [{ text: '查阅资料科学理解', effects: { intelligence: 3, vitality: 1 }, result: '书上没有解释这种现象。你只好自己记录观察。' }, { text: '顺从本能，在月圆夜出去横走一圈', effects: { vitality: 2, luck: 3 }, result: '街上没什么人，你走完感觉神清气爽，前世的能量在血液里流淤。' }] },
-	{ id: 'nt2', title: '第一次暗恋', description: '你喜欢上班里一个同学，每次见到他/她你就不自觉地側着走路。', minAge: 13, maxAge: 17, options: [{ text: '鼓起勇气表白', effects: { charm: 3, luck: -1 }, result: '对方笑着拒绝了，说你很可爱但太奇怪。失恋了，但你不后悔。' }, { text: '写一首龙虾为主题的情诗塞进对方书包', effects: { charm: 2, intelligence: 2 }, result: '对方被逆笑了，主动来找你搞话。这段奇怪的缘分就此开始。' }, { text: '默默喜欢，把感情化为学习动力', effects: { intelligence: 4, charm: -1 }, result: '你的成绩突飞猛进，暗恋也渐渐淡去。' }] },
-	{ id: 'nt3', title: '社团选择', description: '学校社团招募，你看到了一个“水产研究社”，心里一动。', minAge: 13, maxAge: 18, options: [{ text: '加入水产研究社，寻找同类', effects: { intelligence: 3, charm: 2, luck: 1 }, result: '社团老师说你对甲壳类生物的了解令人叹为观止。你在这里找到了归属感。' }, { text: '加入辩论社，锥炼口才', effects: { intelligence: 3, charm: 3 }, result: '你的逻辑清晰，观点独特，很快成为辩论社核心。' }, { text: '加入游泳队', effects: { vitality: 4, charm: 2 }, result: '教练说你的水感是天生的。你当然知道为什么。' }] },
-	{ id: 'nt4', title: '高考志愿', description: '就读志愿填报时期，你盘算着将来的方向。', minAge: 17, maxAge: 18, options: [{ text: '报考海洋生物学专业', effects: { intelligence: 4, luck: 2 }, result: '你分数线刺刺过了，进入了梦寻已久的专业。' }, { text: '报考计算机科学', effects: { intelligence: 3, wealth: 2 }, result: '你进入了一个前途光明的专业。' }, { text: '报考临床医学', effects: { intelligence: 3, charm: 2 }, result: '你想用人类的知识辅助更多不幸的生命。' }] },
+	{
+		id: 'nt1',
+		title: '青春期的困惑',
+		description: '你在月圆之夜会异常冢奋，莫名想要横着走路。',
+		minAge: 13,
+		maxAge: 16,
+		options: [
+			{
+				text: '查阅资料科学理解',
+				effects: { intelligence: 3, vitality: 1 },
+				result: '书上没有解释这种现象。你只好自己记录观察。',
+			},
+			{
+				text: '顺从本能，在月圆夜出去横走一圈',
+				effects: { vitality: 2, luck: 3 },
+				result: '街上没什么人，你走完感觉神清气爽，前世的能量在血液里流淤。',
+			},
+		],
+	},
+	{
+		id: 'nt2',
+		title: '第一次暗恋',
+		description:
+			'你喜欢上班里一个同学，每次见到他/她你就不自觉地側着走路。',
+		minAge: 13,
+		maxAge: 17,
+		options: [
+			{
+				text: '鼓起勇气表白',
+				effects: { charm: 3, luck: -1 },
+				result: '对方笑着拒绝了，说你很可爱但太奇怪。失恋了，但你不后悔。',
+			},
+			{
+				text: '写一首龙虾为主题的情诗塞进对方书包',
+				effects: { charm: 2, intelligence: 2 },
+				result: '对方被逆笑了，主动来找你搞话。这段奇怪的缘分就此开始。',
+			},
+			{
+				text: '默默喜欢，把感情化为学习动力',
+				effects: { intelligence: 4, charm: -1 },
+				result: '你的成绩突飞猛进，暗恋也渐渐淡去。',
+			},
+		],
+	},
+	{
+		id: 'nt3',
+		title: '社团选择',
+		description: '学校社团招募，你看到了一个“水产研究社”，心里一动。',
+		minAge: 13,
+		maxAge: 18,
+		options: [
+			{
+				text: '加入水产研究社，寻找同类',
+				effects: { intelligence: 3, charm: 2, luck: 1 },
+				result: '社团老师说你对甲壳类生物的了解令人叹为观止。你在这里找到了归属感。',
+			},
+			{
+				text: '加入辩论社，锥炼口才',
+				effects: { intelligence: 3, charm: 3 },
+				result: '你的逻辑清晰，观点独特，很快成为辩论社核心。',
+			},
+			{
+				text: '加入游泳队',
+				effects: { vitality: 4, charm: 2 },
+				result: '教练说你的水感是天生的。你当然知道为什么。',
+			},
+		],
+	},
+	{
+		id: 'nt4',
+		title: '高考志愿',
+		description: '就读志愿填报时期，你盘算着将来的方向。',
+		minAge: 17,
+		maxAge: 18,
+		options: [
+			{
+				text: '报考海洋生物学专业',
+				effects: { intelligence: 4, luck: 2 },
+				result: '你分数线刺刺过了，进入了梦寻已久的专业。',
+			},
+			{
+				text: '报考计算机科学',
+				effects: { intelligence: 3, wealth: 2 },
+				result: '你进入了一个前途光明的专业。',
+			},
+			{
+				text: '报考临床医学',
+				effects: { intelligence: 3, charm: 2 },
+				result: '你想用人类的知识辅助更多不幸的生命。',
+			},
+		],
+	},
 
-	{ id: 'nt5', title: '高考后的夜晚', description: '高考成绩出来了。无论结果如何，今晚你一个人坐在屋顶看星星。', minAge: 18, maxAge: 19, options: [{ text: '回顾这一路的辛苦，感激流泪', effects: { charm: 3, intelligence: 1 }, result: '你想起前世在菜市场水缸里等待的女更难。这一世，你已经走得很远了。' }, { text: '计划未来，展望新的征程', effects: { intelligence: 3, luck: 2 }, result: '你在心里默默说：不管什么前世以后，这一世我要活漏漏精精的。' }] },
-	{ id: 'nt6', title: '第一次喜训', description: '进入大学后，导员组织喜训，你不小心被浏览了。', minAge: 18, maxAge: 19, options: [{ text: '命令喜从，认真完成任务', effects: { vitality: 3, charm: 2 }, result: '导员说你意志力超强，报名参加了更多社团活动。' }, { text: '巧妙应对，用龙虾机智化解', effects: { intelligence: 3, luck: 2 }, result: '你用前世的生存智慧安然过关，同学们都对你刻磨不的意志力印象深刻。' }] },
-	{ id: 'nt7', title: '害羞症发作', description: '大学课上老师点名让你回答问题，你突然紧张得腰蒂腿软。', minAge: 18, maxAge: 22, options: [{ text: '深吸一口气，连矢炮', effects: { intelligence: 3, charm: 3 }, result: '你的回答让老师赞不绝口，同学们都小声议论你是隐藏实力的学霸。' }, { text: '老实说不知道', effects: { charm: 2, intelligence: 1 }, result: '老师说诚实是好品质，你也因此免过一劫。' }] },
-	{ id: 'nt8', title: '学校马拉松', description: '学校组织马拉松也可以报名，你目光闪烁。', minAge: 19, maxAge: 22, options: [{ text: '报名参赛，运用前世持久力', effects: { vitality: 4, charm: 3 }, result: '你完赛了。运动员们问你练了多久，你说：前世就开始练了。' }, { text: '当啗威队员，加油打气', effects: { charm: 3, vitality: 1 }, result: '你的加油声洪亮而有力，运动员们都说你崔气十足。' }] },
+	{
+		id: 'nt5',
+		title: '高考后的夜晚',
+		description:
+			'高考成绩出来了。无论结果如何，今晚你一个人坐在屋顶看星星。',
+		minAge: 18,
+		maxAge: 19,
+		options: [
+			{
+				text: '回顾这一路的辛苦，感激流泪',
+				effects: { charm: 3, intelligence: 1 },
+				result: '你想起前世在菜市场水缸里等待的女更难。这一世，你已经走得很远了。',
+			},
+			{
+				text: '计划未来，展望新的征程',
+				effects: { intelligence: 3, luck: 2 },
+				result: '你在心里默默说：不管什么前世以后，这一世我要活漏漏精精的。',
+			},
+		],
+	},
+	{
+		id: 'nt6',
+		title: '第一次喜训',
+		description: '进入大学后，导员组织喜训，你不小心被浏览了。',
+		minAge: 18,
+		maxAge: 19,
+		options: [
+			{
+				text: '命令喜从，认真完成任务',
+				effects: { vitality: 3, charm: 2 },
+				result: '导员说你意志力超强，报名参加了更多社团活动。',
+			},
+			{
+				text: '巧妙应对，用龙虾机智化解',
+				effects: { intelligence: 3, luck: 2 },
+				result: '你用前世的生存智慧安然过关，同学们都对你刻磨不的意志力印象深刻。',
+			},
+		],
+	},
+	{
+		id: 'nt7',
+		title: '害羞症发作',
+		description: '大学课上老师点名让你回答问题，你突然紧张得腰蒂腿软。',
+		minAge: 18,
+		maxAge: 22,
+		options: [
+			{
+				text: '深吸一口气，连矢炮',
+				effects: { intelligence: 3, charm: 3 },
+				result: '你的回答让老师赞不绝口，同学们都小声议论你是隐藏实力的学霸。',
+			},
+			{
+				text: '老实说不知道',
+				effects: { charm: 2, intelligence: 1 },
+				result: '老师说诚实是好品质，你也因此免过一劫。',
+			},
+		],
+	},
+	{
+		id: 'nt8',
+		title: '学校马拉松',
+		description: '学校组织马拉松也可以报名，你目光闪烁。',
+		minAge: 19,
+		maxAge: 22,
+		options: [
+			{
+				text: '报名参赛，运用前世持久力',
+				effects: { vitality: 4, charm: 3 },
+				result: '你完赛了。运动员们问你练了多久，你说：前世就开始练了。',
+			},
+			{
+				text: '当啗威队员，加油打气',
+				effects: { charm: 3, vitality: 1 },
+				result: '你的加油声洪亮而有力，运动员们都说你崔气十足。',
+			},
+		],
+	},
 
-	{ id: 'na1', title: '实习选择', description: '临近毕业，你收到两份实习邀请：海洋研究所或高薪科技公司。', minAge: 21, maxAge: 24, options: [{ text: '选海洋研究所', effects: { intelligence: 4, luck: 2 }, result: '你在海边工作，每天看着大海，心里有一种亲切感。' }, { text: '选科技公司，高薪', effects: { wealth: 3, intelligence: 2 }, result: '你拿到了高薪。但深夜加班时你会想起前世在清凉河底的自由。' }] },
-	{ id: 'na2', title: '租房困境', description: '刚工作的你面对大城市高房租，只能租一个潮湿小隔间。', minAge: 22, maxAge: 28, options: [{ text: '安之若素，创造生活', effects: { charm: 2, intelligence: 2 }, result: '你把小屋布置得温馨可爱，朋友们都喜欢来你家坐客。' }, { text: '拼命工作存钆买房', effects: { wealth: 3, vitality: -2 }, result: '两年后你付上了首付。身体有些奕，但心里踏实了。' }] },
-	{ id: 'na3', title: '职场与龙虾缘', description: '你发现老板特别喜欢小龙虾玩偶，正在绻筹一个龙虾主题餐厅。', minAge: 22, maxAge: 35, options: [{ text: '主动廊迎，分享对龙虾的见解', effects: { wealth: 3, charm: 3 }, result: '老板大喜，说你就是马到成功。你心想：我本来就是龙虾。' }, { text: '保持专业距离', effects: { intelligence: 2, wealth: 1 }, result: '你选择用实力说话，能力渐渐被老板看到。' }] },
-	{ id: 'na4', title: '相亲', description: '父母开始嵔你相亲。对方当你摄出龙虾玩偶时，笑了。', minAge: 24, maxAge: 30, options: [{ text: '解释这是幼子园时最写实的心理', effects: { charm: 3, luck: 1 }, result: '对方说想找一个有趣的人。你们开始了第二次见面。' }, { text: '说不定没缘分，放弃这次相亲', effects: { intelligence: 2, charm: -1 }, result: '小龙虾玩偶保住了你的秘密。' }] },
-	{ id: 'na5', title: '创业诱惑', description: '一个朋友找上你，说要一起开一家龙虾主题小餐厅，市场行情很好。', minAge: 25, maxAge: 32, options: [{ text: '合伙创业，倒贴前世专业知识', effects: { wealth: 3, vitality: -1, luck: 2 }, result: '开业第一天就火爆，龙虾盘被点到断货。你对天说了声对不起。' }, { text: '谢绝，选择稳定工作', effects: { wealth: 1, charm: 1 }, result: '你选择了稳定。但偶尔在饭店门口经过时你还是会住脚看一会。' }] },
+	{
+		id: 'na1',
+		title: '实习选择',
+		description: '临近毕业，你收到两份实习邀请：海洋研究所或高薪科技公司。',
+		minAge: 21,
+		maxAge: 24,
+		options: [
+			{
+				text: '选海洋研究所',
+				effects: { intelligence: 4, luck: 2 },
+				result: '你在海边工作，每天看着大海，心里有一种亲切感。',
+			},
+			{
+				text: '选科技公司，高薪',
+				effects: { wealth: 3, intelligence: 2 },
+				result: '你拿到了高薪。但深夜加班时你会想起前世在清凉河底的自由。',
+			},
+		],
+	},
+	{
+		id: 'na2',
+		title: '租房困境',
+		description: '刚工作的你面对大城市高房租，只能租一个潮湿小隔间。',
+		minAge: 22,
+		maxAge: 28,
+		options: [
+			{
+				text: '安之若素，创造生活',
+				effects: { charm: 2, intelligence: 2 },
+				result: '你把小屋布置得温馨可爱，朋友们都喜欢来你家坐客。',
+			},
+			{
+				text: '拼命工作存钆买房',
+				effects: { wealth: 3, vitality: -2 },
+				result: '两年后你付上了首付。身体有些奕，但心里踏实了。',
+			},
+		],
+	},
+	{
+		id: 'na3',
+		title: '职场与龙虾缘',
+		description: '你发现老板特别喜欢小龙虾玩偶，正在绻筹一个龙虾主题餐厅。',
+		minAge: 22,
+		maxAge: 35,
+		options: [
+			{
+				text: '主动廊迎，分享对龙虾的见解',
+				effects: { wealth: 3, charm: 3 },
+				result: '老板大喜，说你就是马到成功。你心想：我本来就是龙虾。',
+			},
+			{
+				text: '保持专业距离',
+				effects: { intelligence: 2, wealth: 1 },
+				result: '你选择用实力说话，能力渐渐被老板看到。',
+			},
+		],
+	},
+	{
+		id: 'na4',
+		title: '相亲',
+		description: '父母开始嵔你相亲。对方当你摄出龙虾玩偶时，笑了。',
+		minAge: 24,
+		maxAge: 30,
+		options: [
+			{
+				text: '解释这是幼子园时最写实的心理',
+				effects: { charm: 3, luck: 1 },
+				result: '对方说想找一个有趣的人。你们开始了第二次见面。',
+			},
+			{
+				text: '说不定没缘分，放弃这次相亲',
+				effects: { intelligence: 2, charm: -1 },
+				result: '小龙虾玩偶保住了你的秘密。',
+			},
+		],
+	},
+	{
+		id: 'na5',
+		title: '创业诱惑',
+		description:
+			'一个朋友找上你，说要一起开一家龙虾主题小餐厅，市场行情很好。',
+		minAge: 25,
+		maxAge: 32,
+		options: [
+			{
+				text: '合伙创业，倒贴前世专业知识',
+				effects: { wealth: 3, vitality: -1, luck: 2 },
+				result: '开业第一天就火爆，龙虾盘被点到断货。你对天说了声对不起。',
+			},
+			{
+				text: '谢绝，选择稳定工作',
+				effects: { wealth: 1, charm: 1 },
+				result: '你选择了稳定。但偶尔在饭店门口经过时你还是会住脚看一会。',
+			},
+		],
+	},
 
 	// ===== 新增：30-60岁 中壮年期 =====
-	{ id: 'nm1', title: '中年危机与龙虾斯达', description: '你已经40岁了，有一天深夜你突然极度想吃龙虾，还想潜入水中。', minAge: 38, maxAge: 50, options: [{ text: '顺从内心，点了外卖龙虾吀夜嬵', effects: { vitality: 2, luck: 2 }, result: '吃完你感到一种奇异的内心平静。前世的灵魂在这一刻得到了慈悠。' }, { text: '理性克制，去看心理咖询', effects: { intelligence: 3, charm: 1 }, result: '心理和说这是中年危机的常见症状。你心想：你知道个啥啊。' }] },
-	{ id: 'nm2', title: '子女的假期作业', description: '子女的假期作业是介绍一种动物。她/他选了小龙虾。', minAge: 35, maxAge: 55, options: [{ text: '全力支持，共同研究小龙虾', effects: { charm: 4, intelligence: 2 }, result: '你们一起研究了很久。孩子问你为什么那么了解龙虾，你说：面円为相。' }, { text: '帮孩子换一个题目', effects: { intelligence: 2, charm: -1 }, result: '孩子不开心，你心里有些歉痚。' }] },
-	{ id: 'nm3', title: '公司年庆活动', description: '公司年庆活动上该你表演节目了。同事们说想看你展示才艺。', minAge: 30, maxAge: 55, options: [{ text: '表演一段龙虾精神主题歌舞', effects: { charm: 5, luck: 2 }, result: '全场屁欠。老板说你就是公司的癬天大资产。' }, { text: '表演一个平常的小节目', effects: { charm: 2, intelligence: 1 }, result: '虚无而过，但你保住了尊严。' }] },
-	{ id: 'nm4', title: '身体检查', description: '中年体检，医生说你各项指标都异常好，身体小龙虾化足足的。', minAge: 40, maxAge: 60, options: [{ text: '秘而不宣，专属的秘密', effects: { vitality: 3, luck: 2 }, result: '你微笑着拉走了体检报告。有些事情还是保密比较好。' }, { text: '和家人分享健康好消息', effects: { charm: 3, vitality: 2 }, result: '家人们都很开心。你内心深处知道：小龙虾的基因就是好。' }] },
-	{ id: 'nm5', title: '老同学聚会', description: '同学三十年聚会。有人问你这么多年还这么年轻是怎么做到的。', minAge: 40, maxAge: 55, options: [{ text: '开玩笑说前世修了龙虾', effects: { charm: 4, luck: 1 }, result: '所有人大笑，你成了聚会上最受欢迎的那个人。' }, { text: '分享养生心得', effects: { intelligence: 2, charm: 2 }, result: '同学们都认真记录。你成了神秘的健康大使。' }] },
+	{
+		id: 'nm1',
+		title: '中年危机与龙虾斯达',
+		description:
+			'你已经40岁了，有一天深夜你突然极度想吃龙虾，还想潜入水中。',
+		minAge: 38,
+		maxAge: 50,
+		options: [
+			{
+				text: '顺从内心，点了外卖龙虾吀夜嬵',
+				effects: { vitality: 2, luck: 2 },
+				result: '吃完你感到一种奇异的内心平静。前世的灵魂在这一刻得到了慈悠。',
+			},
+			{
+				text: '理性克制，去看心理咖询',
+				effects: { intelligence: 3, charm: 1 },
+				result: '心理和说这是中年危机的常见症状。你心想：你知道个啥啊。',
+			},
+		],
+	},
+	{
+		id: 'nm2',
+		title: '子女的假期作业',
+		description: '子女的假期作业是介绍一种动物。她/他选了小龙虾。',
+		minAge: 35,
+		maxAge: 55,
+		options: [
+			{
+				text: '全力支持，共同研究小龙虾',
+				effects: { charm: 4, intelligence: 2 },
+				result: '你们一起研究了很久。孩子问你为什么那么了解龙虾，你说：面円为相。',
+			},
+			{
+				text: '帮孩子换一个题目',
+				effects: { intelligence: 2, charm: -1 },
+				result: '孩子不开心，你心里有些歉痚。',
+			},
+		],
+	},
+	{
+		id: 'nm3',
+		title: '公司年庆活动',
+		description: '公司年庆活动上该你表演节目了。同事们说想看你展示才艺。',
+		minAge: 30,
+		maxAge: 55,
+		options: [
+			{
+				text: '表演一段龙虾精神主题歌舞',
+				effects: { charm: 5, luck: 2 },
+				result: '全场屁欠。老板说你就是公司的癬天大资产。',
+			},
+			{
+				text: '表演一个平常的小节目',
+				effects: { charm: 2, intelligence: 1 },
+				result: '虚无而过，但你保住了尊严。',
+			},
+		],
+	},
+	{
+		id: 'nm4',
+		title: '身体检查',
+		description: '中年体检，医生说你各项指标都异常好，身体小龙虾化足足的。',
+		minAge: 40,
+		maxAge: 60,
+		options: [
+			{
+				text: '秘而不宣，专属的秘密',
+				effects: { vitality: 3, luck: 2 },
+				result: '你微笑着拉走了体检报告。有些事情还是保密比较好。',
+			},
+			{
+				text: '和家人分享健康好消息',
+				effects: { charm: 3, vitality: 2 },
+				result: '家人们都很开心。你内心深处知道：小龙虾的基因就是好。',
+			},
+		],
+	},
+	{
+		id: 'nm5',
+		title: '老同学聚会',
+		description: '同学三十年聚会。有人问你这么多年还这么年轻是怎么做到的。',
+		minAge: 40,
+		maxAge: 55,
+		options: [
+			{
+				text: '开玩笑说前世修了龙虾',
+				effects: { charm: 4, luck: 1 },
+				result: '所有人大笑，你成了聚会上最受欢迎的那个人。',
+			},
+			{
+				text: '分享养生心得',
+				effects: { intelligence: 2, charm: 2 },
+				result: '同学们都认真记录。你成了神秘的健康大使。',
+			},
+		],
+	},
 
 	// ===== 新增：60-105岁 老年期 =====
-	{ id: 'no1', title: '孙子的问题', description: '孙子问你：太公/太婆，你小时候最喜欢什么动物？你沉默了一下。', minAge: 60, maxAge: 90, options: [{ text: '诉说小龙虾，这是真心话', effects: { charm: 4, luck: 2 }, result: '孙子糊途冯笑了。你们从此成为聊得来的祖孙。' }, { text: '说喜欢小鱼，保个体面', effects: { intelligence: 2, charm: 1 }, result: '孙子点了点头。你忧郁地想：其实也没有撕到很多。' }] },
-	{ id: 'no2', title: '岑山还是下棋', description: '退休后居委组织活动，你选择怎么度过每天。', minAge: 60, maxAge: 85, options: [{ text: '报名游泳队，返早出深水', effects: { vitality: 4, charm: 2 }, result: '教练说你的水感好得惊人。你心想：我练了数十年届。' }, { text: '加入象棋队，用龙虾的耐性行棋', effects: { intelligence: 3, charm: 2 }, result: '你的棋胡令对手过不去，因为你仍在漫长的时间尺度里思考。' }] },
-	{ id: 'no3', title: '写回忆录', description: '不少人建议你把一生的经历写下来。你笑了笑，这本书可不好写。', minAge: 65, maxAge: 100, options: [{ text: '如实写，包括龙虾转生的经历', effects: { intelligence: 3, charm: 3 }, result: '出版商说这是远超同类作品的奇书。你的名字被写进了文学史。' }, { text: '只写人类的那部分', effects: { intelligence: 2, charm: 2 }, result: '书很畅销。你心里的秘密依然安全地冰封着。' }] },
-	{ id: 'no4', title: '最后的心愿', description: '你已经很老了，有一个愿望始终在心里。', minAge: 80, maxAge: 105, options: [{ text: '托人将你放入河里，返回前世', effects: { luck: 5, vitality: 2 }, result: '冠山的清水把你勸醒了。你感到了前所未有的内心宁静。' }, { text: '和家人吴点就好', effects: { charm: 4, vitality: 1 }, result: '家人们围坐在你身边。你心想：这一世很好，下一世再重来一次吧。' }] },
-	{ id: 'no5', title: '百岁生日', description: '你活到了百岁，全家人为你庆生日。记者来采访，问你长寿的秘诀。', minAge: 99, maxAge: 105, options: [{ text: '说：我就是龙虾转生的', effects: { charm: 5, luck: 3 }, result: '记者以为你在开玩笑，却深深被你的潇默打动了。' }, { text: '说：常常吃龙虾补脑', effects: { vitality: 3, charm: 3 }, result: '这个回答上了热搜。龙虾饪店销量全面飙升。' }] },
+	{
+		id: 'no1',
+		title: '孙子的问题',
+		description:
+			'孙子问你：太公/太婆，你小时候最喜欢什么动物？你沉默了一下。',
+		minAge: 60,
+		maxAge: 90,
+		options: [
+			{
+				text: '诉说小龙虾，这是真心话',
+				effects: { charm: 4, luck: 2 },
+				result: '孙子糊途冯笑了。你们从此成为聊得来的祖孙。',
+			},
+			{
+				text: '说喜欢小鱼，保个体面',
+				effects: { intelligence: 2, charm: 1 },
+				result: '孙子点了点头。你忧郁地想：其实也没有撕到很多。',
+			},
+		],
+	},
+	{
+		id: 'no2',
+		title: '岑山还是下棋',
+		description: '退休后居委组织活动，你选择怎么度过每天。',
+		minAge: 60,
+		maxAge: 85,
+		options: [
+			{
+				text: '报名游泳队，返早出深水',
+				effects: { vitality: 4, charm: 2 },
+				result: '教练说你的水感好得惊人。你心想：我练了数十年届。',
+			},
+			{
+				text: '加入象棋队，用龙虾的耐性行棋',
+				effects: { intelligence: 3, charm: 2 },
+				result: '你的棋胡令对手过不去，因为你仍在漫长的时间尺度里思考。',
+			},
+		],
+	},
+	{
+		id: 'no3',
+		title: '写回忆录',
+		description:
+			'不少人建议你把一生的经历写下来。你笑了笑，这本书可不好写。',
+		minAge: 65,
+		maxAge: 100,
+		options: [
+			{
+				text: '如实写，包括龙虾转生的经历',
+				effects: { intelligence: 3, charm: 3 },
+				result: '出版商说这是远超同类作品的奇书。你的名字被写进了文学史。',
+			},
+			{
+				text: '只写人类的那部分',
+				effects: { intelligence: 2, charm: 2 },
+				result: '书很畅销。你心里的秘密依然安全地冰封着。',
+			},
+		],
+	},
+	{
+		id: 'no4',
+		title: '最后的心愿',
+		description: '你已经很老了，有一个愿望始终在心里。',
+		minAge: 80,
+		maxAge: 105,
+		options: [
+			{
+				text: '托人将你放入河里，返回前世',
+				effects: { luck: 5, vitality: 2 },
+				result: '冠山的清水把你勸醒了。你感到了前所未有的内心宁静。',
+			},
+			{
+				text: '和家人吴点就好',
+				effects: { charm: 4, vitality: 1 },
+				result: '家人们围坐在你身边。你心想：这一世很好，下一世再重来一次吧。',
+			},
+		],
+	},
+	{
+		id: 'no5',
+		title: '百岁生日',
+		description:
+			'你活到了百岁，全家人为你庆生日。记者来采访，问你长寿的秘诀。',
+		minAge: 99,
+		maxAge: 105,
+		options: [
+			{
+				text: '说：我就是龙虾转生的',
+				effects: { charm: 5, luck: 3 },
+				result: '记者以为你在开玩笑，却深深被你的潇默打动了。',
+			},
+			{
+				text: '说：常常吃龙虾补脑',
+				effects: { vitality: 3, charm: 3 },
+				result: '这个回答上了热搜。龙虾饪店销量全面飙升。',
+			},
+		],
+	},
 	// ========== 结局事件 ==========
 	{
 		id: 'end_accident_1',
