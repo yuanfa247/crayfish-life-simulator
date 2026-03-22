@@ -42,8 +42,8 @@ module.exports = [
 		id: 'nb1',
 		title: '神秘的水盆',
 		description: '妈妈给你洗澡，看到水你莫名亲切，想跳进去游泳。',
-		minAge: 0,
-		maxAge: 1,
+		minAge: 1,
+		maxAge: 2,
 		options: [
 			{
 				text: '奔向水盆',

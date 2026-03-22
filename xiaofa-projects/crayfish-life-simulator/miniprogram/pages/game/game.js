@@ -231,6 +231,9 @@ Page({
 	},
 
 	selectOption: function (e) {
+		// 守卫：如果结果已经显示（showResult=true），不能重复选择
+		if (this.data.showResult) return;
+
 		const idx = e.currentTarget.dataset.index;
 		const option = this.data.currentEvent.options[idx];
 		const attributes = { ...this.data.attributes };
@@ -351,7 +354,10 @@ Page({
 				return;
 			}
 		}
-		if (this.data.status !== 'ended') {
+		// --- 普通事件：结果显示后，800ms自动跳下一事件
+		// 用户也可以手动点击"点击继续"跳过等待
+		// 如果已经触发结局(isEndingPending=true)，一定不要自动继续
+		if (this.data.status !== 'ended' && !this.data.isEndingPending) {
 			this.setData({
 				autoNextTimer: setTimeout(() => this.nextEvent(), 800),
 			});
@@ -360,6 +366,17 @@ Page({
 
 	goToResult: function () {
 		if (this.data.isEndingPending) this.endGame(this.data.pendingEndingId);
+	},
+
+	// 手动跳过结果，直接下一事件（普通非结局事件）
+	skipResult: function () {
+		if (this.data.autoNextTimer) {
+			clearTimeout(this.data.autoNextTimer);
+			this.setData({ autoNextTimer: null });
+		}
+		if (!this.data.isEndingPending) {
+			this.nextEvent();
+		}
 	},
 
 	// 属性自然衰减：随着年龄增长，随机衰减1点属性（40岁后开始）
