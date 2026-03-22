@@ -20,6 +20,44 @@ module.exports = [
 		],
 	},
 	{
+		id: 'c1b',
+		title: '第一次啼哭',
+		description: '医生拍了你一下，你大声哭出来，宣告你的诞生。',
+		minAge: 0,
+		maxAge: 1,
+		options: [
+			{
+				text: '用力哭，让全世界听到',
+				effects: { vitality: 3, charm: 1 },
+				result: '你的哭声洪亮，医生说你很健康。',
+			},
+			{
+				text: '小声哭，保留体力',
+				effects: { vitality: 2, intelligence: 1 },
+				result: '你很安静，护士夸你乖。',
+			},
+		],
+	},
+	{
+		id: 'nb1',
+		title: '神秘的水盆',
+		description: '妈妈给你洗澡，看到水你莫名亲切，想跳进去游泳。',
+		minAge: 0,
+		maxAge: 1,
+		options: [
+			{
+				text: '奔向水盆',
+				effects: { vitality: 2, charm: -1 },
+				result: '妈妈吓得大叫，但你在水里感到无比自在。',
+			},
+			{
+				text: '忍住安静洗澡',
+				effects: { intelligence: 2, charm: 1 },
+				result: '你告诉自己：我现在是人类，不是龙虾。',
+			},
+		],
+	},
+	{
 		id: 'c2',
 		title: '第一次摔跤',
 		description: '学会走路后，你在地上摔了一跤。',
