@@ -254,6 +254,219 @@ module.exports = [
 		minAge: 980,
 		endingText: '探索仙界，发现无穷奥秘',
 	},
+	// ===== 极端属性特色结局 =====
+	{
+		id: 'extreme_vitality_max',
+		title: '小龙虾本虾',
+		description:
+			'你的活力属性拉满，身体比所有人都强壮。你继承了小龙虾最强的肉身，一辈子几乎没生病，活到了一百多岁，身体依然硬朗。你就是小龙虾本虾，强壮了一辈子。',
+		image: '💪',
+		priority: 10,
+		conditions: {
+			vitality: {
+				min: 50,
+			},
+		},
+		endingText: '一辈子强壮，小龙虾本色',
+	},
+	{
+		id: 'extreme_intelligence_max',
+		title: '智者不惑',
+		description:
+			'你的智力属性拉满，从小就是学霸，一路考上名牌大学，成为业界知名专家。你用智力解决了人生大部分问题，留下了丰硕的知识成果。',
+		image: '🧠',
+		priority: 10,
+		conditions: {
+			intelligence: {
+				min: 50,
+			},
+		},
+		endingText: '智力超群，成果丰硕',
+	},
+	{
+		id: 'extreme_wealth_max',
+		title: '商业巨鳄',
+		description:
+			'你的财富属性一路高涨，年纪轻轻就实现了财富自由，成为了商业界知名的巨鳄。你这一生赚了无数钱，给后代留下了巨大的遗产。',
+		image: '💰',
+		priority: 10,
+		conditions: {
+			wealth: {
+				min: 50,
+			},
+		},
+		endingText: '财富自由，商业巨鳄',
+	},
+	{
+		id: 'extreme_charm_max',
+		title: '万人迷',
+		description:
+			'你的魅力属性拉满，走到哪里都受人喜欢。你有无数朋友，人际关系处理得非常好，一辈子都被爱包围着。',
+		image: '😍',
+		priority: 10,
+		conditions: {
+			charm: {
+				min: 50,
+			},
+		},
+		endingText: '万人迷，一辈子被爱包围',
+	},
+	{
+		id: 'extreme_luck_max',
+		title: '天选之子',
+		description:
+			'你的运气好到爆炸，这辈子逢凶化吉，想买什么彩票中什么彩票，想有什么机会就有什么机会。所有人都羡慕你的好运气，你就是天选之子。',
+		image: '🍀',
+		priority: 10,
+		conditions: {
+			luck: {
+				min: 50,
+			},
+		},
+		endingText: '天选之子，运气好到爆炸',
+	},
+	// ===== 龙虾转生专属结局 =====
+	{
+		id: 'lobster_return_river',
+		title: '回归大河',
+		description:
+			'你老年之后，终于回到了前世生长的那条小河。你走进河里，变回了小龙虾的样子。阳光透过水面照在你身上，你终于回家了。',
+		image: '🌊',
+		priority: 12,
+		tags: ['lobster-immortal'],
+		conditions: {
+			age: {
+				min: 60,
+			},
+		},
+		endingText: '终于回家，回到了出生的地方',
+	},
+	{
+		id: 'lobster_life_legend',
+		title: '龙虾人生',
+		description:
+			'你这一生，无论是作为龙虾还是作为人类，都活得精彩。你接受了前世，也活好了今生，龙虾的血脉和人类的生活完美融合。你的一生，就是传奇的一生。',
+		image: '🦞',
+		priority: 12,
+		tags: ['lobster-immortal'],
+		conditions: {
+			age: {
+				min: 80,
+			},
+			totalScore: {
+				min: 200,
+			},
+		},
+		endingText: '龙虾人生，传奇一生',
+	},
+	{
+		id: 'lobster_secret_kept',
+		title: '完美隐藏',
+		description:
+			'你一辈子都完美隐藏了龙虾转生的秘密，没有人发现你的特殊身份。你像一个普通人一样出生、成长、老去，带走了这个秘密。这也是一种完美的人生。',
+		image: '🤫',
+		priority: 11,
+		tags: [],
+		conditions: {
+			age: {
+				min: 60,
+			},
+		},
+		endingText: '秘密带走，完美人生',
+	},
+	{
+		id: 'lobster_restaurant_king',
+		title: '龙虾大王',
+		description:
+			'你开了一家龙虾餐厅，因为你对小龙虾最懂，所以你的龙虾做得最好吃。你的餐厅成为了当地网红，你成为了远近闻名的龙虾大王。你靠龙虾发家致富，也算落叶归根。',
+		image: '🍤',
+		priority: 11,
+		tags: ['lobster-infinite', 'business'],
+		conditions: {
+			wealth: {
+				min: 30,
+			},
+		},
+		endingText: '龙虾大王，靠虾发家',
+	},
+	// ===== 拓展风格多元结局 =====
+	{
+		id: 'scifi_lobster_clone',
+		title: '克隆重生',
+		description:
+			'你前世其实是科学家实验失败，意识转移到小龙虾身上后再次转生为人。科学家找到了你，邀请你回到实验室继续研究，你可以揭开生命转移的秘密。',
+		image: '🧬',
+		priority: 9,
+		conditions: {
+			intelligence: {
+				min: 30,
+			},
+		},
+		endingText: '科学家，克隆重生',
+	},
+	{
+		id: 'love_secret_identity',
+		title: '秘密爱情',
+		description:
+			'你爱上了一个人，但你不敢告诉他你是小龙虾转生的秘密。TA接受了你所有的一切，对你说：不管你是什么，我都爱你。你找到了一生的挚爱，这就够了。',
+		image: '❤️',
+		priority: 10,
+		conditions: {
+			charm: {
+				min: 30,
+			},
+		},
+		endingText: '真爱无惧，秘密一生',
+	},
+	{
+		id: 'politics_success',
+		title: '政坛新星',
+		description:
+			'你凭借小龙虾带来的天生智慧和耐力，在政坛一步步爬升，最终成为了一方大员。你用你的能力造福一方，留下了光辉的政绩。',
+		image: '🏛️',
+		priority: 9,
+		conditions: {
+			intelligence: {
+				min: 25,
+			},
+			charm: {
+				min: 25,
+			},
+		},
+		endingText: '政坛新星，造福一方',
+	},
+	{
+		id: 'rich_fish_hole',
+		title: '钓鱼老翁',
+		description:
+			'你一辈子赚了足够的钱，退休后你天天在河边钓鱼。每天都能钓到大鱼，你坐在岸边看日落，这一生，值了。',
+		image: '🎣',
+		priority: 10,
+		conditions: {
+			wealth: {
+				min: 25,
+			},
+			age: {
+				min: 60,
+			},
+		},
+		endingText: '垂钓一生，自在平安',
+	},
+	{
+		id: 'cultivate_hidden_temple',
+		title: '山中隐仙',
+		description:
+			'你没有选择飞升，而是在山中找了一个灵气充沛的洞穴隐修。你看着人间沧海桑田，自己活得清净自在，这就是最大的幸福。',
+		image: '🏔️',
+		priority: 10,
+		tags: ['cultivate', 'lobster-cave'],
+		conditions: {
+			age: {
+				min: 105,
+			},
+		},
+		endingText: '山中隐仙，清净自在',
+	},
 	{
 		id: 'default',
 		title: '平凡的人生',

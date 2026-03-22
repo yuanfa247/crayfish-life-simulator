@@ -2390,7 +2390,7 @@ module.exports = [
 	// ===== 新增：30-60岁 中壮年期 =====
 	{
 		id: 'nm1',
-		title: '中年危机与龙虾斯达',
+		title: '中年危机与龙虾基因',
 		description:
 			'你已经40岁了，有一天深夜你突然极度想吃龙虾，还想潜入水中。',
 		minAge: 38,
@@ -2402,9 +2402,109 @@ module.exports = [
 				result: '吃完你感到一种奇异的内心平静。前世的灵魂在这一刻得到了治愈。',
 			},
 			{
-				text: '理性克制，去看心理咖询',
+				text: '理性克制，去看心理咨询',
 				effects: { intelligence: 3, charm: 1 },
-				result: '心理和说这是中年危机的常见症状。你心想：你知道个啥啊。',
+				result: '咨询师说这是中年危机的常见症状。你心想：你知道个啥啊。',
+			},
+		],
+	},
+	{
+		id: 'nm8',
+		title: '老同学聚会剥虾比赛',
+		description: '同学聚会有人发起挑战：谁能一分钟剥开最多小龙虾，谁剥的干净算赢。你微微一笑，你前世就是小龙虾。',
+		minAge: 35,
+		maxAge: 55,
+		tags: ['lobster-perception'],
+		options: [
+			{
+				text: '轻松剥虾，一分钟剥完一大盘',
+				effects: { charm: 4, luck: 2 },
+				result: '全班震惊，都说你是小龙虾专家。你笑而不语。',
+			},
+			{
+				text: '故意剥慢一点，给年轻人留点面子',
+				effects: { charm: 2, intelligence: 1 },
+				result: '大家开心，你人缘更好了。',
+			},
+		],
+	},
+	{
+		id: 'nm9',
+		title: '水库钓鱼钓到一只超大龙虾',
+		description: '你去水库钓鱼，没钓到鱼，却捞上来一只超大野生龙虾。你知道这是命运的召唤。',
+		minAge: 30,
+		maxAge: 55,
+		tags: ['lobster-cave', 'lobster-night'],
+		options: [
+			{
+				text: '放回到深水里',
+				effects: { luck: 4, charm: 2 },
+				result: '它看了你一眼，慢慢游走了。你感到一种心灵的呼应。',
+			},
+			{
+				text: '带回家煮了吃',
+				effects: { vitality: 3, wealth: 1 },
+				result: '味道极其鲜美，你感觉身体很舒服。',
+			},
+		],
+	},
+	{
+		id: 'nm10',
+		title: '断肢再生天赋觉醒',
+		description: '你车祸断了一条腿，医生说要截肢，你的龙虾天赋突然觉醒。',
+		minAge: 30,
+		maxAge: 60,
+		tags: ['lobster-regen'],
+		options: [
+			{
+				text: '相信天赋，等待再生',
+				effects: { vitality: 5, luck: 1 },
+				result: '几个月后，你的腿真的长回来了。医生惊呆了。',
+			},
+			{
+				text: '相信现代医学',
+				effects: { intelligence: 2, vitality: -2 },
+				result: '你截肢了，平安但失去了天赋。',
+			},
+		],
+	},
+	{
+		id: 'nm11',
+		title: '铁甲防御天生神力',
+		description: '你遇到劫匪打劫，你本能地举起手挡住刀，刀砍不进你的皮肤。',
+		minAge: 25,
+		maxAge: 50,
+		tags: ['lobster-armor'],
+		options: [
+			{
+				text: '吓退劫匪',
+				effects: { vitality: 4, charm: 3 },
+				result: '你的皮肤像龙虾壳一样坚硬，劫匪惊呆了，落荒而逃。',
+			},
+			{
+				text: '报警等待',
+				effects: { intelligence: 2, luck: 2 },
+				result: '警察很快来了，你安全了。',
+			},
+		],
+	},
+	{
+		id: 'nm12',
+		title: '无限生长天赋',
+		description: '体检发现你还在长高，医生说你的骨龄还在增长。这就是无限生长天赋的效果。',
+		minAge: 30,
+		maxAge: 60,
+		tags: ['lobster-infinite'],
+		options: [
+			{
+				text: '接受这个变化',
+				effects: { vitality: 3, intelligence: 2 },
+				result: '你比同龄人年轻十岁，身体一直保持活力。',
+			},
+			{
+				text: '正常生活',
+				effects: { vitality: 1, luck: 3 },
+				result: '你顺其自然，享受生活。',
 			},
 		],
 	},
