@@ -245,6 +245,7 @@ Page({
 			luck: '运气',
 			charm: '魅力',
 		};
+		let decayedAttrs = attributes; // 提前声明，默认等于原属性
 		for (const [key, delta] of Object.entries(option.effects)) {
 			if (attributes.hasOwnProperty(key)) {
 				const old = attributes[key];
@@ -262,7 +263,7 @@ Page({
 		if (newEventCount % 8 === 0) {
 			newAge++;
 			// 涨岁后进行属性自然衰减
-			const decayedAttrs = this.ageDecay(attributes, newAge);
+			decayedAttrs = this.ageDecay(attributes, newAge);
 			// 检查是否有属性归零
 			if (Object.values(decayedAttrs).some(a => a <= 0)) {
 				this.setData({
@@ -312,7 +313,7 @@ Page({
 				});
 			}
 		} else {
-			// 不涨岁，直接设置
+			// 不涨岁，直接设置，decayedAttrs 已初始化为 attributes
 			this.setData({
 				attributes,
 				eventCount: newEventCount,
