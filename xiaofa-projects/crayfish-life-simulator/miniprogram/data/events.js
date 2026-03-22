@@ -1282,7 +1282,329 @@ module.exports = [
 		],
 	},
 
-	// ===== 新增：0-5岁幼児期 =====
+	// ===== 新增：修仙中期补充事件 =====
+	{
+		id: 'c150',
+		title: '灵气潮汐',
+		description: '天地间灵气潮汐涌动，你的修为在潮汐中自然增长。',
+		minAge: 150,
+		maxAge: 299,
+		tags: ['cultivate', 'lobster-immortal', 'lobster-infinite'],
+		options: [
+			{
+				text: '顺势吸收，稳固修为',
+				effects: { intelligence: 3, luck: 2 },
+				result: '你的修为在潮汐中稳步增长。',
+			},
+			{
+				text: '强行突破，冲击瓶颈',
+				effects: { intelligence: 5, luck: 1, vitality: -2 },
+				result: '你提前突破了瓶颈，但根基稍显不稳。',
+			},
+		],
+	},
+	{
+		id: 'c151',
+		title: '山中奇遇',
+		description: '你在深山修行中发现了一处天然灵气洞穴。',
+		minAge: 100,
+		maxAge: 299,
+		tags: ['cultivate', 'lobster-immortal', 'lobster-cave'],
+		options: [
+			{
+				text: '进驻洞穴修行',
+				effects: { intelligence: 4, vitality: 2 },
+				result: '洞穴中灵气浓郁，你的修为进展神速。',
+			},
+			{
+				text: '留下印记，偶尔来修行',
+				effects: { intelligence: 2, luck: 2 },
+				result: '你将此处留作日后的机缘。',
+			},
+		],
+	},
+	{
+		id: 'c152',
+		title: '妖兽内丹',
+		description: '你击杀了一只修成内丹的妖兽，获得了它积攒百年的内丹。',
+		minAge: 120,
+		maxAge: 299,
+		tags: ['cultivate', 'lobster-immortal', 'lobster-armor'],
+		options: [
+			{
+				text: '直接炼化内丹',
+				effects: { vitality: 4, luck: 2 },
+				result: '内丹之力融入你的身躯，肉身强度更胜从前。',
+			},
+			{
+				text: '慢慢温养，循序渐进',
+				effects: { intelligence: 3, vitality: 2 },
+				result: '你将内丹慢慢融入，收益更加绵长。',
+			},
+		],
+	},
+	{
+		id: 'c153',
+		title: '夜观星象',
+		description: '静夜无风，你在山顶夜观星象，感悟天地大道。',
+		minAge: 100,
+		maxAge: 299,
+		tags: ['cultivate', 'lobster-immortal', 'lobster-perception'],
+		options: [
+			{
+				text: '感悟星辰运转规律',
+				effects: { intelligence: 5, luck: 2 },
+				result: '你领悟了星辰运转的大道，修为大进。',
+			},
+			{
+				text: '感悟自身命理星辰',
+				effects: { intelligence: 3, luck: 3 },
+				result: '你明了了自身天命，未来修行之路更加清晰。',
+			},
+		],
+	},
+	{
+		id: 'c154',
+		title: '月光淬体',
+		description: '月圆之夜，你吸收月光精华淬炼肉身。',
+		minAge: 100,
+		maxAge: 299,
+		tags: ['cultivate', 'lobster-immortal', 'lobster-regen'],
+		options: [
+			{
+				text: '全力吸收月光',
+				effects: { vitality: 5, intelligence: 1 },
+				result: '你的肉身被月光滋养，恢复能力更强了。',
+			},
+			{
+				text: '适度吸收，保持节奏',
+				effects: { vitality: 3, intelligence: 2 },
+				result: '你稳步淬炼，肉身逐渐变强。',
+			},
+		],
+	},
+	{
+		id: 'c155',
+		title: '暗夜悟道',
+		description: '万籁俱寂的黑夜，你的感知在黑暗中变得更加敏锐。',
+		minAge: 100,
+		maxAge: 299,
+		tags: ['cultivate', 'lobster-immortal', 'lobster-night'],
+		options: [
+			{
+				text: '在黑暗中感悟本源',
+				effects: { intelligence: 4, luck: 3 },
+				result: '你领悟了黑暗的本源，感知力更上一层楼。',
+			},
+			{
+				text: '借黑暗宁静修炼心神',
+				effects: { intelligence: 3, vitality: 2 },
+				result: '你的心神变得更加宁静，修为稳步增长。',
+			},
+		],
+	},
+	{
+		id: 'c400',
+		title: '金丹温养',
+		description: '进入金丹期后，你需要每日温养金丹，巩固修为。',
+		minAge: 300,
+		maxAge: 499,
+		tags: ['cultivate', 'lobster-immortal'],
+		options: [
+			{
+				text: '每日打坐温养',
+				effects: { intelligence: 4, vitality: 1 },
+				result: '你的金丹越来越圆润稳固。',
+			},
+			{
+				text: '吸收天地精华滋养',
+				effects: { intelligence: 3, luck: 2 },
+				result: '天地精华融入金丹，品质提升。',
+			},
+		],
+	},
+	{
+		id: 'c401',
+		title: '金丹丹火淬炼',
+		description: '你用丹火反复淬炼金丹，去除其中杂质。',
+		minAge: 350,
+		maxAge: 499,
+		tags: ['cultivate', 'lobster-immortal'],
+		options: [
+			{
+				text: '猛烈淬炼，快速去杂',
+				effects: { intelligence: 5, vitality: -2 },
+				result: '金丹杂质减少，品质大幅提升。',
+			},
+			{
+				text: '文火慢炖，细水长流',
+				effects: { intelligence: 3, vitality: 1 },
+				result: '你慢慢来，金丹品质稳步提升。',
+			},
+		],
+	},
+	{
+		id: 'c402',
+		title: '感悟 lobster 肉身本源',
+		description: '你前世龙虾的肉身本源在金丹期开始觉醒，融入你的修仙道基。',
+		minAge: 300,
+		maxAge: 499,
+		tags: ['cultivate', 'lobster-immortal', 'lobster-infinite'],
+		options: [
+			{
+				text: '融合本源，完善道基',
+				effects: { vitality: 5, intelligence: 3 },
+				result: '无限生长的本源融入道基，你终身都可以成长。',
+			},
+			{
+				text: '保留本源，逐步融合',
+				effects: { vitality: 3, intelligence: 2, luck: 1 },
+				result: '你选择稳步融合，风险更小。',
+			},
+		],
+	},
+	{
+		id: 'c403',
+		title: '铁甲金丹',
+		description: '你将前世龙虾铁甲的天赋融入金丹，金丹变得坚不可摧。',
+		minAge: 300,
+		maxAge: 499,
+		tags: ['cultivate', 'lobster-immortal', 'lobster-armor'],
+		options: [
+			{
+				text: '全力融合，铸就无敌金丹',
+				effects: { vitality: 6, intelligence: 2 },
+				result: '你的金丹如同铁甲一般，任何心魔外道都难以攻破。',
+			},
+			{
+				text: '部分融合，留有余地',
+				effects: { vitality: 4, intelligence: 2 },
+				result: '你留下了后续改进的空间。',
+			},
+		],
+	},
+	{
+		id: 'c404',
+		title: '感知天地灵气波动',
+		description: '你三百六十度感知天赋发挥作用，能感知到千里之外的灵气流动。',
+		minAge: 300,
+		maxAge: 499,
+		tags: ['cultivate', 'lobster-immortal', 'lobster-perception'],
+		options: [
+			{
+				text: '顺着灵气波动寻找灵脉',
+				effects: { luck: 4, intelligence: 3 },
+				result: '你找到了一条小型灵脉，修为增长速度提升。',
+			},
+			{
+				text: '用感知预警危险',
+				effects: { intelligence: 4, luck: 2 },
+				result: '你提前避开了几次心魔劫，修行更加平稳。',
+			},
+		],
+	},
+	{
+		id: 'c405',
+		title: '断肢再生道韵',
+		description: '你断肢再生的天赋演化出道韵，即使受损也能快速恢复。',
+		minAge: 300,
+		maxAge: 499,
+		tags: ['cultivate', 'lobster-immortal', 'lobster-regen'],
+		options: [
+			{
+				text: '把再生道韵融入道基',
+				effects: { vitality: 5, intelligence: 2 },
+				result: '你的恢复能力达到修仙极致，几乎任何伤势都能快速愈合。',
+			},
+			{
+				text: '保留部分道韵慢慢参悟',
+				effects: { vitality: 3, intelligence: 3 },
+				result: '你继续参悟，未来还有提升空间。',
+			},
+		],
+	},
+	{
+		id: 'c700',
+		title: '元婴孕育',
+		description: '金丹破碎，开始孕育你的元婴。',
+		minAge: 500,
+		maxAge: 599,
+		tags: ['cultivate', 'lobster-immortal'],
+		options: [
+			{
+				text: '不惜损耗本源，全力孕育',
+				effects: { intelligence: 5, vitality: -3 },
+				result: '你的元婴提前成型，资质上佳。',
+			},
+			{
+				text: '慢慢来，顺其自然',
+				effects: { intelligence: 3, vitality: 1 },
+				result: '元婴稳步孕育，根基扎实。',
+			},
+		],
+	},
+	{
+		id: 'c701',
+		title: '元婴出窍',
+		description: '你的元婴第一次成功出窍，可以离开肉身观察天地。',
+		minAge: 600,
+		maxAge: 799,
+		tags: ['cultivate', 'lobster-immortal'],
+		options: [
+			{
+				text: '远游观天地',
+				effects: { intelligence: 5, luck: 3 },
+				result: '你见识了天地造化，悟性大增。',
+			},
+			{
+				text: '近游熟悉方圆',
+				effects: { intelligence: 3, luck: 2 },
+				result: '你熟悉了出窍的感觉，为日后远游打下基础。',
+			},
+		],
+	},
+	{
+		id: 'c702',
+		title: '夜行千里采药',
+		description: '夜间你元婴出窍，前去千里之外寻找天才地宝。',
+		minAge: 600,
+		maxAge: 799,
+		tags: ['cultivate', 'lobster-immortal', 'lobster-night'],
+		options: [
+			{
+				text: '深入大山寻找',
+				effects: { luck: 5, intelligence: 2 },
+				result: '你找到了一株千年灵药，收获巨大。',
+			},
+			{
+				text: '在周边寻找',
+				effects: { luck: 3, intelligence: 2 },
+				result: '你找到了几百年份的药材，收获不错。',
+			},
+		],
+	},
+	{
+		id: 'c703',
+		title: '元婴寄居洞穴',
+		description: '你找到一处天然灵洞，作为元婴修炼的宝地。',
+		minAge: 600,
+		maxAge: 799,
+		tags: ['cultivate', 'lobster-immortal', 'lobster-cave'],
+		options: [
+			{
+				text: '长期在此修炼',
+				effects: { intelligence: 4, vitality: 2 },
+				result: '灵洞灵气浓郁，元婴修炼速度倍增。',
+			},
+			{
+				text: '偶尔来此闭关',
+				effects: { intelligence: 2, luck: 2 },
+				result: '你将此处作为闭关静修的场所。',
+			},
+		],
+	},
+
+	// ===== 新增：0-5岁幼年期 =====
 	{
 		id: 'nb1',
 		title: '神秘的水盆',
