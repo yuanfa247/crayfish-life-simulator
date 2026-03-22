@@ -320,7 +320,9 @@ Page({
 				showResult: true,
 			});
 		}
-		if (Object.values(attributes).some((a) => a <= 0)) {
+		// 检查最终属性是否有归零（衰减后也需要检查）
+		const finalAttrs = newEventCount % 8 === 0 ? decayedAttrs : attributes;
+		if (Object.values(finalAttrs).some((a) => a <= 0)) {
 			this.setData({ isEndingPending: true, pendingEndingId: null });
 			return;
 		}
