@@ -327,6 +327,10 @@ Page({
 		const finalAttrs = newEventCount % 8 === 0 ? decayedAttrs : attributes;
 		if (Object.values(finalAttrs).some((a) => a <= 0)) {
 			this.setData({ isEndingPending: true, pendingEndingId: null });
+			// 属性归零属于突发意外结局，1.5秒后自动跳结局页，不用手动点
+			setTimeout(() => {
+				this.goToResult();
+			}, 1500);
 			return;
 		}
 		if (option.isCultivateOption) {
@@ -345,11 +349,16 @@ Page({
 			const result = this.checkCultivatorBreakthrough(newAge, attributes);
 			if (result) {
 				this.setData({ eventResult: result.msg, showResult: true });
-				if (result.end)
+				if (result.end) {
 					this.setData({
 						isEndingPending: true,
 						pendingEndingId: null,
 					});
+					// 渡劫失败也是结局，1.5秒后自动跳结局页
+					setTimeout(() => {
+						this.goToResult();
+					}, 1500);
+				}
 				else setTimeout(() => this.nextEvent(), 2500);
 				return;
 			}
