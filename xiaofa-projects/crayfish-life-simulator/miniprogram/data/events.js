@@ -1946,7 +1946,7 @@ module.exports = [
 			{
 				text: '用前世本能碾压全场',
 				effects: { vitality: 4, charm: 3 },
-				result: '你以压倒性优势夺冒。教练问：你练过蟹步吗？',
+				result: '你以压倒性优势夺冠。教练问：你练过蟹步吗？',
 			},
 			{
 				text: '正常跑，不暴露异能',
@@ -2115,7 +2115,7 @@ module.exports = [
 			{
 				text: '写一首龙虾为主题的情诗塞进对方书包',
 				effects: { charm: 2, intelligence: 2 },
-				result: '对方被逆笑了，主动来找你搞话。这段奇怪的缘分就此开始。',
+				result: '对方被逗笑了，主动来找你说话。这段奇怪的缘分就此开始。',
 			},
 			{
 				text: '默默喜欢，把感情化为学习动力',
@@ -2556,7 +2556,7 @@ module.exports = [
 			{
 				text: '全力支持，共同研究小龙虾',
 				effects: { charm: 4, intelligence: 2 },
-				result: '你们一起研究了很久。孩子问你为什么那么了解龙虾，你说：面円为相。',
+				result: '你们一起研究了很久。孩子问你为什么那么了解龙虾，你说：因材施教。',
 			},
 			{
 				text: '帮孩子换一个题目',
