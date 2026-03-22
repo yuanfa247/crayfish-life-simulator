@@ -5,7 +5,7 @@ const eventList = require('../../data/events.js');
 Page({
 	data: {
 		status: 'event',
-		age: 1,
+		age: 0,
 		ageStage: '幼儿',
 		eventCount: 0,
 		isCultivator: false,
