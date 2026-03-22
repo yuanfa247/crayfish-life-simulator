@@ -108,15 +108,16 @@ Page({
 	},
 
 	// 结局概率：幼年极低，成年后逐步上升，符合人类生命规律
+	// 经过测试调优：中晚年结局概率略提高，让寿命分布更集中在合理区间
 	getEndingRatio: function (age) {
 		if (age < 18) return 0.005; // 18岁以下极低
-		if (age < 30) return 0.01; // 18-29岁 1%
-		if (age < 40) return 0.02; // 30-39岁 2%
-		if (age < 50) return 0.04 + (age - 40) * 0.003; // 40-49岁 4%-7%
-		if (age < 60) return 0.07 + (age - 50) * 0.008; // 50-59岁 7%-15%
-		if (age < 70) return 0.15 + (age - 60) * 0.015; // 60-69岁 15%-30%
-		if (age < 80) return 0.3 + (age - 70) * 0.02; // 70-79岁 30%-50%
-		return Math.min(0.85, 0.5 + (age - 80) * 0.012); // 80+岁
+		if (age < 30) return 0.015; // 18-29岁 1.5%
+		if (age < 40) return 0.03; // 30-39岁 3%
+		if (age < 50) return 0.06 + (age - 40) * 0.004; // 40-49岁 6%-10%
+		if (age < 60) return 0.10 + (age - 50) * 0.01; // 50-59岁 10%-20%
+		if (age < 70) return 0.20 + (age - 60) * 0.02; // 60-69岁 20%-40%
+		if (age < 80) return 0.40 + (age - 70) * 0.025; // 70-79岁 40%-65%
+		return Math.min(0.90, 0.65 + (age - 80) * 0.01); // 80+岁，最高90%
 	},
 
 	triggerRandomEvent: function () {
@@ -255,16 +256,70 @@ Page({
 		const newEventCount = this.data.eventCount + 1;
 		let newAge = this.data.age;
 		// 每8件事涨1岁，让玩家有充足的事件体验
-		if (newEventCount % 8 === 0) newAge++;
-		this.setData({
-			attributes,
-			eventCount: newEventCount,
-			age: newAge,
-			ageStage: this.getAgeStage(newAge),
-			eventResult: option.result,
-			attrChanges,
-			showResult: true,
-		});
+		if (newEventCount % 8 === 0) {
+			newAge++;
+			// 涨岁后进行属性自然衰减
+			const decayedAttrs = this.ageDecay(attributes, newAge);
+			// 检查是否有属性归零
+			if (Object.values(decayedAttrs).some(a => a <= 0)) {
+				this.setData({
+					attributes: decayedAttrs,
+					eventCount: newEventCount,
+					age: newAge,
+					ageStage: this.getAgeStage(newAge),
+					eventResult: option.result + '\n\n时光流逝，你的身体逐渐衰退，一项属性归零了...',
+					attrChanges,
+					showResult: true,
+					isEndingPending: true,
+					pendingEndingId: null,
+				});
+				return;
+			}
+			// 将衰减后的属性应用，并添加衰减提示
+			let hasChange = false;
+			for (const key in decayedAttrs) {
+				if (decayedAttrs[key] !== attributes[key]) {
+					attrChanges.push({
+						name: attrNames[key],
+						delta: decayedAttrs[key] - attributes[key],
+					});
+					hasChange = true;
+					break;
+				}
+			}
+			if (hasChange) {
+				this.setData({
+					attributes: decayedAttrs,
+					eventCount: newEventCount,
+					age: newAge,
+					ageStage: this.getAgeStage(newAge),
+					eventResult: option.result + (hasChange ? '\n\n岁月不饶人，你的身体悄悄发生了变化...' : ''),
+					attrChanges,
+					showResult: true,
+				});
+			} else {
+				this.setData({
+					attributes: decayedAttrs,
+					eventCount: newEventCount,
+					age: newAge,
+					ageStage: this.getAgeStage(newAge),
+					eventResult: option.result,
+					attrChanges,
+					showResult: true,
+				});
+			}
+		} else {
+			// 不涨岁，直接设置
+			this.setData({
+				attributes,
+				eventCount: newEventCount,
+				age: newAge,
+				ageStage: this.getAgeStage(newAge),
+				eventResult: option.result,
+				attrChanges,
+				showResult: true,
+			});
+		}
 		if (Object.values(attributes).some((a) => a <= 0)) {
 			this.setData({ isEndingPending: true, pendingEndingId: null });
 			return;
@@ -305,10 +360,39 @@ Page({
 		if (this.data.isEndingPending) this.endGame(this.data.pendingEndingId);
 	},
 
+	// 属性自然衰减：随着年龄增长，随机衰减1点属性（40岁后开始）
+	ageDecay: function (attributes, age) {
+		if (age < 40) return attributes; // 40岁前不衰减
+		if (age > 105 && this.data.isCultivator) return attributes; // 修仙者不衰减
+
+		// 40-60岁：20%概率衰减，60-80岁：40%，80+：60%
+		let decayChance = 0.2;
+		if (age >= 60) decayChance = 0.4;
+		if (age >= 80) decayChance = 0.6;
+
+		if (Math.random() > decayChance) return attributes;
+
+		const attrCopy = { ...attributes };
+		// 优先衰减活力>魅力>财富>智力>运气，活力最容易衰减
+		const candidates = [];
+		['vitality', 'charm', 'wealth', 'intelligence', 'luck'].forEach(key => {
+			if (attrCopy[key] > 3) candidates.push(key); // 不衰减到0以下
+		});
+
+		if (candidates.length > 0) {
+			const key = candidates[Math.floor(Math.random() * candidates.length)];
+			attrCopy[key]--;
+		}
+
+		return attrCopy;
+	},
+
 	checkCultivatorBreakthrough: function (age, attrs) {
 		const r = Math.random();
+		let failChance = 0;
 		if (age === 300) {
-			if (attrs.intelligence < 80 || attrs.luck < 70 || r < 0.2)
+			failChance = attrs.intelligence < 80 || attrs.luck < 70 ? 0.4 : 0.25;
+			if (r < failChance)
 				return {
 					msg: '💥 筑基期渡劫失败，修为散尽，寿元耗尽...',
 					end: true,
@@ -316,12 +400,14 @@ Page({
 			return { msg: '✨ 筑基期渡劫成功！寿命延长到500岁！', end: false };
 		}
 		if (age === 500) {
-			if (attrs.intelligence < 90 || attrs.luck < 80 || r < 0.25)
+			failChance = attrs.intelligence < 90 || attrs.luck < 80 ? 0.45 : 0.3;
+			if (r < failChance)
 				return { msg: '💥 金丹期渡劫失败，神魂俱灭...', end: true };
 			return { msg: '✨ 金丹期渡劫成功！寿命延长到800岁！', end: false };
 		}
 		if (age === 800) {
-			if (attrs.intelligence < 95 || attrs.luck < 90 || r < 0.3)
+			failChance = attrs.intelligence < 95 || attrs.luck < 90 ? 0.55 : 0.35;
+			if (r < failChance)
 				return {
 					msg: '💥 元婴期渡劫失败，被九天神雷劈成飞灰...',
 					end: true,
@@ -329,7 +415,8 @@ Page({
 			return { msg: '✨ 元婴期渡劫成功！寿命延长到980岁！', end: false };
 		}
 		if (age >= 980) {
-			if (attrs.intelligence < 100 || attrs.luck < 95 || r < 0.35)
+			failChance = attrs.intelligence < 100 || attrs.luck < 95 ? 0.65 : 0.4;
+			if (r < failChance)
 				return {
 					msg: '💥 九九天劫失败！你在雷火中化为灰烬，修为尽毁...',
 					end: true,

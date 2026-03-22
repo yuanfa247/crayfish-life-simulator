@@ -1683,7 +1683,7 @@ module.exports = [
 	{
 		id: 'nt1',
 		title: '青春期的困惑',
-		description: '你在月圆之夜会异常冢奋，莫名想要横着走路。',
+		description: '你在月圆之夜会异常兴奋，莫名想要横着走路。',
 		minAge: 13,
 		maxAge: 16,
 		options: [
@@ -1695,7 +1695,7 @@ module.exports = [
 			{
 				text: '顺从本能，在月圆夜出去横走一圈',
 				effects: { vitality: 2, luck: 3 },
-				result: '街上没什么人，你走完感觉神清气爽，前世的能量在血液里流淤。',
+				result: '街上没什么人，你走完感觉神清气爽，前世的能量在血液里流淌。',
 			},
 		],
 	},
@@ -1703,7 +1703,7 @@ module.exports = [
 		id: 'nt2',
 		title: '第一次暗恋',
 		description:
-			'你喜欢上班里一个同学，每次见到他/她你就不自觉地側着走路。',
+			'你喜欢上班里一个同学，每次见到他/她你就不自觉地侧着走路。',
 		minAge: 13,
 		maxAge: 17,
 		options: [
@@ -1789,19 +1789,19 @@ module.exports = [
 			{
 				text: '计划未来，展望新的征程',
 				effects: { intelligence: 3, luck: 2 },
-				result: '你在心里默默说：不管什么前世以后，这一世我要活漏漏精精的。',
+				result: '你在心里默默说：不管什么前世今生，这一世我要活得漂漂亮亮的。',
 			},
 		],
 	},
 	{
 		id: 'nt6',
-		title: '第一次喜训',
-		description: '进入大学后，导员组织喜训，你不小心被浏览了。',
+		title: '第一次军训',
+		description: '进入大学后，导员组织军训，你不小心被晒伤了。',
 		minAge: 18,
 		maxAge: 19,
 		options: [
 			{
-				text: '命令喜从，认真完成任务',
+				text: '命令服从，认真完成任务',
 				effects: { vitality: 3, charm: 2 },
 				result: '导员说你意志力超强，报名参加了更多社团活动。',
 			},
@@ -1919,24 +1919,24 @@ module.exports = [
 			{
 				text: '安之若素，创造生活',
 				effects: { charm: 2, intelligence: 2 },
-				result: '你把小屋布置得温馨可爱，朋友们都喜欢来你家坐客。',
+				result: '你把小屋布置得温馨可爱，朋友们都喜欢来你家做客。',
 			},
 			{
-				text: '拼命工作存钆买房',
+				text: '拼命工作攒钱买房',
 				effects: { wealth: 3, vitality: -2 },
-				result: '两年后你付上了首付。身体有些奕，但心里踏实了。',
+				result: '两年后你付上了首付。身体有些累，但心里踏实了。',
 			},
 		],
 	},
 	{
 		id: 'na3',
 		title: '职场与龙虾缘',
-		description: '你发现老板特别喜欢小龙虾玩偶，正在绻筹一个龙虾主题餐厅。',
+		description: '你发现老板特别喜欢小龙虾玩偶，正在筹划一个龙虾主题餐厅。',
 		minAge: 22,
 		maxAge: 35,
 		options: [
 			{
-				text: '主动廊迎，分享对龙虾的见解',
+				text: '主动迎合，分享对龙虾的见解',
 				effects: { wealth: 3, charm: 3 },
 				result: '老板大喜，说你就是马到成功。你心想：我本来就是龙虾。',
 			},
@@ -1950,7 +1950,7 @@ module.exports = [
 	{
 		id: 'na4',
 		title: '相亲',
-		description: '父母开始嵔你相亲。对方当你摄出龙虾玩偶时，笑了。',
+		description: '父母开始催你相亲。对方当你掏出龙虾玩偶时，笑了。',
 		minAge: 24,
 		maxAge: 30,
 		options: [
@@ -2035,9 +2035,9 @@ module.exports = [
 		maxAge: 50,
 		options: [
 			{
-				text: '顺从内心，点了外卖龙虾吀夜嬵',
+				text: '顺从内心，点了外卖龙虾彻夜吃',
 				effects: { vitality: 2, luck: 2 },
-				result: '吃完你感到一种奇异的内心平静。前世的灵魂在这一刻得到了慈悠。',
+				result: '吃完你感到一种奇异的内心平静。前世的灵魂在这一刻得到了治愈。',
 			},
 			{
 				text: '理性克制，去看心理咖询',
@@ -2061,7 +2061,7 @@ module.exports = [
 			{
 				text: '帮孩子换一个题目',
 				effects: { intelligence: 2, charm: -1 },
-				result: '孩子不开心，你心里有些歉痚。',
+				result: '孩子不开心，你心里有些歉疚。',
 			},
 		],
 	},
@@ -2179,7 +2179,7 @@ module.exports = [
 			{
 				text: '说喜欢小鱼，保个体面',
 				effects: { intelligence: 2, charm: 1 },
-				result: '孙子点了点头。你忧郁地想：其实也没有撕到很多。',
+				result: '孙子点了点头。你忧郁地想：其实也没有说到很多。',
 			},
 		],
 	},
@@ -2438,7 +2438,7 @@ module.exports = [
 			{
 				text: '坦然接受',
 				effects: {},
-				result: '你放下了一切牴挂，平静地离开了这个世界。',
+				result: '你放下了一切牵挂，平静地离开了这个世界。',
 				isEndingOption: true,
 				endingId: 'natural_death',
 			},
@@ -2453,7 +2453,7 @@ module.exports = [
 	},
 	{
 		id: 'end_natural_3',
-		title: '寿终正寢',
+		title: '寿终正寝',
 		description: '你活到了很多人羡慕的年纪，岁月在你脸上留下了深深的痕迹。',
 		isEnding: true,
 		minAge: 80,
