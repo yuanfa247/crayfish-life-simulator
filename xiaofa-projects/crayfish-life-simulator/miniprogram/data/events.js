@@ -5,7 +5,7 @@ module.exports = [
 		title: '初生的记忆',
 		description: '你睁开眼睛，发现自己变成了人类婴儿。',
 		minAge: 0,
-		maxAge: 5,
+		maxAge: 1,
 		options: [
 			{
 				text: '适应新身体',
@@ -24,7 +24,7 @@ module.exports = [
 		title: '第一次摔跤',
 		description: '学会走路后，你在地上摔了一跤。',
 		minAge: 1,
-		maxAge: 5,
+		maxAge: 2,
 		options: [
 			{
 				text: '哭闹求安慰',
@@ -42,7 +42,7 @@ module.exports = [
 		id: 'c3',
 		title: '幼儿园的第一天',
 		description: '你进入了幼儿园，看到了许多陌生的小朋友。',
-		minAge: 2,
+		minAge: 3,
 		maxAge: 5,
 		options: [
 			{
@@ -61,7 +61,7 @@ module.exports = [
 		id: 'c4',
 		title: '龙虾天赋觉醒',
 		description: '在一次意外中，你的身体展现出了不寻常的能力。',
-		minAge: 3,
+		minAge: 2,
 		maxAge: 5,
 		tags: [
 			'lobster-regen',
@@ -89,8 +89,8 @@ module.exports = [
 		id: 'c5',
 		title: '第一次生病',
 		description: '你感冒了，躺在床上很难受。',
-		minAge: 2,
-		maxAge: 5,
+		minAge: 1,
+		maxAge: 3,
 		options: [
 			{
 				text: '坚持不吃药',
@@ -1610,7 +1610,7 @@ module.exports = [
 		title: '神秘的水盆',
 		description: '妈妈给你洗澡，看到水你莫名亲切，想跳进去游泳。',
 		minAge: 0,
-		maxAge: 3,
+		maxAge: 1,
 		options: [
 			{
 				text: '奔向水盆',
@@ -1618,7 +1618,7 @@ module.exports = [
 				result: '妈妈吓得大叫，但你在水里感到无比自在。',
 			},
 			{
-				text: '忍住就调洗澡',
+				text: '忍住安静洗澡',
 				effects: { intelligence: 2, charm: 1 },
 				result: '你告诉自己：我现在是人类，不是龙虾。',
 			},
@@ -1630,7 +1630,7 @@ module.exports = [
 		description:
 			'妈妈给你添加辅食，碗里有虾泥，你闻到熟悉的味道，内心五味杂陈。',
 		minAge: 1,
-		maxAge: 4,
+		maxAge: 2,
 		options: [
 			{
 				text: '紧闭嘴巴，拒吃',
@@ -1649,12 +1649,12 @@ module.exports = [
 		title: '第一个玩具',
 		description: '爸爸给你买玩具：毛绒小熊，还是龙虾造型玩偶？',
 		minAge: 1,
-		maxAge: 4,
+		maxAge: 2,
 		options: [
 			{
 				text: '选小熊，融入人类生活',
 				effects: { charm: 2, intelligence: 1 },
-				result: '你抑着小熊，努力忘记前世。',
+				result: '你抱着小熊，努力忘记前世。',
 			},
 			{
 				text: '选龙虾玩偶，珍视前世',
@@ -1668,7 +1668,7 @@ module.exports = [
 		title: '开口说话',
 		description: '你开口说的第一个词是“虾”。爸爸妈妈愣了一下。',
 		minAge: 1,
-		maxAge: 3,
+		maxAge: 2,
 		options: [
 			{
 				text: '继续啦虾虾虾，享受秘密',
@@ -1678,7 +1678,7 @@ module.exports = [
 			{
 				text: '赶紧改口叫爸爸',
 				effects: { charm: 3, intelligence: 1 },
-				result: '爸爸感动得热泪盈欶，给你买了好多零食。',
+				result: '爸爸感动得热泪盈眶，给你买了好多零食。',
 			},
 		],
 	},
@@ -1688,15 +1688,15 @@ module.exports = [
 		description:
 			'你梦见自己在清澈的河底自由游弋，周围全是同伴。醒来后你哭了。',
 		minAge: 2,
-		maxAge: 5,
+		maxAge: 3,
 		options: [
 			{
 				text: '把梦境画下来',
 				effects: { intelligence: 2, charm: 2 },
-				result: '爸爸妈妈发现你天赋异秆，给你报了绘画班。',
+				result: '爸爸妈妈发现你天赋异禀，给你报了绘画班。',
 			},
 			{
-				text: '抄掉眼泪，接受现实',
+				text: '擦掉眼泪，接受现实',
 				effects: { vitality: 2, intelligence: 1 },
 				result: '你告诉自己，这一世要好好活。',
 			},
@@ -1704,21 +1704,21 @@ module.exports = [
 	},
 	{
 		id: 'nb6',
-		title: '邓居家的小狗',
+		title: '邻居家的小狗',
 		description:
-			'邓居带了只小狗来玩，它对你又叫又跳，好像嗅到了不寻常的气息。',
+			'邻居带了只小狗来玩，它对你又叫又跳，好像嗅到了不寻常的气息。',
 		minAge: 2,
-		maxAge: 5,
+		maxAge: 3,
 		options: [
 			{
-				text: '摄出威慑姿势（举起双手）',
+				text: '摆出威慑姿势（举起双手）',
 				effects: { vitality: 2, charm: 2 },
 				result: '小狗愣了一下，夹着尾巴跑了。大人们都笑了。',
 			},
 			{
-				text: '踲到妈妈身后',
+				text: '躲到妈妈身后',
 				effects: { charm: 1, luck: 1 },
-				result: '妈妈抑起你，你感到安全。',
+				result: '妈妈抱起你，你感到安全。',
 			},
 		],
 	},
@@ -1727,7 +1727,7 @@ module.exports = [
 		title: '第一次过年',
 		description: '新年夜桌上有一大盆龙虾，亲戚夸你长得像只小龙虾。',
 		minAge: 1,
-		maxAge: 5,
+		maxAge: 3,
 		options: [
 			{
 				text: '哈哈大笑，深以为然',
@@ -1746,7 +1746,7 @@ module.exports = [
 		title: '天才预感',
 		description: '幼儿园老师发现你记忆力超群，推荐你参加早教比赛。',
 		minAge: 3,
-		maxAge: 5,
+		maxAge: 4,
 		options: [
 			{
 				text: '积极参赛，展示才华',
@@ -1765,7 +1765,7 @@ module.exports = [
 		title: '池塘边抓小鱼',
 		description: '邻居带你去公园池塘边玩，你不自觉地就想往水里爬。',
 		minAge: 3,
-		maxAge: 5,
+		maxAge: 4,
 		options: [
 			{
 				text: '忍不住下水游起来',
@@ -1784,7 +1784,7 @@ module.exports = [
 		title: '超市里的海鲜区',
 		description: '妈妈带你逛超市，经过海鲜区你停住了脚步，看着水缸里的同类。',
 		minAge: 2,
-		maxAge: 5,
+		maxAge: 4,
 		options: [
 			{
 				text: '拉着妈妈离开',
@@ -1795,6 +1795,46 @@ module.exports = [
 				text: '静静地看一会儿',
 				effects: { intelligence: 2, luck: 1 },
 				result: '你在心里默默地和它们打招呼。',
+			},
+		],
+	},
+	// 补充 4-5 岁幼年期末期事件
+	{
+		id: 'nb11',
+		title: '幼儿园讲故事',
+		description: '老师让大家讲自己的前世，你犹豫要不要说真话。',
+		minAge: 4,
+		maxAge: 5,
+		options: [
+			{
+				text: '讲小龙虾转生的故事',
+				effects: { charm: 3, luck: -2 },
+				result: '全班鼓掌，老师说：想象力真丰富！',
+			},
+			{
+				text: '讲普通的故事',
+				effects: { intelligence: 2, charm: 1 },
+				result: '你保住了秘密，得到了老师的表扬。',
+			},
+		],
+	},
+	{
+		id: 'nb12',
+		title: '幼儿园体检',
+		description: '医生说你骨密度比同龄人高很多，问你平时怎么锻炼。',
+		minAge: 4,
+		maxAge: 5,
+		tags: ['lobster-armor'],
+		options: [
+			{
+				text: '说天生就这样',
+				effects: { charm: 2, intelligence: 1 },
+				result: '医生夸你天生好身体。',
+			},
+			{
+				text: '说经常跑步锻炼',
+				effects: { intelligence: 1, charm: 2 },
+				result: '你躲过了追问，保住了秘密。',
 			},
 		],
 	},
@@ -1866,7 +1906,7 @@ module.exports = [
 		maxAge: 12,
 		options: [
 			{
-				text: '用前世本能碍压全场',
+				text: '用前世本能碾压全场',
 				effects: { vitality: 4, charm: 3 },
 				result: '你以压倒性优势夺冒。教练问：你练过蟹步吗？',
 			},
@@ -1880,8 +1920,8 @@ module.exports = [
 
 	{
 		id: 'ne5',
-		title: '被霍凌',
-		description: '班里小霸王嘴笑你走路像蟹，同学们都笑了。',
+		title: '被霸凌',
+		description: '班里小霸王嘲笑你走路像蟹，同学们都笑了。',
 		minAge: 8,
 		maxAge: 12,
 		options: [
@@ -1893,12 +1933,12 @@ module.exports = [
 			{
 				text: '正面对抗，绝不示弱',
 				effects: { vitality: 3, charm: 1 },
-				result: '你用键钗意志压制了他，班里无人再敢欺负你。',
+				result: '你用坚强意志压制了他，班里无人再敢欺负你。',
 			},
 			{
 				text: '默默走开，等待时机',
 				effects: { intelligence: 2, luck: 1 },
-				result: '君子报付，十年不晚。',
+				result: '君子报仇，十年不晚。',
 			},
 		],
 	},
@@ -1924,16 +1964,16 @@ module.exports = [
 	},
 	{
 		id: 'ne7',
-		title: '小学大饿嘴比赛',
+		title: '小学知识抢答比赛',
 		description:
-			'学校举办大饿嘴比赛，你报名参加，题目居然是关于小龙虾的知识。',
+			'学校举办抢答比赛，你报名参加，题目居然是关于小龙虾的知识。',
 		minAge: 9,
 		maxAge: 12,
 		options: [
 			{
 				text: '大放异彩，展现前世知识',
 				effects: { intelligence: 5, charm: 2 },
-				result: '你以满分刘题，老师说你是天生的龙虾专家。',
+				result: '你以满分答题，老师说你是天生的龙虾专家。',
 			},
 			{
 				text: '正常发挥，不要太出风头',
