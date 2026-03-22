@@ -45,20 +45,31 @@
     <view class="event-title">{{currentEvent.title}}</view>
     <view class="event-desc">{{currentEvent.description}}</view>
 
-    <!-- 选择结果展示 -->
-    <view wx:if="{{showResult}}" class="result-panel {{isEndingPending ? 'ending' : ''}}">
+    <!-- 选择结果展示：普通事件点击整个面板都能继续 -->
+    <view wx:if="{{showResult && !isEndingPending}}" class="result-panel" bindtap="skipResult">
       <view class="result-text">{{eventResult}}</view>
       <view class="attr-changes" wx:if="{{attrChanges.length > 0}}">
         <view class="attr-change-item {{item.delta > 0 ? 'add' : 'sub'}}" wx:for="{{attrChanges}}" wx:key="name">
           {{item.name}} {{item.delta > 0 ? '+' : ''}}{{item.delta}}
         </view>
       </view>
-      <!-- 结局事件：显示查看结局按钮，禁止跳过 -->
-      <view wx:if="{{isEndingPending}}" class="ending-btn-wrap">
+      <!-- 提示文字 -->
+      <view>
+        <view class="skip-hint">点击继续</view>
+      </view>
+    </view>
+    <!-- 结局事件单独展示 -->
+    <view wx:if="{{showResult && isEndingPending}}" class="result-panel ending">
+      <view class="result-text">{{eventResult}}</view>
+      <view class="attr-changes" wx:if="{{attrChanges.length > 0}}">
+        <view class="attr-change-item {{item.delta > 0 ? 'add' : 'sub'}}" wx:for="{{attrChanges}}" wx:key="name">
+          {{item.name}} {{item.delta > 0 ? '+' : ''}}{{item.delta}}
+        </view>
+      </view>
+      <!-- 结局事件：显示查看结局按钮 -->
+      <view class="ending-btn-wrap">
         <button class="ending-goto-btn" bindtap="goToResult">查看我的结局 →</button>
       </view>
-      <!-- 普通事件：点击跳过 -->
-      <view wx:if="{{!isEndingPending}}" class="skip-hint" bindtap="skipResult">点击继续</view>
     </view>
 
     <!-- 选项列表 -->
