@@ -45,7 +45,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.19.4",
-  "appid": "touristappid",
+  "appid": "wx02c0698257ea510f",
   "projectname": "crayfish-life-simulator",
   "condition": {
     "search": {
