@@ -5,7 +5,25 @@ Page({
 	data: {
 		// 当前步骤 1:属性分配 2:天赋选择
 		step: 1,
-		// 随机生成的开局属性
+		// 当前周目数
+		runCount: 0,
+		// 继承属性加成
+		inheritedAttrs: {
+			vitality: 0,
+			intelligence: 0,
+			wealth: 0,
+			luck: 0,
+			charm: 0,
+		},
+		// 随机生成的开局属性（不含继承加成）
+		baseAttrs: {
+			vitality: 0,
+			intelligence: 0,
+			wealth: 0,
+			luck: 0,
+			charm: 0,
+		},
+		// 最终显示的属性（基础+继承+分配）
 		attrs: {
 			vitality: 0,
 			intelligence: 0,
@@ -345,7 +363,12 @@ Page({
 
 	onShow() {
 		// 每次回到首页，重置到属性分配步骤，重新随机属性
-		this.setData({ step: 1 });
+		const newGamePlus = app.globalData.newGamePlus;
+		this.setData({ 
+			step: 1,
+			runCount: newGamePlus.runCount,
+			inheritedAttrs: { ...newGamePlus.inheritedAttrs }
+		});
 		this.randomAttrs();
 	},
 
@@ -385,11 +408,11 @@ Page({
 		const total = 30;
 		const min = 2;
 		const hardMax = 14;
-		let attrs = {};
+		let baseAttrs = {};
 
 		// 先每项分配最小值
 		keys.forEach((key) => {
-			attrs[key] = min;
+			baseAttrs[key] = min;
 		});
 		let remaining = total - min * keys.length; // 剩余 30 - 10 = 20 点
 
@@ -400,22 +423,29 @@ Page({
 
 		strongKeys.forEach((key) => {
 			const bonus = 5 + Math.floor(Math.random() * 4); // 强项额外+5~8点
-			const actual = Math.min(bonus, hardMax - attrs[key], remaining);
-			attrs[key] += actual;
+			const actual = Math.min(bonus, hardMax - baseAttrs[key], remaining);
+			baseAttrs[key] += actual;
 			remaining -= actual;
 		});
 
 		// 剩余点数逐点随机分配
 		while (remaining > 0) {
-			const available = keys.filter((k) => attrs[k] < hardMax);
+			const available = keys.filter((k) => baseAttrs[k] < hardMax);
 			if (available.length === 0) break;
 			const key = available[Math.floor(Math.random() * available.length)];
-			attrs[key] += 1;
+			baseAttrs[key] += 1;
 			remaining -= 1;
 		}
 
-		const used = Object.values(attrs).reduce((sum, val) => sum + val, 0);
+		// 计算最终属性：基础属性 + 继承属性加成
+		const attrs = {};
+		keys.forEach(key => {
+			attrs[key] = baseAttrs[key] + this.data.inheritedAttrs[key];
+		});
+
+		const used = Object.values(baseAttrs).reduce((sum, val) => sum + val, 0);
 		this.setData({
+			baseAttrs,
 			attrs,
 			remainingPoints: this.data.totalPoints - used,
 		});
@@ -424,20 +454,27 @@ Page({
 	// 调整属性点数
 	changeAttr(e) {
 		const { key, op } = e.currentTarget.dataset;
-		const attrs = { ...this.data.attrs };
+		const baseAttrs = { ...this.data.baseAttrs };
 		let remainingPoints = this.data.remainingPoints;
 
 		if (op === '+') {
 			if (remainingPoints <= 0) return;
-			attrs[key] += 1;
+			baseAttrs[key] += 1;
 			remainingPoints -= 1;
 		} else if (op === '-') {
-			if (attrs[key] <= 1) return;
-			attrs[key] -= 1;
+			if (baseAttrs[key] <= 1) return;
+			baseAttrs[key] -= 1;
 			remainingPoints += 1;
 		}
 
-		this.setData({ attrs, remainingPoints });
+		// 重新计算最终属性
+		const attrs = {};
+		const keys = ['vitality', 'intelligence', 'wealth', 'luck', 'charm'];
+		keys.forEach(k => {
+			attrs[k] = baseAttrs[k] + this.data.inheritedAttrs[k];
+		});
+
+		this.setData({ baseAttrs, attrs, remainingPoints });
 	},
 
 	// 进入天赋选择步骤

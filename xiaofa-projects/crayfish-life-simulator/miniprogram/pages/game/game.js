@@ -472,7 +472,66 @@ Page({
 			attributes: this.data.attributes,
 			isCultivator: this.data.isCultivator,
 			forcedEndingId: forcedEndingId || null,
+			unlockedAchievements: []
 		};
+
+		// 多周目继承逻辑
+		const newGamePlus = app.globalData.newGamePlus;
+		// 周目数+1
+		newGamePlus.runCount += 1;
+		// 计算继承属性：当前属性的20%，取整
+		const keys = ['vitality', 'intelligence', 'wealth', 'luck', 'charm'];
+		keys.forEach(key => {
+			const inherit = Math.floor(this.data.attributes[key] * 0.2);
+			newGamePlus.inheritedAttrs[key] += inherit;
+		});
+
+		// 成就解锁检查
+		// 1. 初次体验：完成第一局
+		if (newGamePlus.runCount === 1) {
+			const ach = app.unlockAchievement(1);
+			if (ach) finalData.unlockedAchievements.push(ach);
+		}
+
+		// 2. 长寿老人：寿命>=90
+		if (this.data.age >= 90) {
+			const ach = app.unlockAchievement(2);
+			if (ach) finalData.unlockedAchievements.push(ach);
+		}
+
+		// 3. 世界首富：财富>=100
+		if (this.data.attributes.wealth >= 100) {
+			const ach = app.unlockAchievement(3);
+			if (ach) finalData.unlockedAchievements.push(ach);
+		}
+
+		// 4. 修仙大佬：成功飞升（年龄>=980且修仙者）
+		if (this.data.isCultivator && this.data.age >= 980) {
+			const ach = app.unlockAchievement(4);
+			if (ach) finalData.unlockedAchievements.push(ach);
+		}
+
+		// 5. 人生赢家：全属性>=80
+		let allAttrHigh = true;
+		keys.forEach(key => {
+			if (this.data.attributes[key] < 80) allAttrHigh = false;
+		});
+		if (allAttrHigh) {
+			const ach = app.unlockAchievement(5);
+			if (ach) finalData.unlockedAchievements.push(ach);
+		}
+
+		// 7. 百战百胜：完成10局
+		if (newGamePlus.runCount >= 10) {
+			const ach = app.unlockAchievement(7);
+			if (ach) finalData.unlockedAchievements.push(ach);
+		}
+
+		// 保存数据到本地
+		app.saveData();
+		finalData.runCount = newGamePlus.runCount;
+		finalData.inheritedAttrs = newGamePlus.inheritedAttrs;
+
 		wx.redirectTo({
 			url:
 				'/pages/result/result?data=' +
